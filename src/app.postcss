@@ -1,0 +1,103 @@
+/*place global styles here */
+html,
+body {
+	@apply h-full;
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+	background-image: url('home.png');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.force-opaque::placeholder {
+  opacity: 0.3;
+}
+
+.force-opaque-sm::placeholder {
+  opacity: 0.5;
+}
+
+.border-gradient {
+    border: 2px solid;
+    background: linear-gradient(to bottom right, black, white);
+  }
+
+
+.apple-input {
+  border: none;
+  outline: none;
+  box-shadow: inset 2px 4px 15px rgba(5, 5, 5, 0.5);
+  padding-left: 20px;
+}
+
+.apple-input:focus {
+  /* Apply the same styles as the regular .apple-input */
+  border: none;
+  outline: none;
+  box-shadow: inset 2px 4px 15px rgba(5, 5, 5, 0.5);
+  padding-left: 20px;
+}
+
+.apple-input:hover {
+  /* Apply the same styles as the regular .apple-input */
+  border: none;
+  outline: none;
+  box-shadow: inset 2px 4px 20px rgba(5, 5, 5, 0.65);
+  padding-left: 20px;
+}
+
+
+/*This is the shiny border of some glassy elements */
+
+
+
+/* Here is all about the toggle */
+
+.checkbox {
+    
+  width: 200px;
+  height: 45px;
+  
+  border-radius: 30px;
+  position: relative;
+  color: black;
+  overflow: hidden;
+}
+
+#checkbox_toggle {
+  display: none;
+}
+
+.checkbox .toggle_box {
+  width: 90px;
+  height: 40px;
+  position: absolute;
+  border-radius: 30px;
+  box-shadow: inset 2px 4px 20px rgba(255, 255, 255, 0.1);
+  left: 3px;
+  top: 2.25px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.checkbox .slide {
+  box-shadow: inset 2px 4px 20px rgba(5, 5, 5, 0.65);
+  width: 200px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.checkbox .slide .text {
+  font-size: 16px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.check:checked + .checkbox .slide .toggle_box {
+  transform: translateX(95px);
+}
+

@@ -1,0 +1,1 @@
+<!-- Might wanna refactor and write a proper header to be displayed on demand instead of the current solution -->
