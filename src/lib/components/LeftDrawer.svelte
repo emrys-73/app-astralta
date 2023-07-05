@@ -1,14 +1,47 @@
-<script>
-    import { page } from '$app/stores'
+<!-- Adapt to get image for symbols from pocketbase -->
+<!-- Might need to migrate it to the layout to get the data from data -->
+<!-- Find a way to fix the code duplication between here and layout -->
 
-    // This is some ugly ass way to code it but works
-    // If I ever hire someone, pls fix it
-    // ty
-    let openDrawer = false;
-    $: openDrawer;
+<script lang="ts">
+    import { drawer } from "../../stores";
+    import { onMount } from 'svelte';
+    import { page } from '$app/stores';
 
-    const toggleDrawer = () => {
-        openDrawer = !openDrawer;
+    let isOpen = false;
+    $: isOpen;
+
+    const drawerOpen = () => {
+        if (!isOpen) {
+            drawer.open()
+            isOpen = true;
+        }
+    }
+
+    const drawerClose = ()  => {
+        if (isOpen) {
+            drawer.close()
+            isOpen = false;
+        }
+    }
+
+    const resetDrawer = () => {
+        drawer.reset()
+        isOpen = false;
+    }
+
+
+    const toggleDrawer  = ()  => {
+        switch (isOpen) {
+            case true:
+                drawerClose()
+                break;
+            case false:
+                drawerOpen()
+                break;
+            default:
+                resetDrawer()
+                break;
+        }
     }
 
     const navigation = [
@@ -34,54 +67,61 @@
             },
         ]
 
+    const evalPageURL = ()  => {
+        // This function checks if we in a page where we should have no drawer
+
+    }
+
 </script>
 
-<!-- Extra safety here but a little redundance. Might wanna clean the code later -->
-<div class="drawer max-w-[400px] {openDrawer ? 'drawer-open' : 'drawer-closed'} {$page.url.pathname === '/register' ? ' hidden' : ''} {$page.url.pathname === '/verify' ? ' hidden' : ''} {$page.url.pathname === '/login' ? ' hidden' : ''} {$page.url.pathname === '/reset-password' ? ' hidden' : ''} {$page.url.pathname === '/thanks-bro' ? ' hidden' : ''} {$page.url.pathname === '/whoops' ? ' hidden' : ''}">
-    <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content flex flex-col items-center justify-center">
-      <!-- Page content here -->
-      <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-    
-    </div> 
-    <div class="drawer-side ">
-      <label for="my-drawer-2" class="drawer-overlay"></label> 
-      <ul class="menu p-4 w-80 h-full bg-black bg-opacity-40  text-base-content border-r-[0.25px] border-r-true-black">
-        <div class="w-full p-2 flex">
-            <h3 class="text-true-white text-3xl font-bold pb-4 pt-1.5">
-                Launchpad
-            </h3>
-            <!-- <div>
-                open drawer: {openDrawer}
-            </div> -->
-            <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-md border-none normal-case absolute right-4 drop-shadow-2xl " on:click={toggleDrawer}>
-                <div class="px-1.5 font-regular">
+{#if isOpen}
+    <div class="flex flex-col w-64 h-full bg-black bg-opacity-40 backdrop-blur-sm">
+        <!-- Header grid -->
+        <div class="text-xl text-true-white grid grid-cols-6">
+            <!-- Title -->
+            <div class="col-span-4">
+                <h3 class="font-bold p-4 md:text-2xl mt-0.5 md:mt-2">
+                    Launchpad
+                </h3>
+            </div>
+            <!-- Closing button -->
+            <div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
+                <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-6 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl" on:click={toggleDrawer}>
                     Less
-                </div>
-            </button>
-        </div>
-        {#each navigation as navItem}
-            {#if navItem.title === 'My AI'}
-            <li class=" hover:bg-true-white hover:bg-opacity-0 my-0.5 rounded-3xl text-true-white hover:drop-shadow-2xl hover:backdrop-blur-sm">
-                
-                <a href={navItem.href} class="font-regular text-md text-[13pt] h-[55px] content-center hover:text-true-white {$page.url.pathname === navItem.href ? 'bg-true-white bg-opacity-10' : ''} ">
-                    <img src={navItem.symbol} alt={navItem.title} class="max-w-[30px] px-1"/>
-                    {navItem.title}
-                </a>
-            </li>
-            {/if}
-            
-        {/each}
-      </ul>
+                </button>
+            </div>
     
-    </div>
-  </div>
-  {#if !openDrawer}
-  <div class="pl-4 pt-6 absolute z-50 {$page.url.pathname === '/register' ? ' hidden ' : ''} {$page.url.pathname === '/verify' ? ' hidden' : ''} {$page.url.pathname === '/login' ? ' hidden' : ''} {$page.url.pathname === '/reset-password' ? ' hidden' : ''} {$page.url.pathname === '/waitlist' ? ' hidden' : ''} {$page.url.pathname === '/thanks-bro' ? ' hidden' : ''} {$page.url.pathname === '/whoops' ? ' hidden' : ''} ">
-    <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-md border-none normal-case drop-shadow-2xl " on:click={toggleDrawer}>
-        <div class="px-1.5 font-regular">
-            More
         </div>
-    </button>
-  </div>
-  {/if}
+        <!-- Navigation list -->
+        <div>
+            <ul>
+                {#each navigation as navItem}
+                    {#if navItem.title === 'My AI'}
+                    <li class="hover:bg-true-white hover:bg-opacity-20 rounded-xl text-true-white hover:drop-shadow-2xl hover:backdrop-blur-sm p-2 m-2 {$page.url.pathname === navItem.href ? 'bg-true-white bg-opacity-10' : '' }">
+                        <a href={navItem.href} class="font-regular content-center hover:text-true-whit ">
+                            <div class="flex flex-row max-h-[35px]">
+                                <div class="p-2">
+                                    <img src={navItem.symbol} alt={navItem.title} class=" max-w-[26px]"/>
+                                </div>
+                                <div class="py-2">
+                                    {navItem.title}
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    {/if}
+                    
+                {/each}
+            </ul>
+        </div>
+    </div>
+	
+{:else}
+<div class="flex items-center {$page.url.pathname === '/verify' ? ' hidden' : ''} {$page.url.pathname === '/register' ? ' hidden' : ''} {$page.url.pathname === '/login' ? ' hidden' : ''} {$page.url.pathname === '/reset-password' ? ' hidden' : ''} {$page.url.pathname === '/waitlist' ? ' hidden' : ''} {$page.url.pathname === '/thanks-bro' ? ' hidden' : ''} {$page.url.pathname === '/whoops' ? ' hidden' :'' }">
+    <div class="hover:-translate-y-0.5 transition ease-in-out md:mt-1.5 mt-1">
+        <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl" on:click={toggleDrawer}>
+            More
+        </button>
+    </div>
+</div>
+{/if}
