@@ -72,6 +72,26 @@
 
     }
 
+    onMount(() => {
+        // Ensures to set both states to false
+        // resetDrawer()
+
+        function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
+            if (event.metaKey && event.key === 'x') {
+                toggleDrawer()
+            }
+            if (event.ctrlKey && event.key === 'x') {
+                toggleDrawer()
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    })
+
 </script>
 
 {#if isOpen}
@@ -100,10 +120,10 @@
                     <li class="hover:bg-true-white hover:bg-opacity-20 rounded-xl text-true-white hover:drop-shadow-2xl hover:backdrop-blur-sm p-2 m-2 {$page.url.pathname === navItem.href ? 'bg-true-white bg-opacity-10' : '' }">
                         <a href={navItem.href} class="font-regular content-center hover:text-true-whit ">
                             <div class="flex flex-row max-h-[35px]">
-                                <div class="p-2">
+                                <!-- <div class="p-2">
                                     <img src={navItem.symbol} alt={navItem.title} class=" max-w-[26px]"/>
-                                </div>
-                                <div class="py-2">
+                                </div> -->
+                                <div class="py-2 px-2">
                                     {navItem.title}
                                 </div>
                             </div>

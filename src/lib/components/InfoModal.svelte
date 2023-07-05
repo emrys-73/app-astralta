@@ -12,7 +12,7 @@
     <div class="fixed inset-0 bg-black bg-opacity-40 transition-opacity"></div>
   
     <div class="fixed inset-0 z-10 overflow-y-auto backdrop-blur-lg">
-      <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0 flex-col">
+      <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0 flex-col">
         <!--
           Modal panel, show/hide based on modal state.
   
@@ -41,7 +41,7 @@
 
 
         <div class="bg-true-white bg-opacity-20  rounded-3xl min-h-[400px]">
-          <div class="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+          <div class="relative transform overflow-hidden rounded-lg shadow-xl transition-all sm:w-full sm:max-w-lg">
             <div class=" px-4 pt-5 sm:p-6 sm:pb-4 ">
               <div class="sm:flex sm:items-start ">
                 <!-- <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -50,7 +50,7 @@
                   </svg>
                 </div> -->
                 <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                  <h3 class="text-xl text-center font-semibold leading-6 text-true-white pb-6" id="modal-title">
+                  <h3 class="text-xl text-center font-semibold leading-6 text-true-white pb-6 pt-8" id="modal-title">
                     <slot name="header"/>
                   </h3>
                   <!-- Fix the margin here! -->

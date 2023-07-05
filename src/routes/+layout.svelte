@@ -71,17 +71,14 @@
             window.removeEventListener('keydown', handleKeyDown);
         };
     })
-	
-	let imageName = ""
-	
-
 
 </script>
 
 <!-- <Drawer>
 	<SideBarLeft />
 </Drawer> -->
-<AppShell class="bg-[url('lab.png')] bg-image">
+<!-- <AppShell class="bg-[url('home.png')] bg-image"> -->
+<AppShell class="">
 	<!-- This was an attempt to have a gradient on the header - didnt work -->
 	<!-- <div class="h-full w-full bg-gradient-to-b from-black absolute top-0 left-0 opacity-80 -z-10">
 	</div> -->
@@ -102,7 +99,7 @@
 			<div class="pr-4 flex flex-row">
 				<a href="/login">
 					<div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
-						<button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl">
+						<button class="btn bg-true-white bg-opacity-20 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl">
 							Log In
 						</button>
 					</div>
@@ -110,7 +107,7 @@
 				<a href="/register">
 					<div class="pl-2 z-50">
 						<div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
-							<button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl">
+							<button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl">
 								Register
 							</button>
 						</div>

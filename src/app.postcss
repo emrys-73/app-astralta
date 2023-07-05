@@ -3,7 +3,7 @@ html,
 body {
 	@apply h-full;
 	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-	/* background-image: url('lab.png'); */
+    background-image: url('../../home.png');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -11,7 +11,6 @@ body {
 }
 
 .bg-image {
-    background-image: url('lab.png');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -53,6 +52,31 @@ body {
   padding-left: 20px;
 }
 
+/* Adapted for in-app */
+.s-apple-input {
+  border: none;
+  outline: none;
+  box-shadow: inset 2px 4px 15px rgba(5, 5, 5, 0.5);
+  padding-left: 20px;
+}
+
+.s-apple-input:focus {
+  /* Apply the same styles as the regular .apple-input */
+  border: none;
+  outline: none;
+  box-shadow: inset 2px 4px 15px rgba(5, 5, 5, 0.5);
+  padding-left: 20px;
+}
+
+.s-apple-input:hover {
+  /* Apply the same styles as the regular .apple-input */
+  border: none;
+  outline: none;
+  box-shadow: inset 2px 4px 20px rgba(5, 5, 5, 0.65);
+  padding-left: 20px;
+}
+
+
 
 /*This is the shiny border of some glassy elements */
 
@@ -62,8 +86,8 @@ body {
 
 .checkbox {
     
-  width: 200px;
-  height: 45px;
+  width: 140px;
+  height: 35px;
   
   border-radius: 30px;
   position: relative;
@@ -76,6 +100,54 @@ body {
 }
 
 .checkbox .toggle_box {
+  width: 70px;
+  height: 29px;
+  position: absolute;
+  border-radius: 30px;
+  box-shadow: inset 2px 4px 20px rgba(255, 255, 255, 0.1);
+  left: 3px;
+  top: 2.25px;
+  cursor: pointer;
+  transition: 0.35s;
+}
+
+.checkbox .slide {
+  box-shadow: inset 2px 4px 20px rgba(5, 5, 5, 0.65);
+  width: 150px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.checkbox .slide .text {
+  font-size: 13px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.check:checked + .checkbox .slide .toggle_box {
+  transform: translateX(64px);
+}
+
+
+.xlcheckbox {
+    
+  width: 200px;
+  height: 45px;
+  
+  border-radius: 30px;
+  position: relative;
+  color: black;
+  overflow: hidden;
+}
+
+#xlcheckbox_toggle {
+  display: none;
+}
+
+.xlcheckbox .toggle_box {
   width: 90px;
   height: 40px;
   position: absolute;
@@ -87,7 +159,7 @@ body {
   transition: 0.4s;
 }
 
-.checkbox .slide {
+.xlcheckbox .slide {
   box-shadow: inset 2px 4px 20px rgba(5, 5, 5, 0.65);
   width: 200px;
   height: 45px;
@@ -97,15 +169,17 @@ body {
   cursor: pointer;
 }
 
-.checkbox .slide .text {
+.xlcheckbox .slide .text {
   font-size: 16px;
   z-index: 100;
   cursor: pointer;
 }
 
-.check:checked + .checkbox .slide .toggle_box {
+.xlcheck:checked + .xlcheckbox .slide .toggle_box {
   transform: translateX(95px);
 }
+
+
 
 /* Toggle for sidebar */
 #checkbox {

@@ -2,9 +2,9 @@
     export let form
 </script>
 
-<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30">
+<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30 px-6">
     <a href="/">
-        <h1 class="text-4xl text-true-white pt-10 font-bold uppercase">
+        <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
             Astralta
         </h1>
     </a>
@@ -14,8 +14,8 @@
     </div>
 
 
-     <h2 class="mt-2 text-center text-3xl font-bold tracking-light text-true-white pb-12">
-        Log In to your account
+     <h2 class="mt-2 text-center text-xl sm:text-2xl pb-4 lg:text-3xl font-bold tracking-light text-true-white lg:pb-8">
+        Log in to your account
     </h2>
     <!-- <p class="text-center mt-1">
         Or <a href="/register" class="text-primary font-medium hover:cursor-pointer hover:underline">register</a>
@@ -45,6 +45,7 @@
                     Email
                 </span>
             </label>
+            <!-- <input type="text" name="message" class=" max-h-[35px] s-apple-input rounded-full bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-sm focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none" placeholder="Send a message" /> -->
             <input type="email" name="email" class="apple-input rounded-full bg-black bg-opacity-40 w-full max-w-md font-semibold force-opaque p-3 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none"  placeholder="Email"/>
         </div>
         <div class="form-control w-full max-w-md py-2">
@@ -81,7 +82,7 @@
             </button>
         </div>
         <a href="/register">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
+            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md pt-4">
                 I don't have an account yet
             </div>
         </a>

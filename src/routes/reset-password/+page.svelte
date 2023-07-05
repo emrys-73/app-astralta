@@ -2,15 +2,15 @@
     export let form
 </script>
 
-<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30">
+<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30 px-6">
     <a href="/">
-        <h1 class="text-4xl text-true-white pt-10 font-bold uppercase">
+        <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
             Astralta
         </h1>
     </a>
     
 
-    <div class="flex-none h-64">
+    <div class="flex-none h-16 lg:h-32">
 
     </div>
     <h2 class="mt-2 text-center text-3xl font-bold tracking-light text-true-white pb-2">
@@ -38,8 +38,8 @@
             </button>
         </div>
         <a href="/login">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl pt-3 pb-4 hover:backdrop-blur-md">
-                I remembered my password
+            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl pt-4 pb-4 hover:backdrop-blur-md">
+                Nvm, I remembered my password
             </div>
         </a>
         {#if form?.success}
