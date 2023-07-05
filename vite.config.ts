@@ -3,8 +3,10 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	esbuild: {
-		target: 'esnext'
-	},
+    supported: {
+      'top-level-await': true //browsers can handle top-level-await features
+    },
+  },
 	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
