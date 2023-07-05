@@ -28,7 +28,7 @@
             <div class="hover:-translate-y-0.5 transition ease-in-out ml-0.5 sm:ml-3 md:ml-4 lg:mt-2 lg:ml-10 xl:ml-10 mt-2 xl:mt-1.5">
               <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md ml-3 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl">
                 <!-- Learn more -->
-                <img src="../../logo_white.png" alt="cta" class="h-[30px] w-[30px] -mt-1"/>
+                <img src="/logo_white.png" alt="cta" class="h-[30px] w-[30px] -mt-1"/>
               </button>
             </div>
           </a>

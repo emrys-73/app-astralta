@@ -78,7 +78,7 @@
 	<SideBarLeft />
 </Drawer> -->
 <!-- <AppShell class="bg-[url('home.png')] bg-image"> -->
-<AppShell class="">
+<AppShell class="bg-[url('/tech_lab.png')] bg-image">
 	<!-- This was an attempt to have a gradient on the header - didnt work -->
 	<!-- <div class="h-full w-full bg-gradient-to-b from-black absolute top-0 left-0 opacity-80 -z-10">
 	</div> -->

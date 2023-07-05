@@ -48,7 +48,7 @@
             {
                 title: 'My AI',
                 href: '/my/ai',
-                symbol: 'MyAI.png'
+                symbol: '/MyAI.png'
             },
             {
                 title: 'Settings',
@@ -120,9 +120,9 @@
                     <li class="hover:bg-true-white hover:bg-opacity-20 rounded-xl text-true-white hover:drop-shadow-2xl hover:backdrop-blur-sm p-2 m-2 {$page.url.pathname === navItem.href ? 'bg-true-white bg-opacity-10' : '' }">
                         <a href={navItem.href} class="font-regular content-center hover:text-true-whit ">
                             <div class="flex flex-row max-h-[35px]">
-                                <!-- <div class="p-2">
+                                <div class="p-2">
                                     <img src={navItem.symbol} alt={navItem.title} class=" max-w-[26px]"/>
-                                </div> -->
+                                </div>
                                 <div class="py-2 px-2">
                                     {navItem.title}
                                 </div>
