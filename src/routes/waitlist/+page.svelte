@@ -12,16 +12,17 @@
     };
 </script>
 
-<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30">
+<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30 px-6">
     <a href="/">
-        <h1 class="text-4xl text-true-white pt-10 font-bold uppercase">
+        <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
             Astralta
         </h1>
     </a>
-    <div class="flex-none h-44">
+    <div class="flex-none h-16 lg:h-20">
 
     </div>
-    <h2 class="mt-2 text-center text-3xl font-bold tracking-light text-true-white pb-2">
+
+    <h2 class="mt-2 text-center text-xl sm:text-2xl pb-4 lg:text-3xl font-bold tracking-light text-true-white lg:pb-8">
         Join waitlist
     </h2>
     <!-- This text is pretty much useless. Change it -->
@@ -58,7 +59,7 @@
                     Email
                 </span>
             </label>
-            <h2 class="text-true-white text-2xl text-center">
+            <h2 class="text-true-white text-xl text-center font-semibold">
                 Tell us more about you
             </h2>
             <p class="text-true-white opacity-60 text-center py-4">
@@ -97,6 +98,7 @@
         </div>
 
 
+
         <div class="w-full max-w-md pt-2">
             <!-- <button type="submit" class="btn btn-primary w-full">Register</button> -->
             <button class="btn bg-true-black w-full bg-opacity-10 backdrop-blur-md text-xl hover:bg-opacity-20 hover:bg-gray-500 rounded-full text-true-white font-semibold btn-md border-none normal-case drop-shadow-2xl " type="submit">
@@ -106,7 +108,7 @@
             </button>
         </div>
     </form>
- b
+
     {#if modalOpen}
         <InfoModal>
             <span slot="image">
