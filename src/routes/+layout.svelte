@@ -131,7 +131,7 @@
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
                 <ul
                     tabindex="0"
-                    class="menu menu-compact dropdown-content mt-0 p-2 mr-6 shadow rounded-xl bg-gray-500 bg-opacity-10 text-true-white drop-shadow backdrop-blur-md  w-64 hover:text-true-white"
+                    class="menu menu-compact dropdown-content mt-0 p-2 mr-6 shadow rounded-xl bg-gray-500 bg-opacity-10 text-true-white drop-shadow backdrop-blur-md  w-64 hover:text-true-white z-50"
                 >
                     <li>
                         <a href="/my/profile" class="justify-between hover:text-true-white">Profile</a>

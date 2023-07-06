@@ -15,7 +15,7 @@
 <div class="flex flex-col items-center h-full w-full text-true-white -ml-11 lg:-ml-10">
     <input class="check" type="checkbox" id="checkbox_toggle">
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="checkbox lg:xlcheckbox border-none font-medium max-w-[190px]" on:click={toggle_ai}>
+    <div class="checkbox lg:xlcheckbox border-none font-medium max-w-[190px] rounded-full" on:click={toggle_ai}>
       <label for="checkbox_toggle" class="slide bg-black bg-opacity-40 backdrop-blur-sm text-true-white">
         <label for="checkbox_toggle" class="toggle_box bg-true-white bg-opacity-10"></label>
         <label for="checkbox_toggle" class="text -ml-1 {!talking ? 'opacity-40 transition-opacity' : 'transition-opacity'}">Talk</label>

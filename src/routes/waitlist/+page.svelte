@@ -13,7 +13,7 @@
 </script>
 
 <div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30 px-6">
-    <a href="/">
+    <a href="/my/ai">
         <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
             Astralta
         </h1>
