@@ -77,6 +77,9 @@
         };
         img.src = data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) : `https://ui-avatars.com/api/?name=${data.user?.name}`;
         if(img.complete) imageIsLoaded = true;
+        else {
+            imageSrc = `https://ui-avatars.com/api/?name=${data.user?.name}`;
+        }
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
@@ -153,9 +156,7 @@
                         id="avatar-preview"
                         class="{!imageIsLoaded ? 'hidden' : ''}"
                     > -->
-                    {#if imageIsLoaded}
                     <img src={imageSrc} alt="avatar" id="avatar-preview">
-                    {/if}
 
                     </div>
                 </label>
