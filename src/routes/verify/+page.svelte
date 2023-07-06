@@ -12,7 +12,7 @@
 
     <!-- This text is pretty much useless. Change it -->
     <p class="text-true-white text-center">
-        We are making Astralta available for early-adopters.
+        Check the EMail we jsut sent to your inbox
     </p>
     <!-- <p class="text-center mt-1 opacity-50">
         Or <a href="/login" class="text-primary font-medium hover:cursor-pointer hover:underline ">Sign In</a>
@@ -20,7 +20,7 @@
 
     </p> -->
 
-    <form action="?/register" method="POST" class="flex flex-col items-center space-y-2 w-full pt-4">
+    <!-- <form action="?/register" method="POST" class="flex flex-col items-center space-y-2 w-full pt-4">
         <div class="form-control w-full max-w-md py-2">
             <label for="name" class="label font-medium py-2 hidden">
                 <span class="label-text text-transparent">
@@ -53,28 +53,28 @@
             </label>
                 <input type="password" name="passwordConfirm" class="apple-input rounded-full bg-black bg-opacity-40 w-full max-w-md font-semibold force-opaque p-3 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none"  placeholder="Confirm Password"/>
             
-        </div>
+        </div> -->
 
 
         <a href="/login">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
-                Already have an account?
+            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md mt-10 ">
+                Done
             </div>
         </a>
 
 
-        <div class="flex-none h-8">
+        <!-- <div class="flex-none h-8">
 
-        </div>
+        </div> -->
 
 
-        <div class="w-full max-w-md pt-2">
-            <!-- <button type="submit" class="btn btn-primary w-full">Register</button> -->
+        <!-- <div class="w-full max-w-md pt-2">
+            
             <button class="btn bg-true-black w-full bg-opacity-10 backdrop-blur-md text-xl hover:bg-opacity-20 hover:bg-gray-500 rounded-full text-true-white font-semibold btn-md border-none normal-case drop-shadow-2xl " type="submit">
                 <div class="px-1.5 font-regular">
                     Register
                 </div>
             </button>
-        </div>
-    </form>
+        </div> -->
+    <!-- </form> -->
 </div>

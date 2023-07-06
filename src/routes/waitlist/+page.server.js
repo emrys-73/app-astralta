@@ -20,12 +20,12 @@ export const actions = {
 
             // No need to send a verification Email just yet
             // await locals.pb.collection('users').requestVerification(body.email)
-            throw redirect(303, '/thanks-bro')
             
         } catch (err) {
             console.log('Error: ', err)
             throw redirect(303, '/whoops')    
             // throw error(err.status, err.message) 
         }
+        throw redirect(303, '/thanks-bro')
     }
 }
