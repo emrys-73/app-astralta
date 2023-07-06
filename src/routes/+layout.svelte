@@ -72,10 +72,11 @@
             imageIsLoaded = true;
         };
         img.onerror = () => {
-            // handle the image loading error if needed
+            imageSrc = `https://ui-avatars.com/api/?name=${data.user?.name}`;
+            imageIsLoaded = true;
         };
-        img.src = data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) :
-        `https://ui-avatars.com/api/?name=${data.user?.name}`;
+        img.src = data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) : `https://ui-avatars.com/api/?name=${data.user?.name}`;
+        if(img.complete) imageIsLoaded = true;
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
@@ -85,7 +86,7 @@
     // Ensure image loading before displaying
 
     let imageIsLoaded = false;
-
+    let imageSrc = "";
 
 
 </script>
@@ -143,6 +144,7 @@
                         <!-- <img src={data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) : 
                             `https://ui-avatars.com/api/?name=${data.user?.name}`
                         } alt="avatar" id="avatar-preview"> -->
+<!-- 
                                             <img
                         src={data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) : 
                             `https://ui-avatars.com/api/?name=${data.user?.name}`
@@ -150,7 +152,10 @@
                         alt="avatar"
                         id="avatar-preview"
                         class="{!imageIsLoaded ? 'hidden' : ''}"
-                    >
+                    > -->
+                    {#if imageIsLoaded}
+                    <img src={imageSrc} alt="avatar" id="avatar-preview">
+                    {/if}
 
                     </div>
                 </label>
