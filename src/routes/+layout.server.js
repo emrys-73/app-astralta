@@ -20,14 +20,19 @@ export const load = async ({ locals }) => {
     //     throw error(err.status, err.message)
     // }
 
-
-
-    if (locals.user) {
-        return {
-            user: locals.user
+    try {
+        if (locals.user) {
+            return {
+                user: locals.user
+            }
         }
+        return {
+            user: undefined,
+        }
+    } catch(err) {
+
+        console.log("Error", err)
     }
-    return {
-        user: undefined,
-    }
+
+    
 }
