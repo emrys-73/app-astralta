@@ -97,22 +97,23 @@
 			</div>
 			{#if !data.user}
 			<div class="pr-4 flex flex-row">
-				<a href="/login">
-					<div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
-						<button class="btn bg-true-white bg-opacity-20 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl">
-							Log In
-						</button>
-					</div>
-				</a>
-				<a href="/register">
+                <a href="/waitlist">
 					<div class="pl-2 z-50">
 						<div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
-							<button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl">
-								Register
+							<button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] border-none normal-case drop-shadow-2xl">
+								Join Waitlist
 							</button>
 						</div>
 					</div>
 				</a>
+				<a href="/login">
+					<div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
+						<button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl">
+							Log In
+						</button>
+					</div>
+				</a>
+				
 
 			</div>
 			

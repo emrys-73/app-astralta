@@ -35,7 +35,7 @@
         <div class="col-span-2">
           <a href="https://astralta.com">
             <div class="hover:-translate-y-0.5 transition ease-in-out h-[40px]">
-              <button class="btn bg-true-black bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:w-16 border-none normal-case drop-shadow-2xl h-[40px] ml-4 apple-input w-[50px]">
+              <button class="btn bg-true-black bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:w-16 border-none normal-case drop-shadow-2xl h-[40px] ml-4 apple-btn w-[50px]">
                 <!-- Learn more -->
                 <img src="/logo_white.png" alt="cta" class="h-[30px] w-[30px]"/>
               </button>
@@ -47,7 +47,7 @@
         </div>
         <div class="col-span-2">
           <div class="hover:-translate-y-0.5 transition ease-in-out">
-            <button class="btn bg-true-black  text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:w-16 border-none normal-case drop-shadow-2xl h-[40px] ml-4 apple-input w-[50px]" type="submit">
+            <button class="btn bg-true-black  text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:w-16 border-none normal-case drop-shadow-2xl h-[40px] ml-4 apple-btn w-[50px]" type="submit">
               <!-- Learn more -->
               ➤
             </button>
