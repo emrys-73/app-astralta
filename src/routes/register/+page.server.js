@@ -21,6 +21,7 @@ export const actions = {
             // throw error(500, 'Something went wrong') 
         }
 
-        throw redirect(303, '/verify')
+        // Adapt for verify site
+        throw redirect(303, '/thanks-bro')
     }
 }
