@@ -67,10 +67,26 @@
 
         window.addEventListener('keydown', handleKeyDown);
 
+        const img = new Image();
+        img.onload = () => {
+            imageIsLoaded = true;
+        };
+        img.onerror = () => {
+            // handle the image loading error if needed
+        };
+        img.src = data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) :
+        `https://ui-avatars.com/api/?name=${data.user?.name}`;
+
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     })
+
+    // Ensure image loading before displaying
+
+    let imageIsLoaded = false;
+
+
 
 </script>
 
@@ -124,9 +140,18 @@
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label tabindex="0" class="btn bg-transparent border-none hover:bg-transparent active:border-none avatar w-20 mt-1.5 lg:mt-0.5">
                     <div class=" rounded-full w-[35px] lg:w-[45px]">
-                        <img src={data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) : 
+                        <!-- <img src={data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) : 
                             `https://ui-avatars.com/api/?name=${data.user?.name}`
-                        } alt="avatar" id="avatar-preview">
+                        } alt="avatar" id="avatar-preview"> -->
+                                            <img
+                        src={data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) : 
+                            `https://ui-avatars.com/api/?name=${data.user?.name}`
+                        }
+                        alt="avatar"
+                        id="avatar-preview"
+                        class="{!imageIsLoaded ? 'hidden' : ''}"
+                    >
+
                     </div>
                 </label>
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
