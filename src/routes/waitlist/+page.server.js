@@ -3,6 +3,23 @@
 import { error, redirect } from '@sveltejs/kit'
 import { generateUsername } from '$lib/utils.js'
 
+export const load = async ({ locals }) => {
+
+    try {
+        if (locals.user) {
+            return {
+                user: locals.user
+            }
+        }
+        return {
+            user: undefined,
+        }
+    } catch (err) {
+        throw error(err.status, err.message)
+    }
+}
+
+
 export const actions = {
     join: async ({ locals, request }) => {
         
