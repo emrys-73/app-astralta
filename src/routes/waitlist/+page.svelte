@@ -7,9 +7,10 @@
 
     $: modalOpen;
 
-    const hadnleSubmit = () => {
+    const handleSubmit = () => {
         modalOpen = true;
     };
+    
 </script>
 
 <div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30 px-6">
@@ -36,7 +37,7 @@
     </p> -->
 
 
-    <form action="?/join" method="POST" class="flex flex-col items-center space-y-2 w-full pt-4" on:submit={hadnleSubmit}>
+    <form action="?/join" method="POST" class="flex flex-col items-center space-y-2 w-full pt-4" on:submit={handleSubmit}>
         <div class="form-control w-full max-w-md py-2">
             <label for="name" class="label font-medium py-2 hidden">
                 <span class="label-text text-transparent">
