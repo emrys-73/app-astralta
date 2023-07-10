@@ -27,9 +27,9 @@
         Join waitlist
     </h2>
     <!-- This text is pretty much useless. Change it -->
-    <p class="text-true-white text-center opacity-50">
+    <!-- <p class="text-true-white text-center opacity-50">
         We are making Astralta available for early-adopters.
-    </p>
+    </p> -->
     <!-- <p class="text-center mt-1 opacity-50">
         Or <a href="/login" class="text-primary font-medium hover:cursor-pointer hover:underline ">Sign In</a>
         if you already have an account
