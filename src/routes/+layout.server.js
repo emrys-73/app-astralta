@@ -6,14 +6,17 @@ import { error } from '@sveltejs/kit';
 
 
 export const load = async ({ locals }) => {
+    let waitlist = true;
     try {
         if (locals.user) {
             return {
-                user: locals.user
+                user: locals.user,
+                waitlist: false,
             }
         }
         return {
             user: undefined,
+            waitlist,
         }
 
     } catch (err) {

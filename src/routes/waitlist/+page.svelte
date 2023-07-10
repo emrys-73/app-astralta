@@ -13,7 +13,7 @@
     
 </script>
 
-<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30 px-6">
+<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-70 px-6">
     <a href="/my/ai">
         <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
             Astralta
@@ -60,13 +60,13 @@
                     Email
                 </span>
             </label>
-            <h2 class="text-true-white text-xl text-center font-semibold">
+            <!-- <h2 class="text-true-white text-xl text-center font-semibold">
                 Tell us more about you
             </h2>
             <p class="text-true-white opacity-60 text-center py-4">
                 What do you plan using Astralta for?
-            </p>
-            <input type="text" name="info" class="apple-input rounded-full bg-black bg-opacity-40 w-full max-w-md font-semibold force-opaque p-3 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none"  placeholder="This is all you"/>
+            </p> -->
+            <input type="text" name="info" class="apple-input rounded-full bg-black bg-opacity-40 w-full max-w-md font-semibold force-opaque p-3 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none"  placeholder="What will you use Astralta for?"/>
         </div>
         <!-- <div class="form-control w-full max-w-md py-2">
             <label for="password" class="label font-medium py-2 hidden">
@@ -87,11 +87,11 @@
         </div> -->
 
 
-        <a href="https://astralta.com">
+        <!-- <a href="https://astralta.com">
             <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
                 Back to astralta.com
             </div>
-        </a>
+        </a> -->
 
 
         <div class="flex-none h-8">
