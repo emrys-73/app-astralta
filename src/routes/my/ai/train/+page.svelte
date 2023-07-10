@@ -27,7 +27,7 @@
     }
 </script>
 
-<div class="items-center justify-center">
+<div class="items-center justify-center absolute top-32 -ml-4">
     <GlassCard 
         on:dragover="{dragOver}"
         on:drop="{dropHandler}"
