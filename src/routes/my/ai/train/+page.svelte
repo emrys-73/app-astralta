@@ -42,5 +42,19 @@
             <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label>
         {/if}
     </GlassCard>
+    <GlassCard 
+        on:dragover="{dragOver}"
+        on:drop="{dropHandler}"
+        >
+
+        {#if selectedFile}
+            <p>File: {selectedFile.name}</p>
+        {:else}
+            <!-- <p>Drop a PDF file here or click to select</p> -->
+            <p>Train with Website</p>
+            <!-- <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
+            <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label> -->
+        {/if}
+    </GlassCard>
 </div>
 

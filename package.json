@@ -43,6 +43,7 @@
     },
     "type": "module",
     "dependencies": {
+        "openai": "^3.3.0",
         "pocketbase": "^0.15.2"
     },
     "browserslist": [
