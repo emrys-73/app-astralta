@@ -114,7 +114,9 @@ the logic, I was just too sleepy to do it -->
     {#if true}
         <InfoModal>
             <span slot="header">
-                You're in!
+                <div class="mt-8">
+                    You're in!
+                </div>
             </span>
             <span slot="image" class="">
                 <img src="ty.png" alt="nice" class="rounded-xl my-6 max-h-[210px] items-center ml-24">

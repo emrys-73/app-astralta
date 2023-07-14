@@ -1,14 +1,7 @@
 import { writable } from 'svelte/store';
 
-function toggleDrawer() {
-	const { subscribe, set } = writable(true);
+// Drawer store
+export const drawerOpen = writable(false);
 
-	return {
-		subscribe,
-		close: () => set(false),
-        open: () => set(true),
-		reset: () => set(false)
-	};
-}
-
-export const drawer = toggleDrawer();
+// Toggle store
+export const toggleTalk = writable(true);

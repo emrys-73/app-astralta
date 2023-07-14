@@ -17,7 +17,8 @@ export const POST: RequestHandler = async ({ request })  => {
     const { messages } = await request.json();
 
     const response = await openai.createChatCompletion({
-        model: 'gpt-4',
+        // model: 'gpt-3.5-turbo',
+        model: 'gpt-3.5-turbo',
         stream: true,
         messages
     })

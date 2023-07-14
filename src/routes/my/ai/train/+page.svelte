@@ -3,8 +3,9 @@
 <script>
     // @ts-nocheck
     import { GlassCard } from "$lib/components";
+    import { toggleTalk } from "../../../../stores";
+    import { onMount } from "svelte";
 
-    import { onMount } from 'svelte';
     let selectedFile = null;
 
     function dragOver(e) {

@@ -114,7 +114,10 @@ the logic, I was just too sleepy to do it -->
     {#if true}
         <InfoModal>
             <span slot="header">
-                Whoops!
+                <div class="mt-8">
+
+                    Whoops!
+                </div>
             </span>
             <span slot="image" class="">
                 <img src="kitty.png" alt="nice" class="rounded-xl my-6 max-h-[210px] items-center">
@@ -126,10 +129,17 @@ the logic, I was just too sleepy to do it -->
 
             </span>
             <span slot="backlink">
-                <div class="my-4">
+                <div class="mt-4">
                     <a href="mailto:help@astralta.com" class="text-center">
                       <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
-                        send us an Email about it
+                        Send us an Email about it
+                      </div>
+                    </a>
+                  </div>
+                  <div class="mb-4">
+                    <a href="/" class="text-center">
+                      <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
+                        Back Home
                       </div>
                     </a>
                   </div>

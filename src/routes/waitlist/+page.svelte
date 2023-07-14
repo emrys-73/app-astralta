@@ -13,13 +13,13 @@
     
 </script>
 
-<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-70 px-6">
-    <a href="/my/ai">
+<div class="flex flex-col items-center h-full w-full text-true-white bg-gradient-to-b to-black from-transparent px-6">
+    <!-- <a href="/my/ai">
         <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
             Astralta
         </h1>
-    </a>
-    <div class="flex-none h-16 lg:h-20">
+    </a> -->
+    <div class="flex-none h-10 lg:h-20">
 
     </div>
 
@@ -102,7 +102,7 @@
 
         <div class="w-full max-w-md pt-2">
             <!-- <button type="submit" class="btn btn-primary w-full">Register</button> -->
-            <button class="btn bg-true-black w-full bg-opacity-10 backdrop-blur-md text-xl hover:bg-opacity-20 hover:bg-gray-500 rounded-full text-true-white font-semibold btn-md border-none normal-case drop-shadow-2xl " type="submit">
+            <button class="btn bg-true-black w-full bg-opacity-10 backdrop-blur-md text-xl hover:bg-opacity-20 hover:bg-gray-500 rounded-full text-true-white font-semibold btn-md border-none normal-case drop-shadow-2xl   duration-500 ease-in-out" type="submit">
                 <div class="px-1.5 font-regular">
                     Join now
                 </div>

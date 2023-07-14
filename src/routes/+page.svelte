@@ -1,74 +1,46 @@
-
-<!-- <script>
-    let talking = true;
-    let training = false;
-
-    $: talking = !training;
-    $: training
-
-    const toggle_ai = () => {
-        training = talking;
-    }
-
-</script>
-
-
-<div class="flex flex-col items-center h-full w-full text-true-white">
-    <input class="check" type="checkbox" id="checkbox_toggle">
-    
-    <div class="checkbox border-none font-medium max-w-[190px]" on:click={toggle_ai}>
-      <label for="checkbox_toggle" class="slide bg-black bg-opacity-40 backdrop-blur-sm text-true-white">
-        <label for="checkbox_toggle" class="toggle_box bg-true-white bg-opacity-10"></label>
-        <label for="checkbox_toggle" class="text -ml-1 {!talking ? 'opacity-40 transition-opacity' : 'transition-opacity'}">Talk</label>
-        <label for="checkbox_toggle" class="text -ml-3 {!training ? 'opacity-40 transition-opacity' : 'transition-opacity'}">Train</label>
-      </label>
-    </div>
-</div> -->
-
-
-
-
-<!-- <div class="w-full h-full text-true-white text-center content-center justify-center">
-  <h1 class="text-2xl">
-    Join waitlist
-  </h1>
-
-  <div class="items-center">
-    <a href="/waitlist">
-      <div class="pl-2 z-50">
-        <div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
-          <button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] border-none normal-case drop-shadow-2xl">
-            Join Waitlist
-          </button>
-        </div>
-      </div>
-    </a>
-  </div>
-</div> -->
-
-
 <script>
   import { InfoModal } from '$lib/components';
-  import { afterUpdate } from 'svelte';
-  import { page } from '$app/stores';
   export let data;
 
-  let modalOpen = false;
+  import { drawerOpen } from '../stores.js';
 
-  $: modalOpen;
 
-  const hadnleSubmit = () => {
-      modalOpen = true;
-  };
+  let drawerState = false;
+  // The dollar sign label tells Svelte that the following statement should be re-run whenever one of the state variables it references is updated
+  $: drawerState;
+
+
+  drawerOpen.subscribe((value) => {
+    drawerState = value;
+  })
+
+
+  const toggleDrawer = () => {
+    drawerOpen.update((state) => !state)
+  }
+
+
 </script>
+
+
+
+<div class="text-3xl text-true-white w-full h-full text-center bg-gradient-to-b to-black from-transparent">
+  {drawerState}
+
+
+  <button class="btn-primary rounded-full p-4" on:click={toggleDrawer}>
+    Toggle Drawer
+  </button>
+</div>
+
 
 
   
 {#if data.waitlist}
       <InfoModal>
-          <span slot="header">
-              Join Waitlist
-          </span>
+          <!-- <span slot="header">
+              This is Astralta
+          </span> -->
           <!-- <span slot="image" class="">
               <img src="ty.png" alt="nice" class="rounded-xl my-6 max-h-[210px] items-center ml-24">
           </span> -->
@@ -76,10 +48,17 @@
             Apply for early access here
           </span> -->
           <span slot="backlink">
-              <div class="pb-6">
+            <div class="mt-4 mb-2">
+              <a href="/login" class="text-center">
+                <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
+                  Log In
+                </div>
+              </a>
+            </div>
+              <div class="mb-4">
                   <a href="/waitlist" class="text-center">
                     <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
-                      Apply for early access
+                      Join Waitlist
                     </div>
                   </a>
                 </div>

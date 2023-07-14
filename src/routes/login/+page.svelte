@@ -2,14 +2,14 @@
     export let form
 </script>
 
-<div class="flex flex-col items-center h-full w-full text-true-white bg-black bg-opacity-30 px-6">
-    <a href="/">
+<div class="flex flex-col items-center h-full w-full text-true-white bg-gradient-to-b to-black from-transparent px-6">
+    <!-- <a href="/">
         <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
             Astralta
         </h1>
-    </a>
+    </a> -->
 
-    <div class="flex-none h-44">
+    <div class="flex-none h-10 xl:h-32">
 
     </div>
 
@@ -61,7 +61,7 @@
             <a href="/reset-password" class="font-medium text-primary hover:cursor-pointer hover:underline">Forgot Password?</a>
         </div> -->
         <a href="/reset-password">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
+            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md  duration-500 ease-in-out">
                 Forgot password?
             </div>
         </a>
@@ -75,14 +75,14 @@
 
         <div class="w-full max-w-md pt-2">
             <!-- <button type="submit" class="btn btn-primary w-full">Register</button> -->
-            <button class="btn bg-true-black w-full bg-opacity-10 backdrop-blur-md text-xl hover:bg-opacity-20 hover:bg-gray-500 rounded-full text-true-white font-semibold btn-md border-none normal-case drop-shadow-2xl " type="submit">
+            <button class="btn bg-true-black w-full bg-opacity-10 backdrop-blur-md text-xl hover:bg-opacity-20 hover:bg-gray-500 rounded-full text-true-white font-semibold btn-md border-none normal-case drop-shadow-2xl   duration-500 ease-in-out" type="submit">
                 <div class="px-1.5 font-regular">
                     Log In
                 </div>
             </button>
         </div>
         <a href="/register">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md pt-4">
+            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md pt-4  duration-500 ease-in-out">
                 I don't have an account yet
             </div>
         </a>

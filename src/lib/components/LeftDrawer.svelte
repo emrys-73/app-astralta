@@ -3,48 +3,32 @@
 <!-- Find a way to fix the code duplication between here and layout -->
 
 <script lang="ts">
-    import { drawer } from "../../stores";
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
+    import { drawerOpen } from '../../stores';
 
-    let isOpen = false;
-    $: isOpen;
 
-    const drawerOpen = () => {
-        if (!isOpen) {
-            drawer.open()
-            isOpen = true;
-        }
+    let drawerState = false;
+    // The dollar sign label tells Svelte that the following statement should be re-run whenever one of the state variables it references is updated
+    $: drawerState;
+
+
+    drawerOpen.subscribe((value) => {
+        drawerState = value;
+    })
+
+
+    const toggleDrawer = () => {
+        drawerOpen.update((state) => !state)
     }
 
-    const drawerClose = ()  => {
-        if (isOpen) {
-            drawer.close()
-            isOpen = false;
-        }
-    }
-
-    const resetDrawer = () => {
-        drawer.reset()
-        isOpen = false;
-    }
-
-
-    const toggleDrawer  = ()  => {
-        switch (isOpen) {
-            case true:
-                drawerClose()
-                break;
-            case false:
-                drawerOpen()
-                break;
-            default:
-                resetDrawer()
-                break;
-        }
-    }
 
     const navigation = [
+            {
+                title: 'Home',
+                href: '/',
+                symbol: '/home_icon.png'
+            },
             {
                 title: 'My AI',
                 href: '/my/ai',
@@ -52,25 +36,20 @@
             },
             {
                 title: 'Settings',
-                href: '/my/settings',
-                symbol: 'Settings.png'
+                href: '/settings',
+                symbol: '/Settings.png'
             },
             {
                 title: 'Help',
                 href: '/help',
-                symbol: 'Help.png'
+                symbol: '/Help.png'
             },
             {
                 title: 'Feedback',
-                href: '/my/feedback',
-                symbol: 'Feedback.png'
+                href: '/feedback',
+                symbol: '/Feedback.png'
             },
         ]
-
-    const evalPageURL = ()  => {
-        // This function checks if we in a page where we should have no drawer
-
-    }
 
     onMount(() => {
         // Ensures to set both states to false
@@ -94,7 +73,7 @@
 
 </script>
 
-{#if isOpen}
+<!-- {#if isOpen} -->
     <div class="flex flex-col w-64 h-full bg-black bg-opacity-40 backdrop-blur-sm">
         <!-- Header grid -->
         <div class="text-xl text-true-white grid grid-cols-6">
@@ -105,19 +84,19 @@
                 </h3>
             </div>
             <!-- Closing button -->
-            <div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
-                <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-6 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl" on:click={toggleDrawer}>
-                    Less
+            <!-- <div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
+                <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>
+                    x
                 </button>
-            </div>
+            </div> -->
     
         </div>
         <!-- Navigation list -->
         <div>
             <ul>
                 {#each navigation as navItem}
-                    {#if navItem.title === 'My AI'}
-                    <li class="hover:bg-true-white hover:bg-opacity-20 rounded-xl text-true-white hover:drop-shadow-2xl hover:backdrop-blur-sm p-2 m-2 {$page.url.pathname === navItem.href ? 'bg-true-white bg-opacity-10' : '' }">
+                    <!-- {#if navItem.title === 'My AI'} -->
+                    <li class="hover:bg-true-white hover:bg-opacity-20 rounded-xl text-true-white hover:backdrop-blur-sm p-2 m-2 duration-700 ease-out {$page.url.pathname === navItem.href ? 'bg-true-white bg-opacity-10' : '' }">
                         <a href={navItem.href} class="font-regular content-center hover:text-true-whit ">
                             <div class="flex flex-row max-h-[35px]">
                                 <div class="p-2">
@@ -129,19 +108,19 @@
                             </div>
                         </a>
                     </li>
-                    {/if}
+                    <!-- {/if} -->
                     
                 {/each}
             </ul>
         </div>
     </div>
-	
+<!-- 	
 {:else}
-<div class="flex items-center {$page.url.pathname === '/verify' ? ' hidden' : ''} {$page.url.pathname === '/register' ? ' hidden' : ''} {$page.url.pathname === '/login' ? ' hidden' : ''} {$page.url.pathname === '/reset-password' ? ' hidden' : ''} {$page.url.pathname === '/waitlist' ? ' hidden' : ''} {$page.url.pathname === '/thanks-bro' ? ' hidden' : ''} {$page.url.pathname === '/whoops' ? ' hidden' :'' }">
+<div class="flex items-center max-w-[60px] {$page.url.pathname === '/verify' ? ' hidden' : ''} {$page.url.pathname === '/register' ? ' hidden' : ''} {$page.url.pathname === '/login' ? ' hidden' : ''} {$page.url.pathname === '/reset-password' ? ' hidden' : ''} {$page.url.pathname === '/waitlist' ? ' hidden' : ''} {$page.url.pathname === '/thanks-bro' ? ' hidden' : ''} {$page.url.pathname === '/whoops' ? ' hidden' :'' }">
     <div class="hover:-translate-y-0.5 transition ease-in-out md:mt-1.5 mt-1">
-        <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl" on:click={toggleDrawer}>
-            More
+        <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm ml-4 mt-4 md:ml-2 md:text-md md:mt-4 md:h-[2rem] border-none normal-case drop-shadow-2xl" on:click={toggleDrawer}>
+            +
         </button>
     </div>
 </div>
-{/if}
+{/if} -->
