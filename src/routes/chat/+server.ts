@@ -1,6 +1,7 @@
 import type { RequestHandler } from './$types'
 import { Configuration, OpenAIApi } from 'openai-edge';
-import { OPENAI_KEY } from '$env/static/private';
+// import { OPENAI_KEY } from '$env/static/private';
+import { OPENAI_KEY} from '$env/static/private'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 
 
