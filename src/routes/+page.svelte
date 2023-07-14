@@ -24,15 +24,18 @@
 
 
 
-<div class="text-3xl text-true-white w-full h-full text-center bg-gradient-to-b to-black from-transparent">
+<!-- <div class="text-3xl text-true-white w-full h-full text-center bg-gradient-to-b to-black from-transparent">
   {drawerState}
 
 
   <button class="btn-primary rounded-full p-4" on:click={toggleDrawer}>
     Toggle Drawer
   </button>
-</div>
+</div> -->
 
+<div class="w-full h-full items-center text-center text-true-white text-2xl">
+  Hello there!
+</div>
 
 
   

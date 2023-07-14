@@ -12,6 +12,9 @@
 	export let data; // to accept that data property
 	import { getImageURL } from "$lib/utils";
     import { drawerOpen } from '../stores';
+    import { dev } from '$app/environment';
+    import { inject } from '@vercel/analytics';
+    inject({ mode: dev ? 'development' : 'production' });
 
 
     let drawerState = false;
