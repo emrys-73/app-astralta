@@ -96,7 +96,7 @@
           <div class="grid grid-cols-10">
             <div class="col-span-9">
               <textarea rows={rows} name="message" class="{rounded} overflow-auto appearance-none touch-manipulation  select-none resize-none min-h-[40px] 
-                s-apple-input bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-sm
+                s-apple-input bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-[15px]
                  focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque
                   focus:border-none" placeholder="Send a message" bind:value={$input}></textarea>
             </div>
