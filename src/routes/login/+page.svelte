@@ -81,7 +81,7 @@
                 </div>
             </button>
         </div>
-        <a href="/register">
+        <a href="/waitlist">
             <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md pt-4  duration-500 ease-in-out">
                 I don't have an account yet
             </div>
@@ -90,7 +90,7 @@
         {#if form?.notVerified}
             <div class="alert alert-error shadow-lg w-full max-w-md">
             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span>You must verify your Email before you can login</span>
+            <span>You are on the waitlist. We will notify you when you get full access.</span>
           </div>
         {/if}
     </form>
