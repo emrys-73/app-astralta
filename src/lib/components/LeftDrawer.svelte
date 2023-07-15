@@ -78,10 +78,18 @@
         <!-- Header grid -->
         <div class="text-xl text-true-white grid grid-cols-6">
             <!-- Title -->
-            <div class="col-span-4">
+            <div class="col-span-5">
                 <h3 class="font-bold p-4 md:text-2xl mt-0.5 md:mt-2">
                     Launchpad
                 </h3>
+            </div>
+            <div class="col-span-1">
+
+                <button class="btn bg-gray-300 bg-opacity-10 mt-6 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>
+                    {#if drawerState}
+                    x
+                    {/if}
+                </button>
             </div>
             <!-- Closing button -->
             <!-- <div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">

@@ -88,13 +88,11 @@
 
     <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" class=" backdrop-blur-sm">
         <svelte:fragment slot="lead">
+            {#if !drawerState}
             <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>
-                {#if drawerState}
-                x
-                {:else}
                 +
-                {/if}
             </button>
+            {/if}
         </svelte:fragment>
             <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase">
                 <a href="/">
