@@ -134,7 +134,7 @@
                     tabindex="0"
                     class="menu menu-compact dropdown-content shadow rounded-xl bg-true-black bg-opacity-50 text-true-white drop-shadow backdrop-blur-md hover:text-true-white xl:mr-4 mt-2"
                 >
-                    <li>
+                    <!-- <li>
                         <a href="/my/profile" class="justify-between hover:text-true-white">Profile</a>
                     </li>
                     <li>
@@ -142,7 +142,7 @@
                     </li>
 					<li>
                         <a href="/my/security" class="justify-between hover:text-true-white">Security</a>
-                    </li>
+                    </li> -->
                     <li>
                         <form action="/logout" method="POST" class="text-true-white hover:text-true-white">
                             <button type="submit" class="w-full text-start hover:text-true-white">Logout</button>

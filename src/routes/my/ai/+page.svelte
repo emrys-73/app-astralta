@@ -7,6 +7,8 @@
       import { toggleTalk } from "../../../stores";
       import { useChat } from "ai/svelte";
       import { GlassCard } from "$lib/components";
+      // import { marked } from 'marked';
+      
   
       let talking = true;
       $: talking;
@@ -51,10 +53,15 @@
       function handleChange(e) {
           selectedFile = e.target.files[0];
       }
+
+      function formatMessageContent(content) {
+        const formattedContent = content.replace(/\n/g, "<br/>");
+        return formattedContent;
+      }
   </script>
 
 
-<div class="flex flex-col items-center h-full w-full text-true-white">
+<div class="flex flex-col items-center h-full w-full text-true-white bg-gradient-to-b from-transparent to-black">
   <input class="check" type="checkbox" id="checkbox_toggle">
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="checkbox lg:xlcheckbox border-none font-medium max-w-[190px] rounded-full" on:click={toggleTT}>
@@ -74,7 +81,7 @@
           {#each $messages as message}
           <li>
             {#if message.role == 'user'}
-            <div class="text-left text-true-white text-md bg-true-white rounded-xl bg-opacity-20 backdrop-blur-md my-2">
+            <div class="text-left text-true-white text-md bg-gray-900 rounded-xl bg-opacity-20 backdrop-blur-md my-2">
     
               <p class="w-full p-2 px-4 overflow-auto">
                 {message.content}
@@ -82,7 +89,8 @@
             </div>
             {:else}
             <div class="text-left text-true-white text-md bg-black rounded-xl bg-opacity-60 backdrop-blur-md my-2">
-              <p class="w-full p-2 px-4 overflow-auto">
+              <p class="w-full p-2 px-4 overflow-auto" innerHTML="{formatMessageContent(message.content)}">
+                console.log({message})
                 {message.content}
               </p>
             </div>
@@ -114,7 +122,8 @@
 
   {:else}
 
-<div class="items-center justify-center">
+<div class="items-center justify-center content-center">
+  <div class="justify-center ">
   <GlassCard 
       on:dragover="{dragOver}"
       on:drop="{dropHandler}"
@@ -123,12 +132,14 @@
       {#if selectedFile}
           <p>File: {selectedFile.name}</p>
       {:else}
-          <!-- <p>Drop a PDF file here or click to select</p> -->
-          <p>Train with PDF</p>
-          <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
-          <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label>
-      {/if}
-  </GlassCard>
+
+        <!-- <p>Drop a PDF file here or click to select</p> -->
+        <p>Train with PDF</p>
+        <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
+        <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label>
+        {/if}
+      </GlassCard>
+    </div>
   <GlassCard 
       on:dragover="{dragOver}"
       on:drop="{dropHandler}"

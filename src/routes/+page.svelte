@@ -4,6 +4,12 @@
 
   import { drawerOpen } from '../stores.js';
 
+  import { experience } from '../stores.js';
+
+  let xp = "";
+  $: xp;
+
+  experience.subscribe((value) => { xp = value; })
 
   let drawerState = false;
   // The dollar sign label tells Svelte that the following statement should be re-run whenever one of the state variables it references is updated
@@ -15,9 +21,6 @@
   })
 
 
-  const toggleDrawer = () => {
-    drawerOpen.update((state) => !state)
-  }
 
 
 </script>
@@ -35,6 +38,12 @@
 
 <div class="w-full h-full items-center text-center text-true-white text-2xl">
   Hello there!
+
+  <!-- <br>
+  this is what I know:
+  <br>
+
+  {xp} -->
 </div>
 
 

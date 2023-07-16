@@ -5,6 +5,8 @@ import LeftDrawer from "./LeftDrawer.svelte";
 import InfoModal from './InfoModal.svelte';
 import SideBarLeft from './SideBarLeft.svelte';
 import GlassCard from './GlassCard.svelte';
+import Modal from './Modal.svelte';
+import Input from './Input.svelte';
 
 
-export { LeftDrawer, Header, InfoModal, SideBarLeft, GlassCard }
+export { LeftDrawer, Header, InfoModal, SideBarLeft, GlassCard, Modal, Input }

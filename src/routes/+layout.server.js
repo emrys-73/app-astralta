@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 
-import { error } from '@sveltejs/kit';
+// import { error } from '@sveltejs/kit';
 
 
 export const load = async ({ locals }) => {
@@ -20,6 +20,7 @@ export const load = async ({ locals }) => {
         }
 
     } catch (err) {
-        throw error(err.status, err.message)
+        // throw error(err.status, err.message)
+        console.log("Error on startup")
     }
 }
