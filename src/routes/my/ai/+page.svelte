@@ -38,6 +38,7 @@
         api: "/chat",
       });
 
+
       
       let message;
 
@@ -108,14 +109,18 @@
           {/each}
         </ul>
       </div>
-      <div class="row-span-1 pb-2 absolute bottom-2 px-2">
+      <div class="row-span-1 py-4 bottom-0 rounded-2xl px-6 fixed backdrop-blur-lg">
         <form on:submit={handleSubmit}>
           <div class="grid grid-cols-10">
             <div class="col-span-9">
-              <textarea rows={rows} name="message" class="{rounded} overflow-auto appearance-none touch-manipulation  select-none resize-none min-h-[40px] 
+              <textarea rows={rows} name="message" class="{rounded} overflow-auto appearance-none touch-manipulation {message.length > 0 ? '' : 'breathe'} select-none resize-none min-h-[40px] 
                 s-apple-input bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-[15px]
                  focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque
-                  focus:border-none" placeholder="Send a message" bind:value={$input}></textarea>
+                  focus:border-none" placeholder="Send a message" bind:value={$input} on:keydown={(event) => {
+                    if (event.key === 'Enter' && !event.shiftKey) {
+                      event.preventDefault();
+                      handleSubmit(event);
+                    }}}></textarea>
             </div>
             <div class="col-span-1 px-1">
               <button class="btn bg-true-black text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case drop-shadow-2xl h-[40px] apple-btn w-full" type="submit">
