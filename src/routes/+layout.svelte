@@ -94,7 +94,7 @@
             </button>
             {/if}
         </svelte:fragment>
-            <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase">
+            <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {drawerState ? 'hidden sm:block' : '' }">
                 <a href="/">
                     <span>Astralta</span>
                 </a>
