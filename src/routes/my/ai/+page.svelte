@@ -163,7 +163,7 @@
           <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label> -->
       {/if}
   </GlassCard>
-  <GlassCard>
+  <!-- <GlassCard>
     <div class="grid grid-rows-3">
       <div class="">
 
@@ -185,7 +185,7 @@
     </div>
     
 
-  </GlassCard>
+  </GlassCard> -->
 </div>
   {/if}
 </div>
