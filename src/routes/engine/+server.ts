@@ -5,11 +5,10 @@ import { OPENAI_KEY} from '$env/static/private'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import { experience } from '../../stores';
 
+let setup = "Your task is to transform the content I give you into a training instruction in imperative describing the field of expertise expected. [content]: There are white wales in the lake. [instruction]: You are an expert in wales and learned that there are white wales in the lake. ";
 
-// let xp = "";
-// textTrainining.subscribe((value) => {xp = value})
-
-
+experience.subscribe((value) => {setup = value})
+const intro = {"role": "system", "content": setup}
 
 
 const config = new Configuration({
@@ -20,10 +19,6 @@ const openai = new OpenAIApi(config);
 
 
 export const POST: RequestHandler = async ({ request })  => {
-
-    let xp;
-    experience.subscribe((value) => xp = value)
-    const intro = {"role": "system", "content": xp}
 
     const { messages } = await request.json();
 
