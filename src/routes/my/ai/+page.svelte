@@ -8,18 +8,32 @@
       import { useChat } from "ai/svelte";
       import { GlassCard } from "$lib/components";
       import { experience } from "../../../stores";
+      export let data;
       // import { marked } from 'marked';
 
+      let debugMode = false
+      let loading = true;
+
       let training;
-      $: training = "";
+      $: training = "You are my AI";
+
+      
+
+      let xp;
+      $: xp = "None"
+
+      experience.subscribe((value) => xp = value)
 
       // let xp;
       // let xp;
       // experience.subscribe((value) => {xp = value})
 
       const train = () => {
-        experience.update(() => training)
-        console.log("Trained succesfully")
+        text = training
+        handleSubmit()
+        // experience.update(() => training)
+        // console.log("Trained succesfully")
+
         // toggleTT()
       }
   
@@ -34,14 +48,21 @@
           }
 
       // talk
+      let text = "you are mine"
+
+      text = data?.user?.username
+
+      let userexperience = data?.user?.xp
+
+      const username = data?.user?.username
+      $: text;
+
+      let greeting = `Hi ${username}, what can I do for you?`
+
       const { messages, handleSubmit, input } = useChat({
         api: "/chat",
+        initialMessages: [{"role": "system", "content": userexperience}, {"role": "assistant", "content": greeting}],
       });
-
-      // classic Talk
-
-
-
 
       
       let message;
@@ -98,15 +119,23 @@
   <div class="flex justify-center h-full relative">
     <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[80] lg:max-w-[900] xl:max-w-[1000px] m-6 rounded-xl flex justify-center items-center bg-black bg-opacity-0 mb-20 overflow-y-auto">
       <div class="row-span-5 overflow-auto">
-        <!-- <pre class="w-full overflow-auto p-2 px-4 ">{message}
-        </pre> -->
+        {#if debugMode}
+          Experience: {xp}
+          User experience: {userexperience}
+        {/if}
         <ul>
           {#each $messages as message}
           <li>
             {#if message.role == 'user'}
-            <div class="text-left text-true-white text-md bg-true-white rounded-xl bg-opacity-0 backdrop-blur-xl my-2 drop-shadow-xl"><pre class="w-full p-2 px-4 overflow-auto whitespace-pre-wrap">{message.content}<pre/></div>
-            {:else}
+            <div class="text-left text-true-white text-md bg-true-white rounded-xl bg-opacity-10 backdrop-blur-xl my-2 drop-shadow-xl"><pre class="w-full p-2 px-4 overflow-auto whitespace-pre-wrap">{message.content}<pre/></div>
+            {:else if message.role == 'assistant'}
             <div class="text-left text-true-white text-md bg-black rounded-xl bg-opacity-60 backdrop-blur-xl my-2 drop-shadow-xl">
+              <pre class="w-full p-2 px-4 overflow-y-auto whitespace-pre-wrap">{message.content}</pre></div>
+            {:else}
+            <div class="text-left text-true-white text-md bg-black rounded-xl bg-opacity-60 backdrop-blur-xl my-2 drop-shadow-xl {debugMode ? '' : 'hidden'}">
+              <h2 class="text-2xl text-true-white text-center">
+                System training:
+              </h2>
               <pre class="w-full p-2 px-4 overflow-y-auto whitespace-pre-wrap">{message.content}</pre></div>
             {/if}
           </li>
@@ -140,59 +169,67 @@
 
   {:else}
 
-<div class="items-center justify-center content-center">
-  <div class="justify-center ">
-  <GlassCard 
-      on:dragover="{dragOver}"
-      on:drop="{dropHandler}"
-      >
-
-      {#if selectedFile}
-          <p>File: {selectedFile.name}</p>
-      {:else}
-
-        <!-- <p>Drop a PDF file here or click to select</p> -->
-        <p>Train with PDF</p>
-        <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
-        <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label>
-        {/if}
-      </GlassCard>
-    </div>
-  <GlassCard>
-
-      {#if selectedFile}
-          <p>File: {selectedFile.name}</p>
-      {:else}
+  {#if debugMode}
+  <div class="items-center justify-center content-center">
+    <div class="justify-center ">
+    <GlassCard 
+        on:dragover="{dragOver}"
+        on:drop="{dropHandler}"
+        >
+  
+        {#if selectedFile}
+            <p>File: {selectedFile.name}</p>
+        {:else}
+  
           <!-- <p>Drop a PDF file here or click to select</p> -->
-          <p>Train with Website</p>
-          <!-- <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
-          <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label> -->
-      {/if}
-  </GlassCard>
-  <!-- <GlassCard>
-    <div class="grid grid-rows-3">
-      <div class="">
-
-        <span class="">
-          Train with Text
-        </span>
+          <p>Train with PDF</p>
+          <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
+          <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label>
+          {/if}
+        </GlassCard>
       </div>
-      <div>
-
-        <input type="text" name="textinput" class="apple-input rounded-full text-sm bg-black bg-opacity-40 w-full max-w-md font-regular force-opaque p-1 focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none"  placeholder="input" bind:value={training}/>
-      </div>
-      <div>
-        {#if training.length > 3}
-        <button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" on:click={train}>
-          Train
-        </button>
+    <GlassCard>
+  
+        {#if selectedFile}
+            <p>File: {selectedFile.name}</p>
+        {:else}
+            <!-- <p>Drop a PDF file here or click to select</p> -->
+            <p>Train with Website</p>
+            <!-- <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
+            <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label> -->
         {/if}
+    </GlassCard>
+    <GlassCard>
+      <div class="grid grid-rows-3">
+        <div class="">
+  
+          <span class="">
+            Train with Text
+          </span>
+        </div>
+        <div>
+  
+          <input type="text" name="textinput" class="apple-input rounded-full text-sm bg-black bg-opacity-40 w-full max-w-md font-regular force-opaque p-1 focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none"  placeholder="input" bind:value={training}/>
+        </div>
+        <div>
+          {#if training.length > 3}
+          <button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" on:click={train}>
+            Train
+          </button>
+          {/if}
+        </div>
       </div>
-    </div>
-    
+      
+  
+    </GlassCard>
+  </div>
 
-  </GlassCard> -->
-</div>
+  {/if}
+  <div class="w-full text-center text-true-white font-semibold p-4 justify-center h-full content-center">
+    <span>Training coming soon</span>
+  </div>
+
+
   {/if}
 </div>
 
