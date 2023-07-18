@@ -4,12 +4,15 @@
       import { goto } from "$app/navigation";
       import { page } from "$app/stores";
       import { redirect } from "@sveltejs/kit";
-      import { textTrainining, toggleTalk } from "../../../stores";
+      import { textTrainining, toggleTalk, darkMode } from "../../../stores";
       import { useChat } from "ai/svelte";
       import { GlassCard } from "$lib/components";
       import { experience } from "../../../stores";
       export let data;
       // import { marked } from 'marked';
+
+      let darkModeState;
+      darkMode.subscribe((value) => {darkModeState = value})
 
       let debugMode = false
       let loading = true;
@@ -103,7 +106,7 @@
   </script>
 
 
-<div class="flex flex-col items-center h-full w-full text-true-white bg-gradient-to-b from-transparent to-black">
+<div class="flex flex-col items-center h-full w-full text-true-whit">
   <input class="check" type="checkbox" id="checkbox_toggle">
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div class="checkbox lg:xlcheckbox border-none font-medium max-w-[190px] rounded-full" on:click={toggleTT}>
@@ -142,7 +145,7 @@
           {/each}
         </ul>
       </div>
-      <div class="row-span-1 py-4 bottom-0 rounded-2xl px-6 fixed backdrop-blur-lg">
+      <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg">
         <form on:submit={handleSubmit}>
           <div class="grid grid-cols-10">
             <div class="col-span-9">

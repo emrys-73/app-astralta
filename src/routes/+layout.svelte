@@ -11,11 +11,13 @@
 	import { LeftDrawer } from '$lib/components';
 	export let data; // to accept that data property
 	import { getImageURL } from "$lib/utils";
-    import { drawerOpen } from '../stores';
+    import { drawerOpen, darkMode } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
 
+    let darkModeState = false;
+    darkMode.subscribe((value) => darkModeState = value);
 
     let drawerState = false;
     // The dollar sign label tells Svelte that the following statement should be re-run whenever one of the state variables it references is updated
@@ -96,7 +98,14 @@
         </svelte:fragment>
             <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {drawerState ? 'hidden sm:block' : '' }">
                 <a href="/">
-                    <span>Astralta</span>
+                    <span>
+                        {#if data?.user?.ainame}
+                            {data?.user?.ainame}
+                        {:else}
+                            Astralta
+                        {/if}
+
+                    </span>
                 </a>
             </div>
         <svelte:fragment slot="trail">
@@ -156,7 +165,7 @@
 		<!-- <div class="w-full flex h-[70px] backdrop-blur-sm {$page.url.pathname === '/register' ? ' hidden' : ''} {$page.url.pathname === '/verify' ? ' hidden' : ''} {$page.url.pathname === '/login' ? ' hidden' : ''} {$page.url.pathname === '/reset-password' ? ' hidden' : ''} {$page.url.pathname === '/waitlist' ? ' hidden' : ''} {$page.url.pathname === '/thanks-bro' ? ' hidden' : ''} {$page.url.pathname === '/whoops' ? ' hidden' : ''}"> -->
 	</svelte:fragment>
 	<!-- Router Slot -->
-    <div class="h-full w-full">
+    <div class="h-full w-full {darkModeState ? 'bg-gradient-to-b from-transparent to-black': ''}">
         <slot />
     </div>
 </AppShell>
