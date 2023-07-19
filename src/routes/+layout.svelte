@@ -34,9 +34,9 @@
     }
 
     let avatarUrl = `https://ui-avatars.com/api/?name=${data.user?.name}`;
+    let backgroundUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.bg).toString();
 
     onMount(() => {
-
 
         function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
             if (event.metaKey && event.key === 'x') {
@@ -54,18 +54,24 @@
             avatarUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar).toString()
         }
 
+        if (data?.user?.bg) {
+            backgroundUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.bg).toString();
+        }
+
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     })
 
-    let backgroundUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.bg).toString();
+    
+
+
 
 </script>
 
 
 <!-- <AppShell class="bg-[url('home.png')] bg-image"> -->
-<AppShell class=" {data?.user?.bg ? `bg-[url('${backgroundUrl}')] `: "bg-[url('/home.png')]"} bg-image">
+<AppShell class="bg-[url('{backgroundUrl}')] bg-image">
 	<!-- (header) -->
 	<svelte:fragment slot="sidebarLeft">
         {#if drawerState}
