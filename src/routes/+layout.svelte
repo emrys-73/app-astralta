@@ -71,7 +71,8 @@
 
 
 <!-- <AppShell class="bg-[url('home.png')] bg-image"> -->
-<AppShell class="bg-[url('{backgroundUrl}')] bg-image">
+<!-- <AppShell class="bg-[url('{backgroundUrl}')] bg-image"> -->
+<AppShell class="bg-[url('/home.png')] bg-image">
 	<!-- (header) -->
 	<svelte:fragment slot="sidebarLeft">
         {#if drawerState}
