@@ -73,11 +73,15 @@
     let imageSrc = "";
 
 
+
+    let backgroundUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.bg).toString();
+    // backgroundUrl = "http://139.144.176.23:80/api/files/_pb_users_auth_/gb2l2xpr9wtulux/hero_ifRuDoWq96.png?thumb=0x0"
+
 </script>
 
-<!-- <AppShell class="bg-[url('home.png')] bg-image"> -->
-<AppShell class="bg-[url('/home.png')] bg-image">
 
+<!-- <AppShell class="bg-[url('home.png')] bg-image"> -->
+<AppShell class=" {data?.user?.bg ? `bg-[url('${backgroundUrl}')] `: "bg-[url('/home.png')]"} bg-image">
 	<!-- (header) -->
 	<svelte:fragment slot="sidebarLeft">
         {#if drawerState}
@@ -104,7 +108,7 @@
                         {:else}
                             Astralta
                         {/if}
-
+                        
                     </span>
                 </a>
             </div>

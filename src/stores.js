@@ -11,6 +11,5 @@ export const experience = writable("")
 
 export const textTrainining = writable("");
 
-
 // User appearance
 export const darkMode = writable(true);
