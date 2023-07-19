@@ -1,7 +1,7 @@
 <script>
 // @ts-nocheck
 
-  import { darkMode } from "../../stores";
+  import { darkMode, gpt4 } from "../../stores";
   import { enhance, applyAction } from '$app/forms';
     import { invalidateAll } from '$app/navigation';
     import { Input, Modal } from '$lib/components';
@@ -100,6 +100,14 @@
     darkMode.update((value) => !value)
   }
 
+  let gpt4On = false;
+  gpt4.subscribe((value) => {gpt4On = value})
+
+
+  const toggleGPT = () => {
+    gpt4.update((value) => !value)
+  }
+
 </script>
 
 
@@ -115,6 +123,18 @@
             Dark Mode
           {:else}
             Light Mode
+          {/if}
+      </button>
+    </div>
+
+    <div class="mb-6">
+
+      <h2 class="text-lg font-regular text-true-white text-center mt-2">GPT Model</h2>
+      <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleGPT}>
+          {#if gpt4On}
+            GPT-4
+          {:else}
+            GPT-3.5-Turbo
           {/if}
       </button>
     </div>
@@ -240,7 +260,7 @@
     </div>
 
     <!-- Name -->
-    <div>
+    <div class="mb-8">
         <h2 class="text-lg font-regular text-true-white text-center my-2">Name</h2>
 
         <input id="name" label="Name" type="text" name="name" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.name}" disabled />

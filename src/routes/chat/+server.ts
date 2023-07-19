@@ -3,6 +3,7 @@ import { Configuration, OpenAIApi } from 'openai-edge';
 // import { OPENAI_KEY } from '$env/static/private';
 import { OPENAI_KEY} from '$env/static/private'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
+import { gpt4 } from '../../stores';
 // import { experience } from '../../stores';
 
 
@@ -10,7 +11,8 @@ import { OpenAIStream, StreamingTextResponse } from 'ai'
 // textTrainining.subscribe((value) => {xp = value})
 
 
-
+let gpt4On = false;
+gpt4.subscribe((value) => {gpt4On = value})
 
 const config = new Configuration({
     apiKey: OPENAI_KEY
@@ -28,34 +30,26 @@ export const POST: RequestHandler = async ({ request })  => {
 
     const { messages } = await request.json();
 
-    const response = await openai.createChatCompletion({
-        model: 'gpt-3.5-turbo',
-        // model: 'gpt-3.5-turbo-0613',
-        // model: 'gpt-4',
-        stream: true,
-        messages: messages,
-        // functions: [
-        //     {
-        //         "name": "get_current_weather",
-        //         "description": "Get the current weather in a given location",
-        //         "parameters": {
-        //             "type": "object",
-        //             "properties": {
-        //                 "location": {
-        //                     "type": "string",
-        //                     "description": "The city and state, e.g. San Francisco, CA",
-        //                 },
-        //                 "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
-        //             },
-        //             "required": ["location"],
-        //         },
-        //     }
-        // ],
-        // function_call:"auto",
-    })
+    if ( gpt4On ) {
+        const response = await openai.createChatCompletion({
+            model: 'gpt-4',
+            stream: true,
+            messages: messages,
+        })
 
-    const stream = OpenAIStream(response)
+        const stream = OpenAIStream(response)
 
-    return new StreamingTextResponse(stream)
+        return new StreamingTextResponse(stream)
+    } else {
+        const response = await openai.createChatCompletion({
+            model: 'gpt-3.5-turbo',
+            stream: true,
+            messages: messages,
+        })
+
+        const stream = OpenAIStream(response)
+
+        return new StreamingTextResponse(stream)
+    }    
 }
 
