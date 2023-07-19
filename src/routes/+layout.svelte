@@ -69,7 +69,15 @@
 	<!-- (header) -->
 	<svelte:fragment slot="sidebarLeft">
         {#if drawerState}
-		    <LeftDrawer/>
+		    <LeftDrawer>
+                <span slot="title">
+                    {#if data?.user?.ainame}
+                        Astralta
+                    {:else}
+                        Launchpad
+                    {/if}
+                </span>
+            </LeftDrawer>
         {/if}
 	</svelte:fragment>
 	

@@ -7,7 +7,6 @@
     import { page } from '$app/stores';
     import { drawerOpen } from '../../stores';
 
-
     let drawerState = false;
     // The dollar sign label tells Svelte that the following statement should be re-run whenever one of the state variables it references is updated
     $: drawerState;
@@ -80,7 +79,7 @@
             <!-- Title -->
             <div class="col-span-5">
                 <h3 class="font-bold p-4 md:text-2xl mt-0.5 md:mt-2">
-                    Launchpad
+                    <slot name="title"/>
                 </h3>
             </div>
             <div class="col-span-1">

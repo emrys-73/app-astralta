@@ -56,5 +56,21 @@ export const actions = {
 			console.log('Error: ', err);
 			throw error(err.status, err.message);
 		}
+	},
+	updateAIName: async ({ request, locals }) => {
+		const data = Object.fromEntries(await request.formData());
+
+		try {
+			const { ainame } = await locals.pb
+						.collection('users')
+						.update(locals.user.id, { ainame: data.ainame });
+					locals.user.ainame = ainame;
+					return {
+						success: true
+					};
+		} catch (err) {
+			console.log('Error: ', err);
+			throw error(err.status, err.message);
+		}
 	}
 };

@@ -5,14 +5,17 @@
   import { enhance, applyAction } from '$app/forms';
     import { invalidateAll } from '$app/navigation';
     import { Input, Modal } from '$lib/components';
+    
   
     export let form;
     export let data;
+    let ainameModalOpen;
     let emailModalOpen;
     let usernameModalOpen;
     let nameModalOpen;
     let loading;
   
+    $: ainameModalOpen = false;
     $: emailModalOpen = false;
     $: usernameModalOpen = false;
     $: nameModalOpen = false;
@@ -72,6 +75,24 @@
       };
     };
 
+    const submitUpdateAIName = () => {
+      loading = true;
+      ainameModalOpen = true;
+      return async ({ result }) => {
+        switch (result.type) {
+          case 'success':
+            await invalidateAll();
+            ainameModalOpen = false;
+            break;
+          case 'error':
+            break;
+          default:
+            await applyAction(result);
+        }
+        loading = false;
+      };
+    };
+
   let darkModeState = false
   darkMode.subscribe((value) => {darkModeState = value})
 
@@ -81,21 +102,66 @@
 
 </script>
 
-<div class="w-full h-full items-center text-center text-true-white text-2xl justify-center">
+
+<!-- My AI Settings -->
+<div class="w-full h-full items-center text-center text-true-white text-2xl justify-center bg-black bg-opacity-0 backdrop-blur-sm">
   <div class="mb-4">
-    <h1 class="font-semibold ">Appearance</h1>
-    <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDarkMode}>
-        {#if darkModeState}
-          Dark Mode
-        {:else}
-          Light Mode
-        {/if}
-    </button>
+    <h1 class="font-semibold ">My AI</h1>
+    <div class="mb-6">
+
+      <h2 class="text-lg font-regular text-true-white text-center mt-2">Appearance</h2>
+      <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDarkMode}>
+          {#if darkModeState}
+            Dark Mode
+          {:else}
+            Light Mode
+          {/if}
+      </button>
+    </div>
+    <div class="mb-20">
+      <!-- AI Name -->
+        
+      <h2 class="text-lg font-regular text-true-white text-center mt-2">AI Name</h2>
+
+      <input id="ainame" label="AIName" type="text" name="ainame" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.ainame}" disabled />
+      
+      <Modal label="change-ainame" checked={ainameModalOpen}>
+        <span slot="trigger" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">Change AI name</span>
+        <h3 slot="heading">Name my AI</h3>
+        <form
+          action="?/updateAIName"
+          method="POST"
+          class="text-true-white"
+          use:enhance={submitUpdateAIName}
+        >
+        <div class="mb-8 items-center">
+          <Input
+            id="ainame"
+            type="text"
+            label="Enter new name"
+            required={true}
+            value={form?.data?.ainame}
+            disabled={loading}
+          />
+        </div>
+          <div class="">
+            <button type="submit" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" disabled={loading}
+              >Name my AI</button
+            >
+          </div>
+        </form>
+        
+      </Modal>
+      
+    </div>
+
   </div>
-  <!-- <div class="divider"></div> -->
+  
+  
+  <!-- My Account Settings -->
   <div class="my-4">
     
-    <h1 class="font-semibold mb-4">Account</h1>
+    <h1 class="font-semibold mb-4">My Account</h1>
     
     <!-- Email -->
     <!-- <div>
@@ -133,11 +199,11 @@
     <div class="mb-12">
         <h2 class="text-lg font-regular text-true-white text-center my-2">Username</h2>
 
-        <input id="username" label="Username" type="text" name="username" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-full max-w-md font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.username}" disabled />
+        <input id="username" label="Username" type="text" name="username" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.username}" disabled />
         
         <Modal label="change-username" checked={usernameModalOpen}>
           <span slot="trigger" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">Change username</span>
-          <h3 slot="heading">Change your username</h3>
+          <h3 slot="heading">Username</h3>
           <form
             action="?/updateUsername"
             method="POST"
@@ -177,11 +243,11 @@
     <div>
         <h2 class="text-lg font-regular text-true-white text-center my-2">Name</h2>
 
-        <input id="name" label="Name" type="text" name="name" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-full max-w-md font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.name}" disabled />
+        <input id="name" label="Name" type="text" name="name" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.name}" disabled />
         
         <Modal label="change-name" checked={nameModalOpen}>
           <span slot="trigger" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">Change name</span>
-          <h3 slot="heading">Change your name</h3>
+          <h3 slot="heading">Name</h3>
           <form
             action="?/updateName"
             method="POST"

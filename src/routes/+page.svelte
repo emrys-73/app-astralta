@@ -1,10 +1,8 @@
 <script>
-  import { InfoModal } from '$lib/components';
-  export let data;
-
+  import { InfoModal, AltaCard } from '$lib/components';
   import { drawerOpen } from '../stores.js';
-
   import { experience } from '../stores.js';
+  export let data;
 
   let xp = "";
   $: xp;
@@ -20,9 +18,6 @@
     drawerState = value;
   })
 
-
-
-
 </script>
 
 
@@ -36,14 +31,12 @@
   </button>
 </div> -->
 
-<div class="w-full h-full items-center text-center text-true-white text-2xl">
-  Hi {data?.user?.username}!
-
-  <!-- <br>
-  this is what I know:
-  <br>
-
-  {xp} -->
+<div class="h-full text-center text-true-white content-center flex justify-center items-center">
+  <a href="/my/ai">  
+    <AltaCard>
+      Hi {data?.user?.username}!
+    </AltaCard>
+  </a>
 </div>
 
 
