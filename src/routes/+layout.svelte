@@ -34,7 +34,7 @@
     }
 
     let avatarUrl = `https://ui-avatars.com/api/?name=${data.user?.name}`;
-    let backgroundUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.bg).toString();
+    let backgroundUrl = '/home.png'
 
     onMount(() => {
 
