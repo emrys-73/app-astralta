@@ -45,9 +45,9 @@
                 symbol: '/Help.png'
             },
             {
-                title: 'Feedback',
-                href: '/feedback',
-                symbol: '/Feedback.png'
+                title: 'Get in touch',
+                href: '/contact',
+                symbol: '/contact.png'
             },
         ]
 

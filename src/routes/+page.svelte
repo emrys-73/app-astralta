@@ -37,7 +37,7 @@
 </div> -->
 
 <div class="w-full h-full items-center text-center text-true-white text-2xl">
-  Hello there!
+  Hi {data?.user?.username}!
 
   <!-- <br>
   this is what I know:
