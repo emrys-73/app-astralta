@@ -104,7 +104,7 @@
 
 
 <!-- My AI Settings -->
-<div class="w-full h-full items-center text-center text-true-white text-2xl justify-center bg-black bg-opacity-0 backdrop-blur-sm">
+<div class="w-full h-full items-center text-center text-true-white text-2xl justify-center bg-black bg-opacity-0 ">
   <div class="mb-4">
     <h1 class="font-semibold ">My AI</h1>
     <div class="mb-6">
