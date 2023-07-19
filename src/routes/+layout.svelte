@@ -33,6 +33,7 @@
         drawerOpen.update((state) => !state)
     }
 
+    let avatarUrl = `https://ui-avatars.com/api/?name=${data.user?.name}`;
 
     onMount(() => {
 
@@ -48,18 +49,9 @@
 
         window.addEventListener('keydown', handleKeyDown);
 
-        const img = new Image();
-        img.onload = () => {
-            imageIsLoaded = true;
-        };
-        img.onerror = () => {
-            imageSrc = `https://ui-avatars.com/api/?name=${data.user?.name}`;
-            imageIsLoaded = true;
-        };
-        img.src = data.user?.avatar ? getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar) : `https://ui-avatars.com/api/?name=${data.user?.name}`;
-        if(img.complete) imageIsLoaded = true;
-        else {
-            imageSrc = `https://ui-avatars.com/api/?name=${data.user?.name}`;
+
+        if (data?.user?.avatar) {
+            avatarUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar).toString()
         }
 
         return () => {
@@ -67,15 +59,7 @@
         };
     })
 
-    // Ensure image loading before displaying
-
-    let imageIsLoaded = false;
-    let imageSrc = "";
-
-
-
     let backgroundUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.bg).toString();
-    // backgroundUrl = "http://139.144.176.23:80/api/files/_pb_users_auth_/gb2l2xpr9wtulux/hero_ifRuDoWq96.png?thumb=0x0"
 
 </script>
 
@@ -139,7 +123,7 @@
                 <!-- svelte-ignore a11y-label-has-associated-control -->
                 <label tabindex="0" class="btn bg-transparent border-none hover:bg-transparent active:border-none avatar w-20 z-50">
                     <div class=" rounded-full w-[35px] lg:w-[45px]">
-                    <img src={imageSrc} alt="avatar" id="avatar-preview">
+                    <img src={avatarUrl} alt="avatar" id="avatar-preview">
                     </div>
                 </label>
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
