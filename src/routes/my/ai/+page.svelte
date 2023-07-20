@@ -186,7 +186,7 @@
           <div class="grid grid-cols-10">
             <div class="col-span-9">
               <textarea rows={rows} name="message" class="{rounded} overflow-auto appearance-none touch-manipulation {message.length > 0 ? '' : 'breathe'} select-none resize-none min-h-[40px] 
-                s-apple-input bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-[15px]
+                s-apple-input bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-[15px] hover:text-true-white hover:opacity-100 text-true-white
                  focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque
                   focus:border-none" placeholder="Send a message" bind:value={$input} on:keydown={(event) => {
                     if (event.key === 'Enter' && !event.shiftKey) {
