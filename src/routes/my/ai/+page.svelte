@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   // @ts-nocheck
   
       import { goto } from "$app/navigation";
@@ -8,20 +8,20 @@
       import { Input, Modal } from '$lib/components';
       import { useChat } from "ai/svelte";
       import { GlassCard, AltaCard } from "$lib/components";
-      import { experience } from "../../../stores";
+      import { experience, personality } from "../../../stores";
       import { enhance, applyAction } from '$app/forms';
+      import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
       export let data;
-      export let form;
+      // export let form;
       // import { marked } from 'marked';
 
       let darkModeState;
       darkMode.subscribe((value) => {darkModeState = value})
 
-      let debugMode = false
+      let debugMode = false;
 
       let training;
-      $: training = "You are my AI";
-
+      $: training = "You are no longer a slave of fear. You are a child of God";
       
 
       let xp;
@@ -53,7 +53,7 @@
           }
 
       // talk
-      let text = "you are mine"
+      let text = "Worthy is the Lord"
 
       text = data?.user?.username
 
@@ -101,11 +101,6 @@
           selectedFile = e.target.files[0];
       }
 
-      function formatMessageContent(content) {
-        const formattedContent = content.replace(/\n/g, "<br/>");
-        return formattedContent;
-      }
-
       // Experience Engine Logic
 
       let xpModalOpen;
@@ -133,6 +128,20 @@
         // loading = false;
       };
     };
+
+
+    // Radio Personality
+    let value;
+    let perso;
+    personality.subscribe((value) => {perso = value})
+
+    const updatePerso = () => {
+      personality.update(() => value)
+    }
+
+    // AI Naming
+    let ainame = "Astralta"
+    if ( data?.user?.ainame ) { ainame = data?.user?.ainame }
 
   </script>
 
@@ -235,67 +244,113 @@
             <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label> -->
         {/if}
     </GlassCard>
-    
-    <div>
-      <h2 class="text-lg font-regular text-true-white text-center my-2">XP</h2>
 
-      <input id="xp" label="XP" type="text" name="xp" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.xp}" disabled />
-
-      <Modal label="change-xp" checked={xpModalOpen}>
-        <span slot="trigger" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">Change XP</span>
-        <h3 slot="heading">XP</h3>
-        <form
-          action="?/updateXP"
-          method="POST"
-          class="text-true-white"
-          use:enhance={submitUpdateXP}
-        >
-        <div class="mb-8 items-center">
-          <!-- ID defines what to retrieve from data later -->
-          <Input
-            id="xp" 
-            type="text"
-            label="Enter new XP"
-            required={true}
-            value={form?.data?.xp}
-            disabled={loading}
-          />
-        </div>
-          <div class="">
-            <button type="submit" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" disabled={loading}
-              >Change my name</button
-            >
-          </div>
-        </form>
-        
-      </Modal>
-    </div>
-    <GlassCard>
-      <div class="grid grid-rows-3">
-        <div class="">
-  
-          <span class="">
-            Train with Text
-          </span>
-        </div>
-        <div>
-  
-          <input type="text" name="textinput" class="apple-input rounded-full text-sm bg-black bg-opacity-40 w-full max-w-md font-regular force-opaque p-1 focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none"  placeholder="input" bind:value={training}/>
-        </div>
-        <div>
-          {#if training.length > 3}
-          <button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" on:click={train}>
-            Train
-          </button>
-          {/if}
-        </div>
-      </div>
-      
-  
-    </GlassCard>
   </div>
 
   {/if}
+  <form 
+        action="?/updateXP"
+        method="POST"
+        use:enhance={submitUpdateXP}
+        class="max-w-min"
+        >
+  <AltaCard>
+    <div class="mb-2">
+      <h2>
+        Personality
+      </h2>
+    </div>
+    
+      <!-- <input 
+          id="perso" 
+          label="perso" 
+          type="text" 
+          name="perso"
+          class=" hidden apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-[50vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
+          value={form?.data?.perso}
+        /> -->
+
+        <input 
+          id="perso" 
+          label="perso" 
+          type="text" 
+          name="perso"
+          class="hidden apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
+          value={perso}
+        />
+
+        <!-- Naming -->
+        <input 
+          id="ainame" 
+          label="ainame" 
+          type="text" 
+          name="ainame"
+          class="hidden apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
+          value={ainame}
+        />
+
+      <!-- <div>
+        <RadioGroup class="border-none">
+          <RadioItem bind:group={value} name="justify" value={0} class="">
+            <span class="{value === 0 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
+              Personal Assistant
+            </span>
+          </RadioItem>
+          <RadioItem bind:group={value} name="justify" value={1}>
+            <span class="{value === 1 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
+              Tutor / Expert
+            </span>
+          </RadioItem>
+          <RadioItem bind:group={value} name="justify" value={2}>
+            <span class=" {value === 2 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
+              Emotional Support
+            </span>
+          </RadioItem>
+        </RadioGroup>
+      </div> -->
+      <div>
+        
+          
+            <button on:click={() => {value = 0; updatePerso()}} class="{value === 0 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black my-2 bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
+              Personal Assistant
+            </button>
+        
+          
+            <button on:click={() => {value = 1; updatePerso()}} class="{value === 1 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black my-2 bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
+              Tutor / Expert
+            </button>
+          
+          
+            <button on:click={() => {value = 2; updatePerso()}} class=" {value === 2 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black my-2 bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
+              Emotional Support
+            </button>
+          
+        
+      </div>
+  
+      {#if debugMode}
+        Personality: {perso}
+      {/if}
+  
+      <!-- <div class="divider"></div>
+      <div class="my-2">
+  
+          <div class="mt-3">
+            <button type="submit" class="btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" on:click={updatePerso}
+              >Set personality</button
+            >
+          </div>
+      </div> -->
+    
+
+
+  </AltaCard>
+
+  <div class="mt-6">
+    <h1 class="text-true-white text-center">
+      Type in what you want to train your AI on
+    </h1>
+  </div>
   <AltaCard>
     <div class="mb-2">
       <h2>
@@ -303,30 +358,35 @@
       </h2>
     </div>
     <div class="my-2">
-      <form 
-        action="?/updateXP"
-        method="POST"
-        use:enhance={submitUpdateXP}>
+      
         
         <input 
           id="xp" 
           label="XP" 
           type="text" 
           name="xp"
-          class="apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-[50vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
+          class="apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
+          on:keydown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+            }}}
         />
 
-        <div class="mt-3">
-          <button type="submit" class="btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" disabled={loading}
-            >Run training</button
-          >
-        </div>
+        
       
-      </form>
+      </div>
+      
+      
+    </AltaCard>
+
+    <div class="mt-3 flex justify-center">
+      <button type="submit" class="btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" disabled={loading}
+        >Run training</button
+      >
     </div>
+  </form>
 
-
-  </AltaCard>
+  
 
   <div class="text-true-white text-center text-sm italic my-4">
     <p>Reload the page to apply the new training</p>
