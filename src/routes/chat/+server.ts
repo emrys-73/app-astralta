@@ -42,7 +42,7 @@ export const POST: RequestHandler = async ({ request })  => {
         return new StreamingTextResponse(stream)
     } else {
         const response = await openai.createChatCompletion({
-            model: 'gpt-3.5-turbo',
+            model: 'gpt-4',
             stream: true,
             messages: messages,
         })
