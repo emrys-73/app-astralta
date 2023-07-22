@@ -63,7 +63,8 @@
         };
     })
 
-    
+    let expItem;
+    $: expItem = 0;
 
 
 
