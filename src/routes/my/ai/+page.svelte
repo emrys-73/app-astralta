@@ -7,7 +7,7 @@
       import { textTrainining, toggleTalk, darkMode } from "../../../stores";
       import { Input, Modal } from '$lib/components';
       import { useChat } from "ai/svelte";
-      import { GlassCard, AltaCard } from "$lib/components";
+      import { GlassCard, AltaCard, Recording } from "$lib/components";
       import { experience, personality } from "../../../stores";
       import { enhance, applyAction } from '$app/forms';
       import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
@@ -185,6 +185,9 @@
         <form on:submit={handleSubmit}>
           <div class="grid grid-cols-10">
             <div class="col-span-9">
+              <div class="w-full">
+                <Recording/>
+              </div>
               <textarea rows={rows} name="message" class="{rounded} overflow-auto appearance-none touch-manipulation {message.length > 0 ? '' : 'breathe'} select-none resize-none min-h-[40px] 
                 s-apple-input bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-[15px] hover:text-true-white hover:opacity-100 text-true-white
                  focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque
@@ -194,10 +197,13 @@
                       handleSubmit(event);
                     }}}></textarea>
             </div>
-            <div class="col-span-1 px-1">
-              <button class="btn bg-true-black text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case drop-shadow-2xl h-[40px] apple-btn w-full" type="submit">
+            <div class="col-span-1 px-1 flex">
+              
+              
+              <button class=" btn bg-true-black text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case drop-shadow-2xl h-[40px] apple-btn" type="submit">
                 ➤
               </button>
+              
             </div>
           </div>
         </form>
@@ -244,6 +250,7 @@
             <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label> -->
         {/if}
     </GlassCard>
+    
 
   </div>
 
