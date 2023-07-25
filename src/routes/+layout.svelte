@@ -92,7 +92,7 @@
 	<!-- (sidebarRight) -->
 	<svelte:fragment slot="pageHeader">
 
-    <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" class=" backdrop-blur-sm">
+    <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" class=" backdrop-blur-sm {drawerState ? 'relative' : 'fixed'} top-0 w-full z-50">
         <svelte:fragment slot="lead">
             {#if !drawerState}
             <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>

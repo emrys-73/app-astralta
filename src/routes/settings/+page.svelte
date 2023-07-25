@@ -1,7 +1,7 @@
 <script>
 // @ts-nocheck
 
-  import { darkMode, gpt4 } from "../../stores";
+  import { darkMode, gpt4, drawerOpen } from "../../stores";
   import { enhance, applyAction } from '$app/forms';
     import { invalidateAll } from '$app/navigation';
     import { Input, Modal } from '$lib/components';
@@ -112,7 +112,7 @@
 
 
 <!-- My AI Settings -->
-<div class="w-full h-full items-center text-center text-true-white text-2xl justify-center bg-black bg-opacity-0 ">
+<div class="w-full h-full items-center text-center text-true-white text-2xl justify-center bg-black bg-opacity-0 {$drawerOpen ? 'hidden sm:block' : 'mt-20'}">
   <div class="mb-4">
     <h1 class="font-semibold ">My AI</h1>
     <div class="mb-6">

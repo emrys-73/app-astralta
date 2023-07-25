@@ -2,7 +2,7 @@
     import { GlassCard } from "$lib/components";
 </script>
 
-<div class="h-full text-center text-true-white content-center flex justify-center items-center">
+<div class="h-full text-center text-true-white content-center flex justify-center items-center mx-6">
     <div class="">
         <a href="mailto:montoya@astralta.com">
             <GlassCard>
@@ -20,7 +20,7 @@
                     
                     <br>
                     <br>
-                    I thank you very much for using Astralta 🤍.
+                    thank you for using Astralta 🤍.
             
             
                 </p>

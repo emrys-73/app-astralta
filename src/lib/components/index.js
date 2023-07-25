@@ -8,5 +8,7 @@ import GlassCard from './GlassCard.svelte';
 import Modal from './Modal.svelte';
 import Input from './Input.svelte';
 import AltaCard from './AltaCard.svelte';
+import Toggle from './Toggle.svelte';
+import Button from './Button.svelte'
 
-export { LeftDrawer, Header, InfoModal, SideBarLeft, GlassCard, Modal, Input, AltaCard }
+export { LeftDrawer, Header, InfoModal, SideBarLeft, GlassCard, Modal, Input, AltaCard, Toggle, Button }

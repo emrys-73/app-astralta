@@ -2,7 +2,7 @@
     import { GlassCard } from "$lib/components";
 </script>
 
-<div class="h-full text-center text-true-white content-center flex justify-center items-center">
+<div class="h-full text-center text-true-white content-center flex justify-center items-center mx-6">
     <a href="mailto:help@astralta.com">
         <GlassCard>
             <span class="text-center text-true-white text-md ">
