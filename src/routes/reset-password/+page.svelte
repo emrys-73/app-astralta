@@ -2,7 +2,7 @@
     export let form
 </script>
 
-<div class="flex flex-col items-center h-full w-full text-true-white bg-gradient-to-b to-black from-transparent px-6">
+<div class="flex flex-col items-center h-full w-full text-true-white bg-gradient-to-b to-black from-transparent px-6 mt-14">
     <!-- <a href="/">
         <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
             Astralta
