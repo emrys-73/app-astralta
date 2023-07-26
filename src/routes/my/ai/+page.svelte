@@ -253,7 +253,7 @@
   </div>
 
   {/if}
-  <div class="">
+  <div class="justify-center">
     <form 
           action="?/updateXP"
           method="POST"

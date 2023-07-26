@@ -2,7 +2,11 @@
 // @ts-nocheck
 
 import Pocketbase from 'pocketbase'
-import { serializeNonPOJOs } from './lib/utils'
+// import { serializeNonPOJOs } from './lib/utils'
+
+const serializeNonPOJOs = (/** @type {any} */ obj) => {
+    return structuredClone(obj)
+};
 
 export const handle = async ({ event, resolve }) => {
     // Out-commented for localhost pocketbase setup
