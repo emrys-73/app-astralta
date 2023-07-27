@@ -68,11 +68,10 @@
 
       let greeting = `Hi ${username}, what can I do for you?`
 
-      const { messages, handleSubmit, input } = useChat({
+      const { messages, handleSubmit, input, isLoading } = useChat({
         api: "/chat",
         initialMessages: [{"role": "system", "content": userexperience}, {"role": "assistant", "content": greeting}],
       });
-
       
       let message;
 
@@ -216,10 +215,10 @@
                     if (event.key === 'Enter' && !event.shiftKey) {
                       event.preventDefault();
                       handleSubmit(event);
-                    }}}></textarea>
+                    }}} disabled={$isLoading}></textarea>
             </div>
             <div class="col-span-1 px-1">
-              <button class="btn bg-true-black text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case drop-shadow-2xl h-[40px] apple-btn w-full" type="submit">
+              <button class="btn bg-true-black text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case drop-shadow-2xl h-[40px] apple-btn w-full" type="submit" disabled={$isLoading}>
                 ➤
               </button>
             </div>
