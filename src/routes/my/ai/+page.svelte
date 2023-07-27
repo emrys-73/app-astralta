@@ -11,6 +11,7 @@
       import { experience, personality } from "../../../stores";
       import { enhance, applyAction } from '$app/forms';
       import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
+      import { beforeUpdate, afterUpdate } from 'svelte';
       export let data;
       // export let form;
       // import { marked } from 'marked';
@@ -146,10 +147,28 @@
     let ainame = "Astralta"
     if ( data?.user?.ainame ) { ainame = data?.user?.ainame }
 
+
+    // scrolling - not working
+    let div;
+    let autoscroll = false;
+
+    beforeUpdate(() => {
+      if (div) {
+        const scrollableDistance = div.scrollHeight - div.offsetHeight;
+        autoscroll = div.scrollTop > scrollableDistance - 20;
+      }
+    });
+
+    afterUpdate(() => {
+      if (autoscroll) {
+        div.scrollTo(0, div.scrollHeight);
+      }
+    });
+
   </script>
 
 
-<div class="flex flex-col items-center h-full w-full text-true-white">
+<div class="flex flex-col items-center h-full w-full text-true-white" bind:this={div}>
   <div class="{drawerState ? 'hidden sm:block' : 'mt-[5.2rem] md:mt-[6rem]'} z-40">
     <input class="check" type="checkbox" id="checkbox_toggle">
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -166,7 +185,7 @@
 
   <div class="flex justify-center h-full relative">
     <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[80] lg:max-w-[900] xl:max-w-[1000px] m-6 rounded-xl flex justify-center items-center mb-20 overflow-y-auto">
-      <div class="row-span-5 overflow-auto">
+      <div class="row-span-5 overflow-auto ">
         <ul>
           {#each $messages as message}
           <li>
