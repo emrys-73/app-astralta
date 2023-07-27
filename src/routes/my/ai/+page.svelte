@@ -11,10 +11,19 @@
       import { experience, personality } from "../../../stores";
       import { enhance, applyAction } from '$app/forms';
       import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-      import { beforeUpdate, afterUpdate } from 'svelte';
+      import { beforeUpdate, afterUpdate, onMount } from 'svelte';
       export let data;
+
       // export let form;
       // import { marked } from 'marked';
+
+      
+
+      let msgcount;
+      $: msgcount = 1;
+
+      let error;
+      $: error;
 
       let drawerState;
       drawerOpen.subscribe((value) => {drawerState = value})
@@ -68,10 +77,20 @@
 
       let greeting = `Hi ${username}, what can I do for you?`
 
-      const { messages, handleSubmit, input, isLoading } = useChat({
+      const { messages, handleSubmit, input, isLoading, reload, stop, setMessages } = useChat({
         api: "/chat",
         initialMessages: [{"role": "system", "content": userexperience}, {"role": "assistant", "content": greeting}],
+        onFinish: () => {msgcount = msgcount + 1; error = false;},
+        onError: () => {
+          error = true;
+        }
       });
+
+
+      const clearChat = () => {
+        setMessages([{"role": "system", "content": userexperience}, {"role": "assistant", "content": greeting}])
+        msgcount = 1;
+      }
       
       let message;
 
@@ -164,6 +183,9 @@
       }
     });
 
+
+
+
   </script>
 
 
@@ -183,7 +205,7 @@
   {#if talking} 
 
   <div class="flex justify-center h-full relative">
-    <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[80] lg:max-w-[900] xl:max-w-[1000px] m-6 rounded-xl flex justify-center items-center mb-20 overflow-y-auto">
+    <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1200px] m-6 rounded-xl flex justify-center items-center mb-20 overflow-y-auto">
       <div class="row-span-5 overflow-auto ">
         <ul>
           {#each $messages as message}
@@ -204,26 +226,71 @@
           {/each}
         </ul>
       </div>
-      <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg">
-        <form on:submit={handleSubmit}>
-          <div class="grid grid-cols-10">
-            <div class="col-span-9">
-              <textarea rows={rows} name="message" class="{rounded} overflow-auto appearance-none touch-manipulation {message.length > 0 ? '' : 'breathe'} select-none resize-none min-h-[40px] 
-                s-apple-input bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-[15px] hover:text-true-white hover:opacity-100 text-true-white
-                 focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque
-                  focus:border-none" placeholder="Send a message" bind:value={$input} on:keydown={(event) => {
-                    if (event.key === 'Enter' && !event.shiftKey) {
-                      event.preventDefault();
-                      handleSubmit(event);
-                    }}} disabled={$isLoading}></textarea>
+      <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg flex flex-col mx-2">
+        <div class="pb-2">
+          <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={reload} disabled={msgcount === 1}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+            
+          </button>
+          <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={stop} disabled={!$isLoading}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z" />
+            </svg>
+            
+            
+          </button>
+          <button class="btn btn-sm bg-red-600 bg-opacity-90 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center {error ? '' : 'hidden'}" on:click={reload}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+          </button>
+          <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={clearChat} disabled={msgcount === 1}>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+            </svg>
+            
+            
+          </button>
+          <!-- <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case">
+            {msgcount}
+          </button> -->
+          
+        </div>
+        <div class="">
+          <form on:submit={handleSubmit}>
+            <div class="grid grid-cols-10">
+              <div class="col-span-9">
+                <textarea rows={rows} name="message" class="{rounded} overflow-auto appearance-none touch-manipulation {message.length > 0 ? '' : 'breathe'} select-none resize-none min-h-[40px] 
+                  s-apple-input bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-[15px] hover:text-true-white hover:opacity-100 text-true-white
+                   focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque
+                    focus:border-none" placeholder="Send a message" bind:value={$input} on:keydown={(event) => {
+                      if (event.key === 'Enter' && !event.shiftKey) {
+                        event.preventDefault();
+                        handleSubmit(event);
+                      }}} disabled={$isLoading}></textarea>
+              </div>
+              <div class="col-span-1 px-1">
+                <!-- <button class="btn bg-true-black text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case drop-shadow-2xl h-[40px] apple-btn w-full" type="submit" disabled={$isLoading}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                  </svg>
+                  
+                </button> -->
+                <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center min-h-[40px]" type="submit" disabled={$isLoading}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                  </svg>
+                  
+                </button>
+                
+              </div>
             </div>
-            <div class="col-span-1 px-1">
-              <button class="btn bg-true-black text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case drop-shadow-2xl h-[40px] apple-btn w-full" type="submit" disabled={$isLoading}>
-                ➤
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
+        
+        
       </div>
     </div>
   </div>
