@@ -1,5 +1,6 @@
 <script>
   import { InfoModal, AltaCard } from '$lib/components';
+	import GlassCard from '$lib/components/GlassCard.svelte';
   import { drawerOpen } from '../stores.js';
   import { experience } from '../stores.js';
   export let data;
@@ -33,9 +34,9 @@
 
 <div class="h-full text-center text-true-white content-center flex justify-center items-center">
   <a href="/my/ai">  
-    <AltaCard>
+    <GlassCard>
       Hi {data?.user?.username}!
-    </AltaCard>
+    </GlassCard>
   </a>
 </div>
 
