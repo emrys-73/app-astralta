@@ -149,7 +149,7 @@
   </script>
 
 
-<div class="flex flex-col items-center h-full w-full text-true-whit">
+<div class="flex flex-col items-center h-full w-full text-true-white">
   <div class="{drawerState ? 'hidden sm:block' : 'mt-[5.2rem] md:mt-[6rem]'} z-40">
     <input class="check" type="checkbox" id="checkbox_toggle">
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -165,15 +165,15 @@
   {#if talking} 
 
   <div class="flex justify-center h-full relative">
-    <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[80] lg:max-w-[900] xl:max-w-[1000px] m-6 rounded-xl flex justify-center items-center bg-black bg-opacity-0 mb-20 overflow-y-auto">
+    <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[80] lg:max-w-[900] xl:max-w-[1000px] m-6 rounded-xl flex justify-center items-center mb-20 overflow-y-auto">
       <div class="row-span-5 overflow-auto">
         <ul>
           {#each $messages as message}
           <li>
             {#if message.role == 'user'}
-            <div class="text-left text-true-white text-md bg-true-white rounded-xl bg-opacity-10 backdrop-blur-xl my-2 drop-shadow-xl"><pre class="w-full p-2 px-4 overflow-auto whitespace-pre-wrap">{message.content}<pre/></div>
+            <div class="text-left text-true-white text-md bg-true-white bg-opacity-10 rounded-xl  backdrop-blur-xl my-2 drop-shadow-xl"><pre class="w-full p-2 px-4 overflow-auto whitespace-pre-wrap ">{message.content}<pre/></div>
             {:else if message.role == 'assistant'}
-            <div class="text-left text-true-white text-md bg-black rounded-xl bg-opacity-60 backdrop-blur-xl my-2 drop-shadow-xl">
+            <div class="text-left text-true-white text-md {$darkMode ? ' bg-black bg-opacity-60' : 'bg-black bg-opacity-20'} rounded-xl  backdrop-blur-xl my-2 drop-shadow-xl">
               <pre class="w-full p-2 px-4 overflow-y-auto whitespace-pre-wrap">{message.content}</pre></div>
             {:else}
             <div class="text-left text-true-white text-md bg-black rounded-xl bg-opacity-60 backdrop-blur-xl my-2 drop-shadow-xl {debugMode ? '' : 'hidden'}">

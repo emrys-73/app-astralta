@@ -73,7 +73,7 @@
 
 <!-- <AppShell class="bg-[url('home.png')] bg-image"> -->
 <!-- <AppShell class="bg-[url('{backgroundUrl}')] bg-image"> -->
-<AppShell class="bg-[url('/home.png')] bg-image">
+<AppShell class="bg-[url('/dark_home.png')] bg-image">
 	<!-- (header) -->
 	<svelte:fragment slot="sidebarLeft">
         {#if drawerState}
@@ -92,7 +92,7 @@
 	<!-- (sidebarRight) -->
 	<svelte:fragment slot="pageHeader">
 
-    <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" class=" backdrop-blur-sm {drawerState ? 'relative' : 'fixed'} top-0 w-full z-50">
+    <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" class=" backdrop-blur-sm {drawerState ? 'relative' : 'fixed'}  top-0 w-full z-50 ">
         <svelte:fragment slot="lead">
             {#if !drawerState}
             <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>
@@ -100,7 +100,7 @@
             </button>
             {/if}
         </svelte:fragment>
-            <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {drawerState ? 'hidden sm:block' : '' }">
+            <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {drawerState ? 'hidden sm:block' : '' } ">
                 <a href="/">
                     <span>
                         {#if data?.user?.ainame}
@@ -169,7 +169,7 @@
 		<!-- <div class="w-full flex h-[70px] backdrop-blur-sm {$page.url.pathname === '/register' ? ' hidden' : ''} {$page.url.pathname === '/verify' ? ' hidden' : ''} {$page.url.pathname === '/login' ? ' hidden' : ''} {$page.url.pathname === '/reset-password' ? ' hidden' : ''} {$page.url.pathname === '/waitlist' ? ' hidden' : ''} {$page.url.pathname === '/thanks-bro' ? ' hidden' : ''} {$page.url.pathname === '/whoops' ? ' hidden' : ''}"> -->
 	</svelte:fragment>
 	<!-- Router Slot -->
-    <div class="h-full w-full {darkModeState ? 'bg-gradient-to-b from-transparent to-black': ''}">
+    <div class="h-full w-full">
         <slot />
     </div>
 </AppShell>

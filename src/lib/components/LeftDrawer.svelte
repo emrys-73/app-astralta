@@ -5,7 +5,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
-    import { drawerOpen } from '../../stores';
+    import { drawerOpen, darkMode } from '../../stores';
 
     let drawerState = false;
     // The dollar sign label tells Svelte that the following statement should be re-run whenever one of the state variables it references is updated
@@ -73,7 +73,7 @@
 </script>
 
 <!-- {#if isOpen} -->
-    <div class="flex flex-col w-64 h-full bg-black bg-opacity-40 backdrop-blur-sm">
+    <div class="flex flex-col w-64 h-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-5'} backdrop-blur-md">
         <!-- Header grid -->
         <div class="text-xl text-true-white grid grid-cols-6">
             <!-- Title -->
