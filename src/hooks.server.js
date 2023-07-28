@@ -24,7 +24,7 @@ export const handle = async ({ event, resolve }) => {
         }
         
     } catch (_) {
-        event.locals.pb.authStpre.clear()
+        event.locals.pb.authStore.clear()
         event.locals.user = undefined
     }
 
