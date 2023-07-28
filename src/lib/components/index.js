@@ -10,5 +10,6 @@ import Input from './Input.svelte';
 import AltaCard from './AltaCard.svelte';
 import Toggle from './Toggle.svelte';
 import Button from './Button.svelte'
+import Home from './Home.svelte';
 
-export { LeftDrawer, Header, InfoModal, SideBarLeft, GlassCard, Modal, Input, AltaCard, Toggle, Button }
+export { LeftDrawer, Header, InfoModal, SideBarLeft, GlassCard, Modal, Input, AltaCard, Toggle, Button, Home }
