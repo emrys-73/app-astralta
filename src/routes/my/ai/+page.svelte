@@ -29,19 +29,6 @@
       $: xp = "None"
 
       experience.subscribe((value) => xp = value)
-
-      // let xp;
-      // let xp;
-      // experience.subscribe((value) => {xp = value})
-
-      const train = () => {
-        text = training
-        handleSubmit()
-        // experience.update(() => training)
-        // console.log("Trained succesfully")
-
-        // toggleTT()
-      }
   
       let talking = true;
       $: talking;
@@ -94,7 +81,7 @@
 
 
       const { messages: ideaMsgs, handleSubmit: ideaSubmit, input: ideaInput } = useChat({
-        api: "/idea",
+        api: "/x-engine/idea",
         initialMessages: [{"role": "system", "content": "Your task is to reply with just one possible question and nothing else that I could ask you later on based on the input I give you. The question will be one possible way to continue the conversation"}],
         onFinish: () => {
           // set input as result from this
@@ -119,7 +106,7 @@
       const MAX_ROWS = 10;
 
 
-      $: rows = message.length > 0 ? Math.min(Math.ceil(message.length / 80), MAX_ROWS) : 1;
+      $: rows = message.length > 0 ? Math.min(Math.ceil(message.length / 100), MAX_ROWS) : 1;
       $: rounded = rows > 1 ? "rounded-lg" : "rounded-full";
 
       // train
@@ -265,13 +252,12 @@
           {/each}
         </ul>
       </div>
-      <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg flex flex-col mx-2">
+      <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg flex flex-col mx-2 sm:w-[40vw]">
         <div class="pb-2 flex flex-row gap-1">
           <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={reload} disabled={msgcount === 1}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
             </svg>
-            
           </button>
           <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={stop} disabled={!$isLoading}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -288,8 +274,6 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
             </svg>
           </button>
-          
-          
 
           
           <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={loadMore} disabled={msgcount === 1}>
@@ -302,30 +286,14 @@
           
             <form on:submit={ideaSubmit}>
               <input bind:value={$ideaInput} hidden>
-              <!-- Idea Input: {$ideaInput}
-              <br>
-    
-              Answer: {idea}
-              
-               -->
-              <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" type="submit" disabled={msgcount === 1}>
+              <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case" type="submit" disabled={msgcount === 1}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                 </svg>
-                
-                
               </button>
             </form>
-          
-
-
-
-          <!-- <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case">
-            {msgcount}
-          </button> -->
-          
         </div>
-        <div class="">
+        <div>
           <form on:submit={handleSubmit}>
             <div class="grid grid-cols-10">
               <div class="col-span-9">
@@ -338,14 +306,8 @@
                         handleSubmit(event);
                       }}} disabled={$isLoading}></textarea>
               </div>
-              <div class="col-span-1 px-1">
-                <!-- <button class="btn bg-true-black text-xl bg-opacity-50 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case drop-shadow-2xl h-[40px] apple-btn w-full" type="submit" disabled={$isLoading}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                  </svg>
-                  
-                </button> -->
-                <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center min-h-[40px]" type="submit" disabled={$isLoading}>
+              <div class="col-span-1 ml-1 md:ml-2 w-full">
+                <button class="btn w-full btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case min-h-[40px] apple-btn" type="submit" disabled={$isLoading}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
                   </svg>
@@ -405,7 +367,7 @@
   </div>
 
   {/if}
-  <div class="justify-center items-center content-center">
+  <div class="items-center flex flex-col">
     <form 
           action="?/updateXP"
           method="POST"
@@ -433,7 +395,7 @@
             label="perso" 
             type="text" 
             name="perso"
-            class="hidden apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
+            class="hidden apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-white"  
             value={perso}
           />
   
@@ -532,7 +494,7 @@
             label="XP" 
             type="text" 
             name="xp"
-            class="apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
+            class="apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white"  
             on:keydown={(event) => {
               if (event.key === 'Enter') {
                 event.preventDefault();
