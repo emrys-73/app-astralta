@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-
-// import { error } from '@sveltejs/kit';
-
+import { error } from '@sveltejs/kit';
 
 export const load = async ({ locals }) => {
     let waitlist = true;
@@ -20,7 +18,6 @@ export const load = async ({ locals }) => {
         }
 
     } catch (err) {
-        // throw error(err.status, err.message)
-        console.log("Error on startup")
+        throw error(err.status, err.message)
     }
 }
