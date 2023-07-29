@@ -12,6 +12,13 @@
     inject({ mode: dev ? 'development' : 'production' });
 	export let data;
 
+    let bg;
+    $: bg = "home"
+
+    let bgUrl;
+    $: bgUrl = `bg-[url('/bg/${bg}.png')]`
+    
+
     const getImageURL = (collectionId, recordId, fileName, size = '0x0') => {
 		return `http://139.144.176.23:80/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
 	};
@@ -23,6 +30,10 @@
     let avatarUrl = `https://ui-avatars.com/api/?name=${data.user?.name}`;
 
     onMount(() => {
+
+        // if (data?.user?.bg) {
+        //     bg = data?.user?.bg;
+        // }
 
         function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
             if (event.metaKey && event.key === 'x') {
@@ -45,7 +56,7 @@
     })
 </script>
 
-<AppShell class="bg-[url('/dark_home.png')] bg-image">
+<AppShell class="bg-[url('/bg/home.png')] bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         {#if $drawerOpen}
@@ -77,7 +88,7 @@
 
         <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } ">
             <a href="/">
-                <span>
+                <span class="drop-shadow-md">
                     {#if data?.user?.ainame}
                         {data?.user?.ainame}
                     {:else}
