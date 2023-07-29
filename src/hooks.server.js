@@ -2,18 +2,14 @@
 // @ts-nocheck
 
 import Pocketbase from 'pocketbase'
-// import { serializeNonPOJOs } from './lib/utils'
 
 const serializeNonPOJOs = (/** @type {any} */ obj) => {
     return structuredClone(obj)
 };
 
 export const handle = async ({ event, resolve }) => {
-    // Out-commented for localhost pocketbase setup
-    // event.locals.pb = new Pocketbase('http://127.0.0.1:8090')
     event.locals.pb = new Pocketbase('http://139.144.176.23:80')
     event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '')
-
 
     // The following try/catch block is a later addition because 
     // of a suggestion of one of the mantainers from pocketbase
@@ -27,14 +23,6 @@ export const handle = async ({ event, resolve }) => {
         event.locals.pb.authStore.clear()
         event.locals.user = undefined
     }
-
-    // We remove the following because of the same reasons
-    // if (event.locals.pb.authStore.isValid) {
-    //     event.locals.user = serializeNonPOJOs(event.locals.pb.authStore.model)
-    // } else {
-    //     event.locals.user = undefined
-    // }
-
 
     const response = await resolve(event)
 
