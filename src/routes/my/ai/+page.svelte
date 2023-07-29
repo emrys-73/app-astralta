@@ -13,6 +13,7 @@
       import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
       import { beforeUpdate, afterUpdate, onMount } from 'svelte';
       import { json } from "@sveltejs/kit";
+      // import { CodeBlock } from '@skeletonlabs/skeleton';
       export let data;
 
       // export let form;
@@ -253,8 +254,8 @@
   {#if talking} 
 
   <div class="flex justify-center h-full relative">
-    <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1200px] m-6 rounded-xl flex justify-center items-center mb-20 overflow-y-auto">
-
+    <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1200px] m-6 rounded-xl flex justify-center items-center mb-32 overflow-y-auto">
+      <!-- <CodeBlock language="ts" code={message.content}></CodeBlock> -->
       <!-- // here to side code -->
       <div class="row-span-5 overflow-auto ">
         <ul>
@@ -264,6 +265,7 @@
             <div class="text-left text-true-white text-md bg-true-white bg-opacity-10 rounded-xl  backdrop-blur-xl my-2 drop-shadow-xl"><pre class="w-full p-2 px-4 overflow-auto whitespace-pre-wrap ">{message.content}<pre/></div>
             {:else if message.role == 'assistant'}
             <div class="text-left text-true-white text-md {$darkMode ? ' bg-black bg-opacity-60' : 'bg-black bg-opacity-20'} rounded-xl  backdrop-blur-xl my-2 drop-shadow-xl">
+              <!-- <pre class="w-full p-2 px-4 overflow-y-auto whitespace-pre-wrap"><CodeBlock language="ts" code={message.content}></CodeBlock></pre></div> -->
               <pre class="w-full p-2 px-4 overflow-y-auto whitespace-pre-wrap">{message.content}</pre></div>
             {:else}
             <div class="text-left text-true-white text-md bg-black rounded-xl bg-opacity-60 backdrop-blur-xl my-2 drop-shadow-xl {debugMode ? '' : 'hidden'}">
