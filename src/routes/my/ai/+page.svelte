@@ -1,6 +1,5 @@
 <script lang="ts">
   // @ts-nocheck
-  
       import { toggleTalk, darkMode, drawerOpen } from "../../../stores";
       import { useChat } from "ai/svelte";
       import { LiveCard, AltaCard } from "$lib/components";
@@ -76,9 +75,6 @@
       let localSumMsgs;
       $: localSumMsgs = [];
       summaryMsgs.subscribe((value) => {localSumMsgs = value})
-
-      let summary = localSumMsgs[localSumMsgs.length - 1].content
-
 
       const { messages: ideaMsgs, handleSubmit: ideaSubmit, input: ideaInput } = useChat({
         api: "/x-engine/idea",
@@ -191,27 +187,13 @@
       }
     });
 
-
-
-
-    const setSummaryInput = () => {
-        summaryInput.set("hi");
-      }
-
-    
-
-    let sumInputContent;
-    $: sumInputContent = "hiashfkja";
-    summaryInput.subscribe((value) => {sumInputContent = value})
-
-
     let idea;
     $: idea = $ideaMsgs[$ideaMsgs.length - 1].content
 
   </script>
 
 
-<div class="flex flex-col items-center h-full w-full text-true-white" bind:this={div}>
+<div class="flex flex-col items-center h-full w-full text-true-white">
   <div class="{$drawerOpen ? 'hidden sm:block' : 'mt-[5.2rem] md:mt-[6rem]'} z-40">
     <input class="check" type="checkbox" id="checkbox_toggle">
     <!-- svelte-ignore a11y-click-events-have-key-events -->
