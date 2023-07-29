@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
-	import { LeftDrawer } from '$lib/components';
+	import { Drawer } from '$lib/components';
     import { drawerOpen } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
@@ -49,7 +49,7 @@
 	
 	<svelte:fragment slot="sidebarLeft">
         {#if $drawerOpen}
-		    <LeftDrawer>
+		    <Drawer>
                 <span slot="title">
                     {#if data?.user?.ainame}
                         Astralta
@@ -57,7 +57,7 @@
                         Launchpad
                     {/if}
                 </span>
-            </LeftDrawer>
+            </Drawer>
         {/if}
 	</svelte:fragment>
 	
@@ -68,7 +68,9 @@
         <svelte:fragment slot="lead">
             {#if !$drawerOpen}
             <button class="btn bg-gray-300 bg-opacity-10 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>
-                +
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  </svg>                  
             </button>
             {/if}
         </svelte:fragment>
