@@ -1,31 +1,14 @@
 <script>
-  import { InfoModal } from '$lib/components';
-	import GlassCard from '$lib/components/GlassCard.svelte';
-  import { drawerOpen } from '../stores.js';
-  import { experience } from '../stores.js';
+  import { InfoModal, LiveCard } from '$lib/components';
   export let data;
-
-  let xp = "";
-  $: xp;
-
-  experience.subscribe((value) => { xp = value; })
-
-  let drawerState = false;
-  // The dollar sign label tells Svelte that the following statement should be re-run whenever one of the state variables it references is updated
-  $: drawerState;
-
-
-  drawerOpen.subscribe((value) => {
-    drawerState = value;
-  })
 
 </script>
 
 <div class="h-full text-center text-true-white content-center flex justify-center items-center">
   <a href="/my/ai">  
-    <GlassCard>
+    <LiveCard>
       Hi {data?.user?.username}!
-    </GlassCard>
+    </LiveCard>
   </a>
 </div>
   

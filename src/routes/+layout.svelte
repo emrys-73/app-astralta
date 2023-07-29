@@ -3,19 +3,14 @@
 	import { AppShell } from '@skeletonlabs/skeleton';
 	import { AppBar } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
-	// The ordering of these imports is critical to your app working properly
-	// import '@skeletonlabs/skeleton/themes/theme-skeleton.css';
-	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
-	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
-	import { LeftDrawer, Home, GlassCard, InfoModal } from '$lib/components';
-	// import { getImageURL } from "$lib/utils";
-    import { drawerOpen, darkMode } from '../stores';
+	import { LeftDrawer } from '$lib/components';
+    import { drawerOpen } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
-	export let data; // to accept that data property
+	export let data;
 
     const getImageURL = (collectionId, recordId, fileName, size = '0x0') => {
 		return `http://139.144.176.23:80/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
@@ -130,40 +125,6 @@
     </AppBar>
 
 	</svelte:fragment>
-    
 
     <slot/>
-    <!-- <Home>
-        <span>
-            {#if data?.user}
-            <div class="h-full text-center text-true-white content-center flex justify-center items-center">
-                <a href="/my/ai"> 
-                    <GlassCard>
-                        Hi {data?.user?.username}!
-                    </GlassCard>
-                </a>
-              </div>
-            {:else}
-            <InfoModal>
-                <span slot="backlink">
-                  <div class="mt-4 mb-2">
-                    <a href="/login" class="text-center">
-                      <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
-                        Log In
-                      </div>
-                    </a>
-                  </div>
-                    <div class="mb-4">
-                        <a href="/waitlist" class="text-center">
-                          <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
-                            Join Waitlist
-                          </div>
-                        </a>
-                      </div>
-                </span>
-            </InfoModal>
-            
-            {/if}
-        </span>
-    </Home> -->
 </AppShell>

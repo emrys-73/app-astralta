@@ -1,10 +1,10 @@
 <script>
-    import { GlassCard } from "$lib/components";
+    import { LiveCard } from "$lib/components";
 </script>
 
 <div class="h-full text-center text-true-white content-center flex justify-center items-center mx-6">
     <a href="mailto:help@astralta.com">
-        <GlassCard>
+        <LiveCard>
             <span class="text-center text-true-white text-md ">
                 We are glad to guide you through your experience with Astralta.
                 <br>
@@ -22,7 +22,7 @@
                     <button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">Contact support</button>
                 </a>
             </div>
-        </GlassCard>
+        </LiveCard>
     </a>
     
   </div>

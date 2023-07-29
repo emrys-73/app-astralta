@@ -1,25 +1,13 @@
 <script lang="ts">
   // @ts-nocheck
   
-      import { goto } from "$app/navigation";
-      import { page } from "$app/stores";
-      import { redirect } from "@sveltejs/kit";
-      import { textTrainining, toggleTalk, darkMode, drawerOpen } from "../../../stores";
-      import { Input, Modal } from '$lib/components';
+      import { toggleTalk, darkMode, drawerOpen } from "../../../stores";
       import { useChat } from "ai/svelte";
-      import { GlassCard, AltaCard, Toggle, Button } from "$lib/components";
+      import { LiveCard, AltaCard } from "$lib/components";
       import { experience, personality } from "../../../stores";
       import { enhance, applyAction } from '$app/forms';
-      import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-      import { beforeUpdate, afterUpdate, onMount } from 'svelte';
-      import { json } from "@sveltejs/kit";
-      // import { CodeBlock } from '@skeletonlabs/skeleton';
-      export let data;
-
-      // export let form;
-      // import { marked } from 'marked';
-
-      
+      import { beforeUpdate, afterUpdate } from 'svelte';
+      export let data;      
 
       let msgcount;
       $: msgcount = 1;
@@ -27,8 +15,6 @@
       let error;
       $: error;
 
-      let drawerState;
-      drawerOpen.subscribe((value) => {drawerState = value})
 
       let darkModeState;
       darkMode.subscribe((value) => {darkModeState = value})
@@ -239,9 +225,10 @@
 
 
 <div class="flex flex-col items-center h-full w-full text-true-white" bind:this={div}>
-  <div class="{drawerState ? 'hidden sm:block' : 'mt-[5.2rem] md:mt-[6rem]'} z-40">
+  <div class="{$drawerOpen ? 'hidden sm:block' : 'mt-[5.2rem] md:mt-[6rem]'} z-40">
     <input class="check" type="checkbox" id="checkbox_toggle">
     <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="checkbox lg:xlcheckbox border-none font-medium max-w-[190px] rounded-full" on:click={toggleTT}>
       <label for="checkbox_toggle" class="slide bg-black bg-opacity-40 text-true-white">
         <label for="checkbox_toggle" class="toggle_box bg-true-white bg-opacity-10"></label>
@@ -386,7 +373,7 @@
           Select how you want to train your AI
         </h1>
       </div>
-    <GlassCard 
+    <LiveCard 
         on:dragover="{dragOver}"
         on:drop="{dropHandler}"
         >
@@ -400,10 +387,10 @@
           <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
           <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label>
           {/if}
-        </GlassCard>
+    </LiveCard>
       </div>
     
-    <GlassCard>
+    <LiveCard>
   
         {#if selectedFile}
             <p>File: {selectedFile.name}</p>
@@ -413,7 +400,7 @@
             <!-- <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
             <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label> -->
         {/if}
-    </GlassCard>
+      </LiveCard>
 
   </div>
 
