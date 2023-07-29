@@ -5,7 +5,6 @@
   import { enhance, applyAction } from '$app/forms';
     import { invalidateAll } from '$app/navigation';
     import { Input, Modal } from '$lib/components';
-    
   
     export let form;
     export let data;
@@ -20,24 +19,6 @@
     $: usernameModalOpen = false;
     $: nameModalOpen = false;
     $: loading = false;
-  
-    // const submitUpdateEmail = () => {
-    //   loading = true;
-    //   emailModalOpen = true;
-    //   return async ({ result }) => {
-    //     switch (result.type) {
-    //       case 'success':
-    //         await invalidateAll();
-    //         emailModalOpen = false;
-    //         break;
-    //       case 'error':
-    //         break;
-    //       default:
-    //         await applyAction(result);
-    //     }
-    //     loading = false;
-    //   };
-    // };
   
     const submitUpdateUsername = () => {
       loading = true;
@@ -183,38 +164,6 @@
     
     <h1 class="font-semibold mb-4">My Account</h1>
     
-    <!-- Email -->
-    <!-- <div>
-      <h2 class="text-xl font-regular text-true-white text-center my-2">Email</h2>
-      
-      <input id="username" label="Username" type="text" name="email" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-full max-w-md font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.email}" disabled />
-      <div class="justify-center ">
-        <Modal label="change-email" checked={emailModalOpen}>
-          <span slot="trigger" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">Change Email</span>
-          <h3 slot="heading">Change Your Email</h3>
-          <form action="?/updateEmail" method="POST" class="text-true-white" use:enhance={submitUpdateEmail}>
-            <div class="mb-8">
-              <Input
-              id="email"
-              type="email"
-              label="Enter your new email address"
-              required={true}
-              value={form?.data?.email}
-              disabled={loading}
-              
-            />
-            </div>
-            <div class="">
-              <button type="submit" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" disabled={loading}
-              >Change my email</button
-            >
-            </div>
-            
-          </form>
-        </Modal>
-      </div>
-    </div> -->
-
     <!-- Username -->
     <div class="mb-12">
         <h2 class="text-lg font-regular text-true-white text-center my-2">Username</h2>
@@ -293,9 +242,13 @@
           
         </Modal>
       </div>
-
-    <!-- <div class="divider"></div> -->
-
-
+      <div class="">
+        <form action="/logout" method="POST" class="text-true-white hover:text-true-white">
+          <button type="submit" class="btn bg-black bg-opacity-60 px-6 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl"
+          >Log Out</button
+        >
+        </form>
+        
+      </div>
   </div>
     
