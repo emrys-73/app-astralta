@@ -1,4 +1,5 @@
 <script lang='ts'>
+// @ts-nocheck
 	import { AppShell } from '@skeletonlabs/skeleton';
 	import { AppBar } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
@@ -9,12 +10,16 @@
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
 	import { LeftDrawer, Home, GlassCard, InfoModal } from '$lib/components';
-	import { getImageURL } from "$lib/utils";
+	// import { getImageURL } from "$lib/utils";
     import { drawerOpen, darkMode } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
 	export let data; // to accept that data property
+
+    const getImageURL = (collectionId, recordId, fileName, size = '0x0') => {
+		return `http://139.144.176.23:80/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
+	};
 
     const toggleDrawer = () => {
         drawerOpen.update((state) => !state)
