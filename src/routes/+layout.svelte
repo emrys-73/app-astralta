@@ -31,9 +31,9 @@
 
     onMount(() => {
 
-        // if (data?.user?.bg) {
-        //     bg = data?.user?.bg;
-        // }
+        if (data?.user?.bg) {
+            bg = data?.user?.bg;
+        }
 
         function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
             if (event.metaKey && event.key === 'x') {
@@ -56,7 +56,7 @@
     })
 </script>
 
-<AppShell class="bg-[url('/bg/home.png')] bg-image">
+<AppShell class="{bgUrl} bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         {#if $drawerOpen}
