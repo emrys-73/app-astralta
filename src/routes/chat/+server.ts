@@ -12,7 +12,7 @@ import { gpt4 } from '../../stores';
 
 
 let gpt4On = false;
-gpt4.subscribe((value) => {gpt4On = value})
+gpt4.subscribe((value: boolean) => {gpt4On = value})
 
 const config = new Configuration({
     apiKey: OPENAI_KEY
@@ -42,7 +42,7 @@ export const POST: RequestHandler = async ({ request })  => {
         return new StreamingTextResponse(stream)
     } else {
         const response = await openai.createChatCompletion({
-            model: 'gpt-3.5-turbo',
+            model: 'gpt-3.5-turbo-16k',
             stream: true,
             messages: messages,
         })

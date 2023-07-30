@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
   import { InfoModal, LiveCard } from '$lib/components';
   export let data;
 
