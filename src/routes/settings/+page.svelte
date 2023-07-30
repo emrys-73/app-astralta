@@ -1,7 +1,7 @@
 <script>
 // @ts-nocheck
 
-  import { darkMode, gpt4, drawerOpen } from "../../stores";
+  import { darkMode, gpt4, drawerOpen, bg } from "../../stores";
   import { enhance, applyAction } from '$app/forms';
     import { invalidateAll } from '$app/navigation';
     import { Input, Modal } from '$lib/components';
@@ -13,11 +13,13 @@
     let usernameModalOpen;
     let nameModalOpen;
     let loading;
+    let bgModalOpen;
   
     $: ainameModalOpen = false;
     $: emailModalOpen = false;
     $: usernameModalOpen = false;
     $: nameModalOpen = false;
+    $: bgModalOpen = false;
     $: loading = false;
   
     const submitUpdateUsername = () => {
@@ -107,6 +109,49 @@
           {/if}
       </button>
     </div>
+<!-- 
+    <div class=" justify-center flex">
+      <h2 class="text-lg font-regular text-true-white text-center mt-2 flex">Background</h2>
+    </div>
+    <form action="?/updateBg" method="POST" class="mb-12 justify-center flex content-center">
+      <div class="mb-2 flex-col flex w-32 md:flex-row gap-2 justify-center content-cente">
+        <input 
+          id="bg"
+          type="text"
+          value={$bg}
+          name="bg"
+          hidden>
+
+        
+        
+        <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} {$bg === 'home' ? 'bg-white bg-opacity-30' : ''} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={() => {bg.set("home")}}>
+          Home
+        </button>
+        <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} {$bg === 'ocean' ? 'bg-white bg-opacity-30' : ''} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={() => {bg.set("ocean")}}>
+            Ocean
+        </button>
+        <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} {$bg === 'forest' ? 'bg-white bg-opacity-30' : ''} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={() => {bg.set("forest")}}>
+          Forest
+        </button>
+        <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} {$bg === 'vulcano' ? 'bg-white bg-opacity-30' : ''} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={() => {bg.set("vulcano")}}>
+          Vulcano
+        </button>
+        <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} {$bg === 'ny' ? 'bg-white bg-opacity-30' : ''} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={() => {bg.set("ny")}}>
+          New York
+        </button>
+        <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} {$bg === 'muc' ? 'bg-white bg-opacity-30' : ''} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={() => {bg.set("muc")}}>
+          Munich
+        </button>
+        <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} {$bg === 'dubai' ? 'bg-white bg-opacity-30' : ''} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={() => {bg.set("dubai")}}>
+          Dubai
+        </button>
+        <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} {$bg === 'pink' ? 'bg-white bg-opacity-30' : ''} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={() => {bg.set("pink")}}>
+          Pink
+        </button>
+      </div>
+      <div>
+      </div>
+    </form> -->
 
     <div class="mb-6">
 

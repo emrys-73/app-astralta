@@ -72,5 +72,21 @@ export const actions = {
 			console.log('Error: ', err);
 			throw error(err.status, err.message);
 		}
-	}
+	},
+	updateBg: async ({ request, locals }) => {
+		const data = Object.fromEntries(await request.formData());
+
+		try {
+			const { bg } = await locals.pb
+						.collection('users')
+						.update(locals.user.id, { bg: data.bg });
+					locals.user.bg = bg;
+					return {
+						success: true
+					};
+		} catch (err) {
+			console.log('Error: ', err);
+			throw error(err.status, err.message);
+		}
+	},
 };

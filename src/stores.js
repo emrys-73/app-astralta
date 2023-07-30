@@ -22,3 +22,5 @@ export const darkMode = writable(true);
 
 // GPT Mode
 export const gpt4 = writable(false);
+
+export const bg = writable("home");

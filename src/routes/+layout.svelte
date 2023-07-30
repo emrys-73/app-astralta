@@ -6,17 +6,14 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
 	import { Drawer } from '$lib/components';
-    import { drawerOpen } from '../stores';
+    import { drawerOpen, bg } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
 	export let data;
 
-    let bg;
-    $: bg = "home"
-
     let bgUrl;
-    $: bgUrl = `bg-[url('/bg/${bg}.png')]`
+    $: bgUrl = `bg-[url('/bg/${$bg}.png')]`
     
 
     const getImageURL = (collectionId, recordId, fileName, size = '0x0') => {
@@ -32,7 +29,7 @@
     onMount(() => {
 
         if (data?.user?.bg) {
-            bg = data?.user?.bg;
+            bg.set(data?.user?.bg)
         }
 
         function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
@@ -56,7 +53,7 @@
     })
 </script>
 
-<AppShell class="{bgUrl} bg-image">
+<AppShell class="bg-[url('/bg/home.png')] bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         {#if $drawerOpen}
@@ -94,7 +91,6 @@
                     {:else}
                         Astralta
                     {/if}
-                    
                 </span>
             </a>
         </div>
