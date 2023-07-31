@@ -110,7 +110,7 @@
       </button>
     </div>
 
-    <div class=" justify-center flex">
+    <!-- <div class=" justify-center flex">
       <h2 class="text-lg font-regular text-true-white text-center mt-2 flex">Background</h2>
     </div>
     <form action="?/updateBg" method="POST" class="mb-12 justify-center flex content-center">
@@ -151,7 +151,7 @@
       </div>
       <div>
       </div>
-    </form>
+    </form> -->
 
     <div class="mb-6">
 

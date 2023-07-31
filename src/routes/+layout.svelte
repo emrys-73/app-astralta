@@ -53,7 +53,7 @@
     })
 </script>
 
-<AppShell class="bg-[url('/bg/ny.png')] bg-image">
+<AppShell class="bg-[url('/bg/home.png')] bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         {#if $drawerOpen}
