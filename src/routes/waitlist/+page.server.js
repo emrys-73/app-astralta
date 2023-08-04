@@ -33,6 +33,7 @@ export const actions = {
         body.passwordConfirm = `${username}astralta`;
         body.role = 'waitlist'
         body.access = false;
+        body.darkMode = true;
 
         try {
             await locals.pb.collection('users').create({ username, ...body})

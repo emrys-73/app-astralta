@@ -16,6 +16,10 @@
         drawerOpen.update((state) => !state)
     }
 
+    const toggleDarkMode = () => {
+        darkMode.update((value) => !value)
+    }
+
     const navigation = [
             {
                 title: 'Home',
@@ -33,7 +37,7 @@
             },
             {
                 title: 'Settings',
-                href: '/settings',
+                href: '/gen-settings',
                 icon: {
                     "d" : "M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495",
                 }
@@ -75,7 +79,7 @@
 </script>
 
 
-<div class="flex flex-col w-64 h-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-5'} backdrop-blur-md">
+<div class="flex flex-col w-64 h-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-5'} backdrop-blur-md relative">
     <!-- Header grid -->
     <div class="text-xl text-true-white grid grid-cols-6">
         <!-- Title -->
@@ -97,7 +101,7 @@
     <div>
         <ul>
             {#each navigation as navItem}
-                <li class="hover:bg-true-white hover:bg-opacity-20 rounded-xl text-true-white hover:backdrop-blur-sm p-2 m-2 duration-700 ease-out {$page.url.pathname === navItem.href ? 'bg-true-white bg-opacity-10' : '' }">
+                <li class="hover:bg-true-white hover:bg-opacity-30 rounded-xl text-true-white p-2 m-2 duration-700 ease-in-out {$page.url.pathname === navItem.href ? 'bg-true-white bg-opacity-10' : '' }">
                     <a href={navItem.href} class="font-regular content-center hover:text-true-whit ">
                         <div class="flex flex-row max-h-[35px]">
                             <div class="py-2 px-1 pl-2">
@@ -112,6 +116,31 @@
                     </a>
                 </li>                    
             {/each}
+            <li class="hover:bg-true-white hover:bg-opacity-30 hover:cursor-pointer rounded-xl text-true-white p-2 m-2 duration-700 ease-out">
+                <form action="/logout" method="POST" class="text-true-white hover:text-true-white">
+                    <div class="flex flex-row max-h-[35px]">
+                        <div class="py-2 px-1 pl-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                              </svg>                              
+                        </div>
+                        <button type="submit" class="py-2 px-2">
+                            Log Out
+                        </button>
+                    </div>
+                  </form>
+            </li>
         </ul>
+    </div>
+    <div class="absolute bottom-2 lg:bottom-4 ml-[78px]">
+        <div>
+            <button class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-true-white bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDarkMode}>
+                {#if $darkMode}
+                  Dark Mode
+                {:else}
+                  Light Mode
+                {/if}
+            </button>
+        </div>
     </div>
 </div>

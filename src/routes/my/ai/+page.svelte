@@ -213,7 +213,7 @@
     <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1200px] m-6 rounded-xl flex justify-center items-center mb-32 overflow-y-auto">
       <!-- <CodeBlock language="ts" code={message.content}></CodeBlock> -->
       <!-- // here to side code -->
-      <div class="row-span-5 overflow-auto ">
+      <div class="row-span-5 overflow-auto">
         <ul>
           {#each $messages as message}
           <li>
@@ -234,7 +234,7 @@
           {/each}
         </ul>
       </div>
-      <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg flex flex-col mx-2 xl:w-[40vw]">
+      <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg flex flex-col mx-2 xl:w-[40vw] {$darkMode ? 'bg-black bg-opacity-60' : ''}">
         <div class="pb-2 flex flex-row gap-1">
           <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={reload} disabled={msgcount === 1}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -279,9 +279,9 @@
           <form on:submit={handleSubmit}>
             <div class="grid grid-cols-10">
               <div class="col-span-9">
-                <textarea rows={rows} name="message" class="{rounded} overflow-auto appearance-none touch-manipulation {message.length > 0 ? '' : 'breathe'} select-none resize-none min-h-[40px] 
-                  s-apple-input bg-black bg-opacity-40 w-full font-regular force-opaque-sm text-[15px] hover:text-true-white hover:opacity-100 text-true-white
-                   focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque
+                <textarea id="myMessage" rows={rows} name="message" class="{rounded} overflow-auto appearance-none touch-manipulation {message.length > 0 ? '' : 'breathe'} select-none resize-none min-h-[40px] 
+                  s-apple-input {$darkMode ? 'bg-black bg-opacity-40 focus:bg-black focus:bg-opacity-40' : 'bg-white bg-opacity-0 focus:bg-white focus:bg-opacity-0'} w-full font-regular force-opaque-sm text-[15px] hover:text-true-white hover:opacity-100 text-true-white
+                     focus:apple-input focus:force-opaque
                     focus:border-none" placeholder="Send a message" bind:value={$input} on:keydown={(event) => {
                       if (event.key === 'Enter' && !event.shiftKey) {
                         event.preventDefault();
@@ -476,7 +476,7 @@
             label="XP" 
             type="text" 
             name="xp"
-            class="apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white"  
+            class="apple-input rounded-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-10'} font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white"  
             on:keydown={(event) => {
               if (event.key === 'Enter') {
                 event.preventDefault();

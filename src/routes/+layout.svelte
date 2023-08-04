@@ -6,7 +6,7 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
 	import { Drawer } from '$lib/components';
-    import { drawerOpen, bg } from '../stores';
+    import { drawerOpen, bg, darkMode } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
