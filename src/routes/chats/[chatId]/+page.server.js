@@ -10,6 +10,19 @@ export const load = ({ locals, params }) => {
     const serializeNonPOJOs = (/** @type {any} */ obj) => {
         return structuredClone(obj)
     };
+
+    const getMessages = async (chatId) => {
+        try {
+            const messages = serializeNonPOJOs(await locals.pb.collection('messages').getFullList({
+                sort: '+created',
+                filter: `chat="${chatId}"`
+            }));
+            return messages
+        } catch (err) {
+            console.log("Error: ", err)
+            throw error(err.status, err.message)
+        }
+    }
     
     const getChat = async (chatId) => {
         try {
@@ -22,7 +35,8 @@ export const load = ({ locals, params }) => {
     };
 
     return {
-        chat: getChat(params.chatId)
+        chat: getChat(params.chatId),
+        messages: getMessages(params.chatId),
     }
 
 }
