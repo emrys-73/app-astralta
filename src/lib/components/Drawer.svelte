@@ -7,17 +7,17 @@
     $: drawerState;
 
 
-    drawerOpen.subscribe((value) => {
+    drawerOpen.subscribe((value: boolean) => {
         drawerState = value;
     })
 
 
     const toggleDrawer = () => {
-        drawerOpen.update((state) => !state)
+        drawerOpen.update((state: any) => !state)
     }
 
     const toggleDarkMode = () => {
-        darkMode.update((value) => !value)
+        darkMode.update((value: any) => !value)
     }
 
     const navigation = [
@@ -79,7 +79,7 @@
 </script>
 
 
-<div class="flex flex-col w-64 h-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-5'} backdrop-blur-md relative">
+<div class="flex flex-col w-64 h-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-5'} backdrop-blur-md relative ease-in-out duration-700">
     <!-- Header grid -->
     <div class="text-xl text-true-white grid grid-cols-6">
         <!-- Title -->

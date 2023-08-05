@@ -101,7 +101,7 @@
     <div class="mb-6">
 
       <h2 class="text-lg font-regular text-true-white text-center mt-2">Appearance</h2>
-      <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDarkMode}>
+      <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl ease-in-out duration-700" on:click={toggleDarkMode}>
           {#if darkModeState}
             Dark Mode
           {:else}
@@ -156,7 +156,7 @@
     <div class="mb-6">
 
       <h2 class="text-lg font-regular text-true-white text-center mt-2">GPT Model</h2>
-      <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleGPT}>
+      <button class="btn {darkModeState ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl ease-in-out duration-700" on:click={toggleGPT}>
           {#if gpt4On}
             GPT-4
           {:else}
@@ -169,7 +169,7 @@
         
       <h2 class="text-lg font-regular text-true-white text-center mt-2">AI Name</h2>
 
-      <input id="ainame" label="AIName" type="text" name="ainame" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.ainame}" disabled />
+      <input id="ainame" label="AIName" type="text" name="ainame" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60 ease-in-out duration-700" value="{data?.user?.ainame}" disabled />
       
       <Modal label="change-ainame" checked={ainameModalOpen}>
         <span slot="trigger" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">Change AI name</span>
@@ -191,7 +191,7 @@
           />
         </div>
           <div class="">
-            <button type="submit" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" disabled={loading}
+            <button type="submit" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl ease-in-out duration-700" disabled={loading}
               >Name my AI</button
             >
           </div>
@@ -213,7 +213,7 @@
     <div class="mb-12">
         <h2 class="text-lg font-regular text-true-white text-center my-2">Username</h2>
 
-        <input id="username" label="Username" type="text" name="username" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.username}" disabled />
+        <input id="username" label="Username" type="text" name="username" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60 ease-in-out duration-700" value="{data?.user?.username}" disabled />
         
         <Modal label="change-username" checked={usernameModalOpen}>
           <span slot="trigger" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">Change username</span>
@@ -235,7 +235,7 @@
             />
           </div>
             <div class="">
-              <button type="submit" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" disabled={loading}
+              <button type="submit" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl ease-in-out duration-700" disabled={loading}
                 >Change my username</button
               >
             </div>
@@ -257,7 +257,7 @@
     <div class="mb-8">
         <h2 class="text-lg font-regular text-true-white text-center my-2">Name</h2>
 
-        <input id="name" label="Name" type="text" name="name" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60" value="{data?.user?.name}" disabled />
+        <input id="name" label="Name" type="text" name="name" class="apple-input rounded-full mb-4 bg-black bg-opacity-40 w-[50vh] font-semibold force-opaque p-2 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-not-allowed text-true-white text-opacity-60 ease-in-out duration-700" value="{data?.user?.name}" disabled />
         
         <Modal label="change-name" checked={nameModalOpen}>
           <span slot="trigger" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">Change name</span>
@@ -279,7 +279,7 @@
             />
           </div>
             <div class="">
-              <button type="submit" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" disabled={loading}
+              <button type="submit" class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl ease-in-out duration-700" disabled={loading}
                 >Change my name</button
               >
             </div>

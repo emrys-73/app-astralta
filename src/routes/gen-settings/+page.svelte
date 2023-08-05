@@ -49,7 +49,7 @@
                 <h3 class="text-md font-regular text-true-white text-center mt-2">Appearance</h3>
             </div>
             <div>
-                <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDarkMode}>
+                <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDarkMode}>
                     {#if $darkMode}
                         Dark Mode
                     {:else}
@@ -68,9 +68,9 @@
                     method="POST"    
                 >
                 
-                <input id="ainame" label="AIName" type="text" name="ainame" class=" rounded-full mb-4 apple-input {$darkMode ? 'bg-black bg-opacity-40 text-opacity-80' : 'bg-black bg-opacity-5 text-opacity-90'} w-[30vh] font-regular force-opaque p-1.5 text-md text-opacity-50 focus:text-opacity-100 focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white " value="{data?.user?.ainame}" />
+                <input id="ainame" label="AIName" type="text" name="ainame" class=" rounded-full mb-4 apple-input {$darkMode ? 'bg-black bg-opacity-40 text-opacity-80' : 'bg-black bg-opacity-5 text-opacity-90'} w-[30vh] ease-in-out duration-700 font-regular force-opaque p-1.5 text-md text-opacity-50 focus:text-opacity-100 focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white " value="{data?.user?.ainame}" />
                 <div class="flex justify-center">
-                    <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
+                    <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
                         Name my AI
                     </button>
                 </div>
@@ -92,9 +92,9 @@
                     method="POST"    
                 >
                 
-                <input id="name" label="Name" type="text" name="name" class=" rounded-full mb-4 apple-input {$darkMode ? 'bg-black bg-opacity-40 text-opacity-80' : 'bg-black bg-opacity-5 text-opacity-90'} w-[30vh] font-regular force-opaque p-1.5 text-md text-opacity-50 focus:text-opacity-100 focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white " value="{data?.user?.name}" />
+                <input id="name" label="Name" type="text" name="name" class=" rounded-full mb-4 apple-input {$darkMode ? 'bg-black bg-opacity-40 text-opacity-80' : 'bg-black bg-opacity-5 text-opacity-90'} w-[30vh] ease-in-out duration-700 font-regular force-opaque p-1.5 text-md text-opacity-50 focus:text-opacity-100 focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white " value="{data?.user?.name}" />
                 <div class="flex justify-center">
-                    <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
+                    <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
                         Set name
                     </button>
                 </div>
@@ -112,9 +112,9 @@
                     use:enhance={submitUpdateUsername}
                 >
                 
-                <input id="username" label="Username" type="text" name="username" class=" rounded-full mb-4 apple-input {$darkMode ? 'bg-black bg-opacity-40 text-opacity-80' : 'bg-black bg-opacity-5 text-opacity-90'} w-[30vh] font-regular text-opacity-50 force-opaque p-1.5 text-md focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text focus:text-opacity-100 text-true-white " value="{data?.user?.username}" />
+                <input id="username" label="Username" type="text" name="username" class=" rounded-full mb-4 apple-input {$darkMode ? 'bg-black bg-opacity-40 text-opacity-80' : 'bg-black bg-opacity-5 text-opacity-90'} ease-in-out duration-700 w-[30vh] font-regular text-opacity-50 force-opaque p-1.5 text-md focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text focus:text-opacity-100 text-true-white " value="{data?.user?.username}" />
                 <div class="flex justify-center">
-                    <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
+                    <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
                         Set username
                     </button>
                 </div>

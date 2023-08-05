@@ -231,7 +231,7 @@
             {#if message.role == 'user'}
             <div class="text-left text-true-white text-md bg-true-white bg-opacity-5 rounded-xl  backdrop-blur-xl my-2 drop-shadow-xl"><pre class="w-full p-2 px-4 overflow-auto whitespace-pre-wrap ">{message.content}<pre/></div>
             {:else if message.role == 'assistant'}
-            <div class="text-left text-true-white text-md {$darkMode ? ' bg-black bg-opacity-60' : 'bg-black bg-opacity-20'} rounded-xl  backdrop-blur-xl my-2 drop-shadow-xl">
+            <div class="text-left text-true-white text-md {$darkMode ? ' bg-black bg-opacity-60' : 'bg-black bg-opacity-20'} ease-in-out duration-700 rounded-xl  backdrop-blur-xl my-2 drop-shadow-xl">
               <!-- <pre class="w-full p-2 px-4 overflow-y-auto whitespace-pre-wrap"><CodeBlock language="ts" code={message.content}></CodeBlock></pre></div> -->
               <pre class="w-full p-2 px-4 overflow-y-auto whitespace-pre-wrap">{message.content}</pre></div>
             {:else}
@@ -245,7 +245,7 @@
           {/each}
         </ul>
       </div>
-      <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg flex flex-col mx-2 xl:w-[40vw] {$darkMode ? 'bg-black bg-opacity-60' : ''}">
+      <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg flex flex-col mx-2 xl:w-[40vw] {$darkMode ? 'bg-black bg-opacity-60' : ''} ease-in-out duration-700">
         <div class="pb-2 flex flex-row gap-1">
           <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={reload} disabled={msgcount === 1}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
