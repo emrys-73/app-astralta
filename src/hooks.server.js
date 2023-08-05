@@ -8,7 +8,7 @@ const serializeNonPOJOs = (/** @type {any} */ obj) => {
 };
 
 export const handle = async ({ event, resolve }) => {
-    event.locals.pb = new Pocketbase('http://139.144.176.23:80')
+    event.locals.pb = new Pocketbase('http://139.144.176.23')
     event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '')
 
     // The following try/catch block is a later addition because 
@@ -16,7 +16,7 @@ export const handle = async ({ event, resolve }) => {
     try {
         if (event.locals.pb.authStore.isValid) {
             await event.locals.pb.collection('users').authRefresh()
-            event.locals.user = serializeNonPOJOs(event.locals.pb.authStore.model)
+            event.locals.user = serializeNonPOJOs(event.locals.pb.authStore.model)  
         }
         
     } catch (_) {
