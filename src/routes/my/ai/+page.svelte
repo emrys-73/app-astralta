@@ -119,24 +119,6 @@
       // train
       let selectedFile = null;
 
-      function dragOver(e) {
-          e.preventDefault();
-      }
-
-      function dropHandler(e) {
-          e.preventDefault();
-          if (e.dataTransfer.items) {
-          if (e.dataTransfer.items[0].kind === 'file') {
-              selectedFile = e.dataTransfer.items[0].getAsFile();
-          }
-          } else {
-          selectedFile = e.dataTransfer.files[0];
-          }
-      }
-
-      function handleChange(e) {
-          selectedFile = e.target.files[0];
-      }
 
       // Experience Engine Logic
 

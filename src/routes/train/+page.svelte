@@ -37,17 +37,19 @@
             }
         }
     }
+
+
+    // new
+
+
+
 </script>
 
-<div class="flex flex-col items-center h-full w-full text-true-white justify-center">
-    <form 
-    action="?/updateXP"
-    method="POST"
-    use:enhance={submitUpdateXP}
-    class="max-w-min"
-    >
+<div class="w-full h-full relative flex justify-center items-center">
+  <form action="?/createChat" method="POST">
+    <div class="mt-3 flex justify-center flex-col">
 
-    <AltaCard>
+      <AltaCard>
         <div class="mb-2">
           <h2>
             Personality
@@ -62,15 +64,6 @@
               value={perso}
             />
     
-            <!-- Naming -->
-            <input 
-              id="ainame" 
-              label="ainame" 
-              type="text" 
-              name="ainame"
-              class="hidden apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
-              value={ainame}
-            />
           <div>
             
                 <button on:click={() => {value = -1; updatePerso()}} class=" {value === -1 ? ' bg-true-white bg-opacity-20' : ''} {data?.user?.username === 'Sir' ? '' : 'hidden'} btn bg-black my-2 bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
@@ -98,26 +91,25 @@
           </div>  
       </AltaCard>
 
+
       <div class="mt-6">
         <h1 class="text-true-white text-center">
           Type in what you want to train your AI on
         </h1>
       </div>
+
+
       <AltaCard>
-        <div class="mb-2">
-          <h2>
-            Text
-          </h2>
-        </div>
+
         <div class="my-2">
           
             
             <input 
-              id="xp" 
-              label="XP" 
+              id="content" 
+              label="content" 
               type="text" 
-              name="xp"
-              class="apple-input rounded-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-10'} font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white"  
+              name="content"
+              class="apple-input rounded-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-10'} font-regular force-opaque p-2 text-md w-full focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white" placeholder="Type here" 
               on:keydown={(event) => {
                 if (event.key === 'Enter') {
                   event.preventDefault();
@@ -130,14 +122,16 @@
           
           
         </AltaCard>
-    
-        <div class="mt-3 flex justify-center">
-          <button type="submit" class="btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl"
-            >Run training</button
-          >
-        </div>
 
-    </form>
+
+      <button type="submit" class="btn bg-black bg-opacity-70 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[3rem] mt-2 border-none normal-case drop-shadow-2xl"
+        >Create Chat
+        </button
+      >
+    </div>
+  </form>
 
 </div>
+
+
 
