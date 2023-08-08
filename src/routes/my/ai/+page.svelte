@@ -344,46 +344,6 @@
 
   {:else}
 
-  {#if debugMode}
-  <div class="items-center justify-center content-center">
-    <div class="justify-center ">
-      <div class="mt-6">
-        <h1 class="text-true-white text-center">
-          Select how you want to train your AI
-        </h1>
-      </div>
-    <LiveCard 
-        on:dragover="{dragOver}"
-        on:drop="{dropHandler}"
-        >
-  
-        {#if selectedFile}
-            <p>File: {selectedFile.name}</p>
-        {:else}
-  
-          <!-- <p>Drop a PDF file here or click to select</p> -->
-          <p>Train with PDF</p>
-          <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
-          <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label>
-          {/if}
-    </LiveCard>
-      </div>
-    
-    <LiveCard>
-  
-        {#if selectedFile}
-            <p>File: {selectedFile.name}</p>
-        {:else}
-            <!-- <p>Drop a PDF file here or click to select</p> -->
-            <p>Train with Website</p>
-            <!-- <input type="file" accept="application/pdf" on:change="{handleChange}" class="hidden" id="fileInput">
-            <label for="fileInput" class="cursor-pointer text-system-cyan pt-2">Select a file</label> -->
-        {/if}
-      </LiveCard>
-
-  </div>
-
-  {/if}
   <div class="items-center flex flex-col">
     <form 
           action="?/updateXP"
@@ -397,16 +357,6 @@
           Personality
         </h2>
       </div>
-      
-        <!-- <input 
-            id="perso" 
-            label="perso" 
-            type="text" 
-            name="perso"
-            class=" hidden apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-[50vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
-            value={form?.data?.perso}
-          /> -->
-  
           <input 
             id="perso" 
             label="perso" 
@@ -425,26 +375,6 @@
             class="hidden apple-input rounded-full bg-black bg-opacity-40 font-regular force-opaque p-2 text-md w-full min-w-[30vh] focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white text-opacity-60"  
             value={ainame}
           />
-  
-        <!-- <div>
-          <RadioGroup class="border-none">
-            <RadioItem bind:group={value} name="justify" value={0} class="">
-              <span class="{value === 0 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
-                Personal Assistant
-              </span>
-            </RadioItem>
-            <RadioItem bind:group={value} name="justify" value={1}>
-              <span class="{value === 1 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
-                Tutor / Expert
-              </span>
-            </RadioItem>
-            <RadioItem bind:group={value} name="justify" value={2}>
-              <span class=" {value === 2 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
-                Emotional Support
-              </span>
-            </RadioItem>
-          </RadioGroup>
-        </div> -->
         <div>
           
               <button on:click={() => {value = -1; updatePerso()}} class=" {value === -1 ? ' bg-true-white bg-opacity-20' : ''} {data?.user?.username === 'Sir' ? '' : 'hidden'} btn bg-black my-2 bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
@@ -472,24 +402,7 @@
               
             
           
-        </div>
-    
-        {#if debugMode}
-          Personality: {perso}
-        {/if}
-    
-        <!-- <div class="divider"></div>
-        <div class="my-2">
-    
-            <div class="mt-3">
-              <button type="submit" class="btn bg-black bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl" on:click={updatePerso}
-                >Set personality</button
-              >
-            </div>
-        </div> -->
-      
-  
-  
+        </div>  
     </AltaCard>
   
     <div class="mt-6">

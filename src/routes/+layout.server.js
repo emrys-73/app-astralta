@@ -13,7 +13,7 @@ export const load = async ({ locals }) => {
             locals.pb.autoCancellation(false);
             const userId = locals.pb.authStore.model.id
             const chats = serializeNonPOJOs(await locals.pb.collection('chats').getFullList({
-                sort: '-created',
+                sort: '-updated',
                 filter: `user="${userId}"`
             }));
             return chats
