@@ -10,7 +10,7 @@
 
  <div class="h-full text-center text-true-white content-center flex justify-center items-center mx-4">
   
-  <div class="relative">
+  <div class="relative mt-20">
     <a href="/train">
       <div class="my-4 flex flex-row text-center items-center justify-center gap-2  backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-30'} drop-shadow-xl text-true-white p-4 min-w-[350px] hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-2xl transition duration-700 ease-in-out">
         <div>
