@@ -31,3 +31,6 @@ export const current_chat = writable({
     "id": undefined,
     "title": undefined,
 })
+
+
+export const chatCount = writable(0);

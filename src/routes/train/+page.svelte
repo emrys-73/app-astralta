@@ -2,13 +2,13 @@
 // @ts-nocheck
 
     import { AltaCard, LiveCard } from "$lib/components";
-    import { darkMode, personality } from "../../stores.js";
+    import { darkMode, personality, chatCount } from "../../stores.js";
     import { applyAction, enhance } from "$app/forms";
-	import { invalidateAll } from "$app/navigation";
+	  import { invalidateAll } from "$app/navigation";
+	import { redirect } from "@sveltejs/kit";
 
 
     export let data;
-
 
     let perso;
     personality.subscribe((value) => {perso = value})
@@ -46,6 +46,14 @@
 </script>
 
 <div class="w-full h-full relative flex justify-center items-center">
+
+  {#if $chatCount >= 10}
+  <div class="bg-black bg-opacity-60 py-2 px-4 rounded-full breathe mx-4">
+    <p class="text-center text-true-white text-md">
+      You've reached the maximum number of chats. Delete a chat if you wish to create a new one.
+    </p>
+  </div>
+  {:else}
   <form action="?/createChat" method="POST">
     <div class="mt-3 flex justify-center flex-col">
 
@@ -131,6 +139,7 @@
     </div>
   </form>
 
+  {/if}
 </div>
 
 
