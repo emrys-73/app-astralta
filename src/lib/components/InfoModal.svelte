@@ -39,7 +39,7 @@
       </div> -->
 
 
-
+      <slot/>
         <div class="bg-true-white bg-opacity-20  rounded-3xl min-h-full">
           <div class="relative transform overflow-hidden rounded-lg shadow-xl transition-all sm:w-full sm:max-w-lg">
             <div class=" px-4 ">

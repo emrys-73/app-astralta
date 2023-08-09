@@ -3,17 +3,19 @@
 
 import { error } from '@sveltejs/kit';
 
-export const load = async ({ locals }) => {
+
+
+
+export const load = ({ locals }) => {
     const serializeNonPOJOs = (/** @type {any} */ obj) => {
         return structuredClone(obj)
     };
-
+    
     const getChats = async () => {
         try {
-            locals.pb.autoCancellation(false);
             const userId = locals.pb.authStore.model.id
             const chats = serializeNonPOJOs(await locals.pb.collection('chats').getFullList({
-                sort: '-updated',
+                sort: '-created',
                 filter: `user="${userId}"`
             }));
             return chats
@@ -23,24 +25,8 @@ export const load = async ({ locals }) => {
         }
     };
 
-    let waitlist = true;
-
-
-    try {
-        if (locals.user) {
-            return {
-                user: locals.user,
-                chats: getChats(),
-                waitlist: false,
-            }
-        }
-        return {
-            user: undefined,
-            chats: undefined,
-            waitlist,
-        }
-
-    } catch (err) {
-        throw error(err.status, err.message)
+    return {
+        chats: getChats()
     }
+
 }

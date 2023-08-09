@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore
 import { writable } from 'svelte/store';
 
 // Drawer store
@@ -24,3 +26,11 @@ export const darkMode = writable(true);
 export const gpt4 = writable(false);
 
 export const bg = writable("home");
+
+export const current_chat = writable({
+    "id": undefined,
+    "title": undefined,
+})
+
+
+export const chatCount = writable(0);
