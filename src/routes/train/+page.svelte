@@ -5,7 +5,6 @@
     import { darkMode, personality, chatCount } from "../../stores.js";
     import { applyAction, enhance } from "$app/forms";
 	  import { invalidateAll } from "$app/navigation";
-	import { redirect } from "@sveltejs/kit";
 
 
     export let data;
@@ -74,9 +73,12 @@
     
           <div>
             
+              {#if data?.user?.username === "Sir"}
                 <button on:click={() => {value = -1; updatePerso()}} class=" {value === -1 ? ' bg-true-white bg-opacity-20' : ''} {data?.user?.username === 'Sir' ? '' : 'hidden'} btn bg-black my-2 bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
                   Monday
                 </button>
+
+              {/if}
               
                 <button on:click={() => {value = 0; updatePerso()}} class="{value === 0 ? ' bg-true-white bg-opacity-20' : ''} btn bg-black my-2 bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
                   Personal Assistant
@@ -100,7 +102,7 @@
       </AltaCard>
 
 
-      <div class="mt-6">
+      <!-- <div class="mt-6">
         <h1 class="text-true-white text-center">
           Type in what you want to train your AI on
         </h1>
@@ -135,7 +137,7 @@
       <button type="submit" class="btn bg-black bg-opacity-70 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[3rem] mt-2 border-none normal-case drop-shadow-2xl"
         >Create Chat
         </button
-      >
+      > -->
     </div>
   </form>
 
