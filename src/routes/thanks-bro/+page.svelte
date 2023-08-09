@@ -91,7 +91,12 @@ the logic, I was just too sleepy to do it -->
 
         <a href="https://astralta.com">
             <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
-                Back to astralta.com
+                astralta.com
+            </div>
+        </a>
+        <a href="/login">
+            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
+                Log In
             </div>
         </a>
 
@@ -125,10 +130,17 @@ the logic, I was just too sleepy to do it -->
                 You will receive an Email once you get full access
             </span>
             <span slot="backlink">
-                <div class="my-4">
+                <!-- <div class="my-4">
                     <a href="https://astralta.com" class="text-center">
                       <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
-                        back to astralta.com
+                        astralta.com
+                      </div>
+                    </a>
+                  </div> -->
+                  <div class="my-4">
+                    <a href="/login" class="text-center">
+                      <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md">
+                        Log In
                       </div>
                     </a>
                   </div>

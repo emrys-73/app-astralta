@@ -12,7 +12,7 @@ export async function POST({ request, locals }) {
         "ai_model": "gpt-3.5-turbo"
     };
 
-    const UpdatedChat = await pb.collection('chats').update(ChatID, ChatData);
+    const UpdatedChat = await locals.pb.collection('chats').update(ChatID, ChatData);
 
 
     const result = {
