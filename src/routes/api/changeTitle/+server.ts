@@ -14,7 +14,6 @@ export async function POST({ request, locals }) {
 
     const UpdatedChat = await locals.pb.collection('chats').update(ChatID, ChatData);
 
-
     const result = {
         "ChatID": ChatID,
         "UpdatedChat": UpdatedChat

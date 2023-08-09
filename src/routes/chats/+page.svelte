@@ -9,7 +9,7 @@
     <div class="h-full justify-center flex items-center flex-col w-full">
         <div class="">
             {#each data?.chats as chat}
-            {#if chat.ai_model === "gpt-4"}
+
             <LiveCard class="">
                 <div class="flex flex-row gap-3 justify-center">
                     <div>
@@ -17,23 +17,23 @@
                             {JSON.stringify(chat.title)}
                         </h1>
                     </div>
+                    {#if chat.ai_model === "gpt-4"}
                     <div>
                         <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
                             PRO
                         </span>
                     </div>
+                    {/if}
+                    {#if chat.public}
+                    <div>
+                        <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
+                            Public
+                        </span>
+                    </div>
+                    {/if}
                 </div>
             </LiveCard>
-
-            {:else }
-            <LiveCard>
-                <h1 class="text-true-white text-lg text-center">
-                    {JSON.stringify(chat.title)}
-                </h1>
-            </LiveCard>
-            {/if}
             {/each}
         </div>
-
     </div>
     

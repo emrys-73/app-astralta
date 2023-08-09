@@ -143,9 +143,6 @@
   </InfoModal>
     {/if}
 
-
-    <!-- {$chatCount} -->
-
     {#if displayDeleteConfirmation}
     <InfoModal>
       <span>
@@ -177,21 +174,6 @@
 
 
         <!-- Showcase chat summary so the user can give a proper name for the chat -->
-        <!-- <AltaCard>
-          <div class="max-w-md mx-2 px-4">
-
-            <div>
-              <h3 class="text-center text-true-white text-lg font-semibold  py-4">
-                This chat is about
-              </h3>
-            </div>
-            <div>
-              <p class="text-true-white text-opacity-70 text-md font-regular justify-between mb-4">
-                Sumary here
-              </p>
-            </div>
-          </div>
-        </AltaCard> -->
       </span>
   </InfoModal>
     {/if}
@@ -210,7 +192,15 @@
               </button>
             </a>
           </div>
+          
           <div class="flex flex-row gap-3 justify-center px-14">
+            {#if chat.public}
+            <div>
+                <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
+                    PUBLIC
+                </span>
+            </div>
+            {/if}
             <div>
               <h1 class="text-true-white text-lg text-center">
                 {JSON.stringify(chat.title)}
@@ -223,6 +213,8 @@
                 </span>
             </div>
             {/if}
+            
+
             <div class="absolute right-2 bottom-4">
               <a href="/">
                 <button on:click={toggleEditForm(chat.id)} class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-10' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
