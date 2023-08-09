@@ -84,7 +84,7 @@
     {:else}
   
     <a href="/train">
-      <div class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-30'} drop-shadow-xl text-true-white p-4 min-w-[350px] hover:bg-true-white hover:cursor-pointer rounded-2xl transition duration-700 ease-in-out">
+      <div class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 min-w-[350px] hover:bg-true-white hover:cursor-pointer rounded-2xl transition duration-700 ease-in-out">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

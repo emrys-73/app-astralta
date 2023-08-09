@@ -139,7 +139,7 @@
         <!-- Messages end -->
 
         <!-- Input area start -->
-        <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg flex flex-col mx-2 xl:w-[40vw] {$darkMode ? 'bg-black bg-opacity-60' : ''}">
+        <div class="row-span-1 py-3 bottom-0 mb-2 xl:mb-4 rounded-2xl px-6 fixed backdrop-blur-lg flex flex-col mx-2 xl:w-[40vw] {$darkMode ? 'bg-black bg-opacity-60' : ''} altashadow">
           <!-- Action island start -->
           <div class="pb-2 flex flex-row gap-1">
             <!-- Regenerate -->
