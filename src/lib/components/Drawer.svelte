@@ -94,7 +94,7 @@
 </script>
 
 
-<div class="flex flex-col w-64 h-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-5'} backdrop-blur-md relative">
+<div class="flex flex-col w-64 h-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-5'} backdrop-blur-md relative z-40">
     <!-- Header grid -->
     <div class="text-xl text-true-white grid grid-cols-6">
         <!-- Title -->

@@ -44,7 +44,7 @@
 
 </script>
 
-<div class="w-full h-full relative flex justify-center items-center">
+<div class="w-full h-full relative flex justify-center items-center px-4">
 
   {#if $chatCount >= 10}
   <div class="bg-black bg-opacity-60 py-2 px-4 rounded-full breathe mx-4">
