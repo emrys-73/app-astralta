@@ -85,7 +85,7 @@
 
         <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } ">
             <a href="/">
-                <span class="drop-shadow-md">
+                <span class="drop-shadow-md text-md">
                     {$header}
                 </span>
             </a>

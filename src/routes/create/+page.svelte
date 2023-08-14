@@ -50,15 +50,22 @@
                             Personality
                         </h2>
                     </div>
-                    <div class="flex flex-col lg:flex-row justify-center items-center gap-2">
+                    
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-2">
                         {#each data?.personalities as perso}
-                        {#if perso.name === "Astralta"}
-                        <input type="radio" name="persoID" value={perso.id} class="bg-black bg-opacity-40" checked>
-                        {:else }
-                            <input type="radio" name="persoID" value={perso.id} class="bg-black bg-opacity-40">
-                        {/if}
-                            <label for="persoID">{perso.name}</label>
-                        {/each}
+                        <div class="flex flex-row justify-center items-center gap-2">
+                            <div class="flex">
+                                {#if perso.name === "Astralta"}
+                                <input type="radio" name="persoID" value={perso.id} class="bg-black bg-opacity-40" checked>
+                                {:else }
+                                    <input type="radio" name="persoID" value={perso.id} class="bg-black bg-opacity-40">
+                                {/if}
+                            </div>
+                            <div class="flex">
+                                <label for="persoID">{perso.name}</label>
+                            </div>
+                        </div>
+                            {/each}
                         
                         <a href="/create/perso">
                             <button class="btn bg-black my-2 bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md  border-none normal-case transition ease-in-out duration-300">  

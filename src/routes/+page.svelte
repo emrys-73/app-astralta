@@ -60,7 +60,7 @@
           
         </div>
         <div>
-          <h1 class="text-true-white text-lg text-center">
+          <h1 class="text-true-white text-md text-center">
             New Agent
         </h1>
         </div>
@@ -108,7 +108,7 @@
             <a href="/agents/{chat.id}">
               <LiveCard>
                 <div>
-                  <h1 class="text-true-white text-lg text-center">
+                  <h1 class="text-true-white text-md text-center">
                     {chat.title}
                   </h1>
                 </div>
@@ -127,7 +127,7 @@
               
             </div>
             <div>
-              <h1 class="text-true-white text-lg text-center">
+              <h1 class="text-true-white text-md text-center">
                 New Chat
             </h1>
             </div>
