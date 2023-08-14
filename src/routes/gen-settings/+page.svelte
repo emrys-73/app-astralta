@@ -58,25 +58,7 @@
                 </button>
             </div>
         </div>
-        <div class="my-4">
-            <div>
-                <h3 class="text-md font-regular text-true-white text-center my-2">AI Name</h3>
-            </div>
-            <div>
-                <form 
-                    action="?/updateAIName"
-                    method="POST"    
-                >
-                
-                <input id="ainame" label="AIName" type="text" name="ainame" class=" rounded-full mb-4 apple-input {$darkMode ? 'bg-black bg-opacity-40 text-opacity-80' : 'bg-black bg-opacity-5 text-opacity-90'} w-[30vh] ease-in-out duration-700 font-regular force-opaque p-1.5 text-md text-opacity-50 focus:text-opacity-100 focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none hover:cursor-text text-true-white " value="{data?.user?.ainame}" />
-                <div class="flex justify-center">
-                    <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
-                        Name my AI
-                    </button>
-                </div>
-                </form>
-            </div>
-        </div>
+        
     </AltaCard>
     <AltaCard>
         <div>
