@@ -6,7 +6,7 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
 	import { Drawer } from '$lib/components';
-    import { drawerOpen, bg, darkMode } from '../stores';
+    import { drawerOpen, bg, darkMode, header } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
@@ -28,10 +28,6 @@
 
     onMount(() => {
 
-        if (data?.user?.bg) {
-            bg.set(data?.user?.bg)
-        }
-
         function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
             if (event.metaKey && event.key === 'x') {
                 toggleDrawer()
@@ -51,6 +47,7 @@
             window.removeEventListener('keydown', handleKeyDown);
         };
     })
+    
 </script>
 
 <AppShell class="bg-[url('/bg/forest.png')] bg-image">
@@ -59,11 +56,14 @@
         {#if $drawerOpen}
 		    <Drawer>
                 <span slot="title">
-                    {#if data?.user?.ainame}
-                        Astralta
-                    {:else}
-                        Launchpad
-                    {/if}
+                    <div class="flex flex-row">
+                        <div>
+                            <img src="/astralta_logo.png" alt="logo" class="w-8 h-8 ml-2"/>
+                        </div>
+                        <div class="ml-2">
+                            Astralta
+                        </div>
+                    </div>
                 </span>
             </Drawer>
         {/if}
@@ -86,11 +86,7 @@
         <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } ">
             <a href="/">
                 <span class="drop-shadow-md">
-                    {#if data?.user?.ainame}
-                        {data?.user?.ainame}
-                    {:else}
-                        Astralta
-                    {/if}
+                    {$header}
                 </span>
             </a>
         </div>

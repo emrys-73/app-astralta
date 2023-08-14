@@ -2,16 +2,13 @@
 // @ts-nocheck
 
   import { InfoModal, LiveCard, AltaCard } from '$lib/components';
-  import { darkMode, chatCount } from '../stores.js';
+  import { darkMode, chatCount, header } from '../stores.js';
   import { onMount } from 'svelte';
   export let data;
 
+  header.set("Astralta")
+
   let max_chats = 10;
-
-  if (data?.user?.username === "Sir") {
-    max_chats = 10000;
-  }
-
 
   onMount(() => {
     editing = false;
@@ -49,42 +46,13 @@
     displayDeleteConfirmation = false;
   }
 
-  // This takes the system training and the last 2 messages (if existant) to determine a summary
-  // async function getChatSummary (chatID) {
-  //     const response = await fetch('/api/chatSummary', {
-  //           method: 'POST',
-  //           body: JSON.stringify({ chatID }),
-  //           headers: {
-  //               'content-type': 'application/json'
-  //           }
-  //       });
-
-  //       const result = await response.json()
-
-  //       return result
-  //   };
-
-  
-  //   let curChatSummary;
-  //   $: curChatSummary = getChatSummary(currentChatId) ;
-
 </script>
 
 
- <div class="h-full text-center text-true-white content-center flex justify-center items-center mx-4">
-  
-  <div class="relative mt-24">
-
-    {#if $chatCount >= max_chats}
-    <div class="bg-black bg-opacity-60 py-2 px-4 rounded-full breathe">
-      <p class="text-center text-true-white text-md">
-        You've reached the maximum number of chats. Delete a chat if you wish to create a new one.
-      </p>
-    </div>
-    {:else}
-  
-    <a href="/train">
-      <div class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 min-w-[350px] hover:bg-true-white hover:cursor-pointer rounded-2xl transition duration-700 ease-in-out">
+ <div class="h-full text-center text-true-white content-center flex justify-center items-center mx-4 relative">
+  <div class="my-20">
+    <a href="/create">
+      <div class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-2xl transition duration-500 ease-in-out">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -93,11 +61,84 @@
         </div>
         <div>
           <h1 class="text-true-white text-lg text-center">
-            New Chat
+            New Agent
         </h1>
         </div>
       </div>
     </a>
+
+    {#if $chatCount >= max_chats}
+    <div class="bg-black bg-opacity-60 py-2 px-4 rounded-full breathe">
+      <p class="text-center text-true-white text-md">
+        You've reached the maximum number of chats. Delete a chat if you wish to create a new one.
+      </p>
+    </div>
+    {:else}
+
+    {#each data?.agents as agent}
+    <AltaCard>
+      <div class="relative">
+        <div class="w-full">
+          <div>
+            <div class="flex flex-row gap-3 justify-center items-center">
+              <h2 class="text-left ml-2 font-bold text-md">
+                {agent.name}
+              </h2>
+              {#if agent.public}
+              <div class="justify-center items-center flex">
+                  <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
+                      PUBLIC
+                  </span>
+              </div>
+              {/if}
+              {#if agent.model === "gpt-4"}
+            <div>
+                <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
+                    PRO
+                </span>
+            </div>
+            {/if}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          {#each data?.chats as chat}
+          {#if chat.agent === agent.id} 
+            <a href="/agents/{chat.id}">
+              <LiveCard>
+                <div>
+                  <h1 class="text-true-white text-lg text-center">
+                    {chat.title}
+                  </h1>
+                </div>
+              </LiveCard>
+            </a>
+            
+          {/if}
+          {/each}
+        </div>
+        <a href="/create">
+          <div class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-2xl transition duration-500 ease-in-out">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              
+            </div>
+            <div>
+              <h1 class="text-true-white text-lg text-center">
+                New Chat
+            </h1>
+            </div>
+          </div>
+        </a>
+      </div>
+    </AltaCard>
+
+    {/each}
+  
+    
     {/if}
 
     

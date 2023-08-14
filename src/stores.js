@@ -34,3 +34,6 @@ export const current_chat = writable({
 
 
 export const chatCount = writable(0);
+
+
+export const header = writable("Astralta") 
