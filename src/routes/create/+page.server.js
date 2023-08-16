@@ -71,7 +71,7 @@ export const actions = {
             "user": locals.user.id,
             "name": data.name === "" ? "Astralta Agent" : data.name,
             "personality": data.persoID,
-            "training": `${naming}${personality}${fine_tune}  The following content is your knowledge. [Content]: ''' ${data.knowledge}'''`,
+            "training": `${naming}${personality}${fine_tune} You will base the entire conversation ONLY about thefollowing content. Your goal is to work only with the provided knowledge. [Content]: ${data.knowledge}`,
             "model": data.pro ? 'gpt-4' : 'gpt-3.5-turbo',
             "public": data.publicAI,
             "CTA_name": data.cta_name === '' ? undefined : data.cta_name,
@@ -83,7 +83,7 @@ export const actions = {
         const newAgent = await locals.pb.collection('agents').create(agentData);
         // console.log(newAgent)
 
-        throw redirect(303, `/agents/${newAgent.id}`)
+         throw redirect(303, `/agents/${newAgent.id}`)
     }
 
 
