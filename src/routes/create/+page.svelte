@@ -3,15 +3,23 @@
         import { AltaCard } from "$lib/components";
         import { darkMode } from "../../stores";
         import { SlideToggle } from '@skeletonlabs/skeleton';
+        import { superForm } from 'sveltekit-superforms/client'
+        import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte'
 
         export let data
+
+        const { form } = superForm(data.form)
 
         let proMode = false;
         let publicAI = false;
 
     </script>
-    
-    <div class="w-full h-full flex justify-center items-center flex-col my-10">
+
+
+<div class="w-full h-full flex justify-center items-center flex-col my-10">
+    <!-- <div class="w-full">
+        <SuperDebug data={$form} />
+    </div> -->
         <div>
             <h1 class="text-true-white text-center text-2xl font-bold">
                 New AI
@@ -22,34 +30,42 @@
         <form action="?/createAgent" method="POST">
             <div>
                 <AltaCard>
-                    <input type="text" id="name" name="name" placeholder="Name" class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input my-2 mt-4">
+                    <input type="text" id="name" name="name" placeholder="Name" bind:value={$form.name} class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input my-2 mt-4">
 
                     <div class="flex flex-row justify-center gap-6 items-center my-2">
-                        <div class="my-2 justify-center items-center flex gap-2 flex-row">
+                        <!-- <div class="my-2 justify-center items-center flex gap-2 flex-row">
                             <h4 class="text-md font-semibold">
                                 Astralta PRO
                             </h4>
-                            <SlideToggle name="slide" bind:checked={proMode} active=" bg-green-500" class="bg-white bg-opacity-20 " size="sm" />
+                            <SlideToggle name="pro" bind:checked={proMode} active=" bg-green-500" class="bg-white bg-opacity-20 " size="sm" />
+                            <input type="checkbox" name="pro" value={proMode} class="hidden" checked>
 
+                        </div> -->
 
-                        </div>
+                        <!-- Default for gpt-3.5-tubro -->
+                        <input type="checkbox" name="pro" value={proMode} class="hidden" checked>
                         <div class="my-2 justify-center items-center flex gap-2 flex-row">
                             <h4 class="text-md font-semibold">
                                 Public
                             </h4>
-                            <SlideToggle name="slide" bind:checked={publicAI} active=" bg-green-500" class="bg-white bg-opacity-20 " size="sm" />
-
+                            <SlideToggle name="publicMode" bind:checked={publicAI} active=" bg-green-500" class="bg-white bg-opacity-20 " size="sm" />
+                            <input type="checkbox" name="publicAI" value={publicAI} class="hidden" checked>
 
                         </div>
+
+                        <!-- We need to add another toggle for the base Info later -->
                     </div>
                 </AltaCard>
     
+                
                 <AltaCard>
-                    <div>
-                        <h2 class="font-bold text-xl my-2 mb-6 md:mb-2">
-                            Personality
-                        </h2>
-                    </div>
+                    <a href="/personalities">
+                        <div>
+                            <h2 class="font-bold text-xl my-2 mb-6 md:mb-2">
+                                Personality
+                            </h2>
+                        </div>
+                    </a>
                     
                     <div class="flex flex-col md:flex-row justify-center items-center gap-2">
                         {#each data?.personalities as perso}
@@ -85,10 +101,10 @@
                     </div>
                     <div class="flex flex-col gap-3 my-4">
                         <div>
-                            <input type="text" id="cta_name" name="cta_name" placeholder="Action Name" class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input ">
+                            <input type="text" id="cta_name" name="cta_name" placeholder="Action Name" bind:value={$form.cta_name} class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input ">
                         </div>
                         <div>
-                            <input type="text" id="cta_url" name="cta_url" placeholder="Action Link" class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input ">            
+                            <input type="text" id="cta_url" name="cta_url" placeholder="Action Link" bind:value={$form.cta_url} class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input ">            
                         </div>
                     </div>
                    

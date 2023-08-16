@@ -40,26 +40,7 @@
 </script>
 
 <div class="{$drawerOpen ? 'sm:flex' : 'mt-20'} w-full h-full flex flex-col md:flex-row gap-4 justify-center items-center">
-    <AltaCard>
-        <div>
-            <h2 class="text-true-white text-lg font-bold tetx-center">System Settings</h2>
-        </div>
-        <div class="my-4">
-            <div>
-                <h3 class="text-md font-regular text-true-white text-center mt-2">Appearance</h3>
-            </div>
-            <div>
-                <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDarkMode}>
-                    {#if $darkMode}
-                        Dark Mode
-                    {:else}
-                        Light Mode
-                    {/if}
-                </button>
-            </div>
-        </div>
-        
-    </AltaCard>
+    
     <AltaCard>
         <div>
             <h2 class="text-true-white text-lg font-bold tetx-center">Account Settings</h2>

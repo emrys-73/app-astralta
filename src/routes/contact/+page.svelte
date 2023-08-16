@@ -7,21 +7,22 @@
         <a href="mailto:montoya@astralta.com">
             <LiveCard>
                 <p class="text-left text-true-white text-md font-mono tracking-wider">
-                    Hi,
-                    <br>
-                    <br>
-                    this is Adrian - founder. 
+                    Hi, 
                     <br>
                     <br>
                     
-                    Whilst we focus on AI at Astralta, we believe in the value of human interactions. 
-                    <br>
+                    Whilst Astralta is all about AI, we firmly believe in the value of human interactions. 
+                    
                     <br>
                     Feel free to get in touch personally anytime by sending me an Email. 
                     
                     <br>
                     <br>
-                    thank you for using Astralta 🤍.
+                    Thank you for building with us,
+                    <br>
+                    Adrian Montoya - founder of Astralta.
+                    <br>
+                    <!-- thank you for using Astralta 🤍. -->
             
             
                 </p>

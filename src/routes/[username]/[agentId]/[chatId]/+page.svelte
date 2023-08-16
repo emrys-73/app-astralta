@@ -1,10 +1,10 @@
 <script>
     // @ts-nocheck
-        import { darkMode, header } from '../../../stores.js';
+        import { darkMode, header } from '../../../../stores.js';
         import { useChat } from "ai/svelte";
         export let data
 
-        header.set(data?.chat?.title)
+        header.set(data?.agent.name)
     
         let debugMode = false;
     
@@ -50,6 +50,27 @@
     
             const result = await response.json()
         }
+
+        async function generateTitle (ChatID, agentID, firstMessage) {
+          const response = await fetch('/api/generateTitle', {
+                method: 'POST',
+                body: JSON.stringify({ ChatID, agentID, firstMessage }),
+                headers: {
+                    'content-type': 'application/json'
+                }
+            });
+    
+            const result = await response.json()
+        }
+
+        const { messages: titleMsg, handleSubmit: titleSubmit, input: titleInput, reload: reloadTitle, isLoading: titleLoading } = useChat({
+            api: "/x-engine/title",
+            initialMessages: [{"role": "system", "content": "Your task is to reply with just one short title in a short sentence that is best suitable for the following message interaction with an user and an AI."}],
+            onFinish: () => {
+
+              // updateTitle on DB
+            }
+          });
     
     
         // Helper function created to see what the message storage sends
@@ -199,6 +220,16 @@
                   </button>
                 </form>
                 {/if}
+
+                <!-- Title generation -->
+                <!-- <form on:submit={titleSubmit}>
+                  <input bind:value={$titleInput} hidden>
+                  <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case" type="submit" disabled={$titleLoading || thisMsgCount < 1}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                    </svg>
+                  </button>
+                </form> -->
       
                 <!-- Copy to Clipboard -->
                 <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={copyToClipboard} disabled={msgcount === 1}>
@@ -242,6 +273,7 @@
               
             </div>
             <!-- Input area end -->
+
         </div>
     </div>
     

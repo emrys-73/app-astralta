@@ -51,13 +51,19 @@ export const actions = {
         const data = Object.fromEntries(await request.formData());
 
         await locals.pb.collection('chats').delete(data.chatId);
-    },
+    },    
 
-    deleteAgent: async ({ request, locals }) => {
+    createChat: async ({ request, locals }) => {
         const data = Object.fromEntries(await request.formData());
 
-        await locals.pb.collection('chats').delete(data.agentId);
-    },
-    
+        const chatData = {
+            "title": data.name,
+            "user": locals.user.id,
+            "agent": data.agentId
+        };
 
+        const newChat = await locals.pb.collection('chats').create(chatData);
+        throw redirect(303, `/agents/${data.agentId}/${newChat.id}`)
+        
+    }
 }

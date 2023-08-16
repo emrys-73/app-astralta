@@ -24,7 +24,7 @@
         drawerOpen.update((state) => !state)
     }
 
-    let avatarUrl = `https://ui-avatars.com/api/?name=${data.user?.name}`;
+    let avatarUrl = `https://ui-avatars.com/api/?name=${data?.user?.name}`;
 
     onMount(() => {
 
@@ -48,9 +48,13 @@
         };
     })
     
+    let lockDownMode = false;
+
+    
+
 </script>
 
-<AppShell class="bg-[url('/bg/forest.png')] bg-image">
+<AppShell class="bg-[url('/bg/home.png')] bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         {#if $drawerOpen}
@@ -91,7 +95,7 @@
             </a>
         </div>
         <svelte:fragment slot="trail">
-            {#if !data.user}
+            {#if !data?.user}
                 <div class="flex-row hidden sm:flex">
                     <a href="/waitlist">
                         <div class="">
