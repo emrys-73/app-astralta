@@ -27,10 +27,19 @@
 <div class="w-full h-full justify-center items-center flex">
     <div class="px-4 py-20 md:w-3/4 xl:w-1/2">
         <AltaCard>
-            <div>
-                <h1 class="text-xl font-bold uppercase text-center pb-2">
+            <div class="flex flex-row pb-2 gap-3">
+              <div>
+                <h1 class="text-xl font-bold uppercase text-center">
                     {data?.agent.name}
                 </h1>
+              </div>
+              {#if data?.agent.model === "gpt-4"}
+                <div class="justify-center items-center flex">
+                  <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
+                      PRO
+                  </span>
+                </div>
+                {/if}
             </div>
             <div class="py-4 md:grid md:grid-cols-6 md:gap-4 flex flex-col justify-center items-center">
                 <div class="col-span-2">
