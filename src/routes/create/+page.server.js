@@ -85,6 +85,9 @@ export const actions = {
         const newAgent = await locals.pb.collection('agents').create(agentData);
         // console.log(newAgent)
 
+        if (newAgent.public) {
+            throw redirect(303, `/${locals.user.username}/public/${newAgent.id}`)
+        }
          throw redirect(303, `/agents/${newAgent.id}`)
     }
 

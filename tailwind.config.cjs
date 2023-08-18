@@ -19,6 +19,11 @@ module.exports = {
 			'base-gray': '#97979C',
 			'link-blue': '#198AFF',
 
+
+			// Notion
+			'notion-dark': '#191919',
+			'notion-light': '#ffffff',
+
 			// Apple colors
 			'system-red': '#FF453A',
 			'system-orange': '#FF9F0A',
