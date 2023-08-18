@@ -4,6 +4,13 @@
 import { redirect } from '@sveltejs/kit';
 
 
+export const load = ({ locals }) => {
+    if (!locals.user) {
+        throw redirect(303, 'waitlist')
+    }
+}
+
+
 export const actions = {
     changeTitle: async ({ request, locals }) => {
         const data = Object.fromEntries(await request.formData());
@@ -65,5 +72,9 @@ export const actions = {
         const newChat = await locals.pb.collection('chats').create(chatData);
         throw redirect(303, `/agents/${data.agentId}/${newChat.id}`)
         
+    },
+    pinChat: async ({ request, locals }) => {
+
+        return {}
     }
 }

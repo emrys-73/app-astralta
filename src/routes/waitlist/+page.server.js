@@ -4,22 +4,7 @@ import { redirect } from '@sveltejs/kit'
 import { generateUsername } from '$lib/utils.js'
 
 export const load = async ({ locals }) => {
-    // if (!locals.pb.authStore.isValid) {
-    //     throw redirect(303, '/my/ai')
-    // }
-
-    // try {
-    //     const bgs = await locals.pb.collection('backgrounds').getFullList({
-    //         sort: '-created',
-    //     });
-    //     backgrounds = await bgs.json();
-        
-    // } catch (err) {
-    //     throw error(err.status, err.message)
-    // }
-
-
-    
+    return {}
 }
 
 export const actions = {

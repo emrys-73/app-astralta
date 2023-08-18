@@ -1,6 +1,6 @@
 <script>
     // @ts-nocheck
-        import { darkMode, header } from '../../../../stores.js';
+        import { darkMode, header } from '../../../../../stores.js';
         import { useChat } from "ai/svelte";
         export let data
 
@@ -130,12 +130,21 @@
     
           $: rows = message.length > 0 ? Math.min(Math.ceil(message.length / 100), MAX_ROWS) : 1;
           $: rounded = rows > 1 ? "rounded-lg" : "rounded-full";
+
+
+          // get custom background
+
     
     </script>
     
     
-    <div class="h-full flex justify-center relative">
-        <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1200px] m-6 rounded-xl flex justify-center items-center mb-32 overflow-y-auto flex-col mt-20">
+    <div class="h-full flex justify-center relative bg-black bg-opacity-40">
+      <div class="w-full fixed top-0 z-50 backdrop-blur-md py-2">
+        <h1 class="text-center text-true-white font-bold text-2xl">
+          {data?.agent?.name}
+        </h1>
+      </div>
+        <div class="min-w-[350px] sm:max-w-[700px] md:max-w-[800px] lg:max-w-[900px] xl:max-w-[1200px] m-6 rounded-xl flex justify-center items-center mb-32 overflow-y-auto flex-col mt-12">
           <!-- Messages start -->
             <div class="row-span-5 overflow-auto">
               

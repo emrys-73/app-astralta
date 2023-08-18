@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals }) => {
+
     locals.pb.autoCancellation(false);
 
     const serializeNonPOJOs = (/** @type {any} */ obj) => {
@@ -23,7 +24,7 @@ export const load = async ({ locals }) => {
             return chats
 
         } catch (err) {
-            console.log("Error: ", err)
+            console.log("Chat Error: ", err)
             throw error(err.status, err.message)
         }
     };
@@ -41,7 +42,7 @@ export const load = async ({ locals }) => {
             return agents
 
         } catch (err) {
-            console.log("Error: ", err)
+            console.log("Agent Error: ", err)
             throw error(err.status, err.message)
         }
     };
@@ -64,7 +65,7 @@ export const load = async ({ locals }) => {
             return [...defaultPersonalities, ...personalities]
 
         } catch (err) {
-            console.log("Error: ", err)
+            console.log("Personality Error: ", err)
             throw error(err.status, err.message)
         }
     };
@@ -92,6 +93,7 @@ export const load = async ({ locals }) => {
         }
 
     } catch (err) {
+        console.log("Retrieval Error")
         throw error(err.status, err.message)
     }
 }

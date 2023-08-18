@@ -10,11 +10,14 @@
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
+    import { page } from '$app/stores';
 	export let data;
 
     let bgUrl;
     $: bgUrl = `bg-[url('/bg/${$bg}.png')]`
-    
+
+    let curPage;
+    $: curPage = ""
 
     const getImageURL = (collectionId, recordId, fileName, size = '0x0') => {
 		return `http://139.144.176.23:80/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
@@ -48,16 +51,13 @@
         };
     })
     
-    let lockDownMode = false;
-
-    
 
 </script>
 
-<AppShell class="bg-[url('/bg/home.png')] bg-image">
+<AppShell class="bg-[url('/bg/ocean.png')] bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
-        {#if $drawerOpen}
+        {#if $drawerOpen && !$page.url.pathname.toString().includes(`public`)}
 		    <Drawer>
                 <span slot="title">
                     <div class="flex flex-row">
@@ -75,7 +75,7 @@
 	
 	<svelte:fragment slot="pageHeader">
 
-    <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" class=" backdrop-blur-sm {$drawerOpen ? 'relative' : 'fixed'}  top-0 w-full z-50 ">
+    <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" class=" backdrop-blur-sm {$drawerOpen ? 'relative' : 'fixed'}  top-0 w-full z-50 { $page.url.pathname.toString().includes(`public`) ? 'hidden' : ''}">
 
         <svelte:fragment slot="lead">
             {#if !$drawerOpen}
@@ -95,40 +95,21 @@
             </a>
         </div>
         <svelte:fragment slot="trail">
-            {#if !data?.user}
-                <div class="flex-row hidden sm:flex">
-                    <a href="/waitlist">
-                        <div class="">
-                            <div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
-                                <button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] border-none normal-case drop-shadow-2xl">
-                                    Join Waitlist
-                                </button>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="/login">
-                        <div class="hover:-translate-y-0.5 transition ease-in-out md:mt-0.5">
-                            <button class="btn bg-true-white bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md md:h-[2rem] md:w-16 border-none normal-case drop-shadow-2xl">
-                                Log In
-                            </button>
-                        </div>
-                    </a>
-                </div>
-            {:else}
-                <div class="dropdown dropdown-end">
-                    <span class="btn bg-transparent border-none hover:bg-transparent active:border-none avatar w-20 z-50">
-                        <div class=" rounded-full w-[35px] lg:w-[45px]">
-                        <img src={avatarUrl} alt="avatar" id="avatar-preview">
-                        </div>
-                    </span>
-                    <ul class="menu menu-compact dropdown-content shadow rounded-xl bg-true-black bg-opacity-50 text-true-white drop-shadow backdrop-blur-md hover:text-true-white xl:mr-4 mt-2">
-                        <li>
-                            <form action="/logout" method="POST" class="text-true-white hover:text-true-white">
-                                <button type="submit" class="w-full text-start hover:text-true-white">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+            {#if data?.user}
+            <div class="dropdown dropdown-end">
+                <span class="btn bg-transparent border-none hover:bg-transparent active:border-none avatar w-20 z-50">
+                    <div class=" rounded-full w-[35px] lg:w-[45px]">
+                    <img src={avatarUrl} alt="avatar" id="avatar-preview">
+                    </div>
+                </span>
+                <ul class="menu menu-compact dropdown-content shadow rounded-xl bg-true-black bg-opacity-50 text-true-white drop-shadow backdrop-blur-md hover:text-true-white xl:mr-4 mt-2">
+                    <li>
+                        <form action="/logout" method="POST" class="text-true-white hover:text-true-white">
+                            <button type="submit" class="w-full text-start hover:text-true-white">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
             {/if}
         </svelte:fragment>
     </AppBar>

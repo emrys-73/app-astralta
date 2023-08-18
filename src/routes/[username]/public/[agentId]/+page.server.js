@@ -33,7 +33,7 @@ export const load = async ({ locals, params }) => {
 
         console.log(newChat)
 
-        const url = `/${params.username}/${params.agentId}/${newChat.id}`
+        const url = `/${params.username}/public/${params.agentId}/${newChat.id}`
         console.log(url)
 
         return {

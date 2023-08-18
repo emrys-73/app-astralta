@@ -8,7 +8,7 @@
 <div class="w-full h-full flex justify-center items-center breathe">
     <a href={data?.url}>
         <LiveCard>
-            Start Chat
+            Start Chat with {data?.url}
         </LiveCard>
     </a>
 </div>
