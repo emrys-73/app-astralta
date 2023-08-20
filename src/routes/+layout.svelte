@@ -54,10 +54,22 @@
 
 </script>
 
-<AppShell class="bg-[url('/bg/ocean.png')] bg-image">
+<style>
+    :global(body) {
+      @apply h-full;
+      background-image: url('/bg/ocean.png');
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+
+<!-- <AppShell class="bg-[url('/bg/ocean.png')] bg-image"> -->
+<AppShell class="">
 	
 	<svelte:fragment slot="sidebarLeft">
-        {#if $drawerOpen && !$page.url.pathname.toString().includes(`public`)}
+        
 		    <Drawer>
                 <span slot="title">
                     <div class="flex flex-row">
@@ -70,51 +82,44 @@
                     </div>
                 </span>
             </Drawer>
-        {/if}
+        
 	</svelte:fragment>
 	
-	<svelte:fragment slot="pageHeader">
+    <div class="{!$page.url.pathname.toString().includes(`public`) ? '' : 'hidden'}">
+        <div class="fixed top-0 w-full z-40 backdrop-blur-md justify-center flex items-center h-16">
+            <div class="left-4 fixed">
+                {#if !$drawerOpen}
+                <button class="btn {$darkMode ? 'bg-black bg-opacity-30' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                      </svg>                  
+                </button>
+                {/if}
+            </div>
 
-    <AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end" class=" backdrop-blur-sm {$drawerOpen ? 'relative' : 'fixed'}  top-0 w-full z-50 { $page.url.pathname.toString().includes(`public`) ? 'hidden' : ''}">
 
-        <svelte:fragment slot="lead">
-            {#if !$drawerOpen}
-            <button class="btn {$darkMode ? 'bg-black bg-opacity-30' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                  </svg>                  
-            </button>
-            {/if}
-        </svelte:fragment>
+            <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } ">
+                <a href="/">
+                    <span class="drop-shadow-md text-md">
+                        {$header}
+                    </span>
+                </a>
+            </div>
 
-        <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } ">
-            <a href="/">
-                <span class="drop-shadow-md text-md">
-                    {$header}
-                </span>
-            </a>
-        </div>
-        <svelte:fragment slot="trail">
             {#if data?.user}
-            <div class="dropdown dropdown-end">
+            <div class="fixed right-0">
                 <span class="btn bg-transparent border-none hover:bg-transparent active:border-none avatar w-20 z-50">
                     <div class=" rounded-full w-[35px] lg:w-[45px]">
                     <img src={avatarUrl} alt="avatar" id="avatar-preview">
                     </div>
                 </span>
-                <ul class="menu menu-compact dropdown-content shadow rounded-xl bg-true-black bg-opacity-50 text-true-white drop-shadow backdrop-blur-md hover:text-true-white xl:mr-4 mt-2">
-                    <li>
-                        <form action="/logout" method="POST" class="text-true-white hover:text-true-white">
-                            <button type="submit" class="w-full text-start hover:text-true-white">Logout</button>
-                        </form>
-                    </li>
-                </ul>
+                
             </div>
             {/if}
-        </svelte:fragment>
-    </AppBar>
 
-	</svelte:fragment>
+
+        </div>
+    </div>       
 
     <slot/>
 </AppShell>

@@ -14,7 +14,7 @@
 
 
     const toggleDrawer = () => {
-        drawerOpen.update((state) => !state)
+        drawerOpen.update((state) => !state);
     }
 
     const toggleDarkMode = () => {
@@ -72,29 +72,10 @@
                 }
             },
         ]
-
-    onMount(() => {
-
-        function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
-            if (event.metaKey && event.key === 'x') {
-                toggleDrawer()
-            }
-            if (event.ctrlKey && event.key === 'x') {
-                toggleDrawer()
-            }
-        }
-
-        window.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    })
-
 </script>
 
 
-<div class="flex flex-col w-64 h-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-5'} backdrop-blur-md relative z-40 ease-in-out duration-1000">
+<div class="flex flex-col w-64 h-full {$darkMode ? 'bg-black bg-opacity-40' : 'bg-white bg-opacity-5'} {$drawerOpen && !$page.url.pathname.toString().includes(`public`) ? ' left-0 opacity-100' : ' -left-64 opacity-0'} backdrop-blur-md fixed transition-all top-0 z-50 ease-in-out duration-500">
     <!-- Header grid -->
     <div class="text-xl text-true-white grid grid-cols-6">
         <!-- Title -->

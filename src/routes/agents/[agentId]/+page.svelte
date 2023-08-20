@@ -82,7 +82,7 @@
                     <div class="justify-center items-center flex flex-col">
                         <div>
                             <div class="bg-black bg-opacity-20 rounded-2xl backdrop-blur-md text-center p-4">
-                                {data?.summary}
+                                {data?.agent.summary}
                             </div>
                         </div>
                         <div class="pt-2">

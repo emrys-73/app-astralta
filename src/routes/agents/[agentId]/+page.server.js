@@ -2,16 +2,16 @@
 // @ts-nocheck
 
 import { error, redirect } from '@sveltejs/kit';
-import { Configuration, OpenAIApi } from 'openai';
-import { OPENAI_KEY} from '$env/static/private'
+// import { Configuration, OpenAIApi } from 'openai';
+// import { OPENAI_KEY} from '$env/static/private'
 
 
 
-const configuration = new Configuration({
-    apiKey: OPENAI_KEY,
-  });
+// const configuration = new Configuration({
+//     apiKey: OPENAI_KEY,
+//   });
 
-const openai = new OpenAIApi(configuration);
+// const openai = new OpenAIApi(configuration);
 
 
 
@@ -20,7 +20,7 @@ export const load = async ({ locals, params }) => {
         return structuredClone(obj)
     };
 
-    let summary = ""
+    // let summary = ""
 
     const getAgent = async (agentId) => {
         try {
@@ -30,30 +30,30 @@ export const load = async ({ locals, params }) => {
 
             // console.log(agent)
 
-            if (agent.training === "") {
-                agent.training = "Your name is Astralta and you are a custom-made AI Assistant"
-            }
+            // if (agent.training === "") {
+            //     agent.training = "Your name is Astralta and you are a custom-made AI Assistant"
+            // }
 
-            const completion = await openai.createChatCompletion({
-                model: "gpt-3.5-turbo",
-                temperature: 0.8,
-                messages: [{
-                    "role": "system",
-                    "content": agent.training
-                },
-                {
-                    "role": "user",
-                    "content": "Summarise your personality and your knowledge in two sentences in a first person view and do not include anything else than the prue description"
-                }
-                ]
-            })
+            // const completion = await openai.createChatCompletion({
+            //     model: "gpt-3.5-turbo",
+            //     temperature: 0.8,
+            //     messages: [{
+            //         "role": "system",
+            //         "content": agent.training
+            //     },
+            //     {
+            //         "role": "user",
+            //         "content": "Summarise your personality and your knowledge in two sentences in a first person view and do not include anything else than the prue description"
+            //     }
+            //     ]
+            // })
             
-            summary = completion.data.choices[0].message.content
+            // summary = completion.data.choices[0].message.content
             // console.log(summary)
 
             return {
                 agent: agent,
-                summary: summary
+                // summary: summary
             }
         } catch (err) {
             console.log("Error: ", err)
@@ -85,13 +85,33 @@ export const actions = {
         const data = Object.fromEntries(await request.formData());
 
         const chatData = {
-            "title": "My Chat",
+            "title": data.name,
             "user": locals.user.id,
             "agent": data.agentId
         };
 
         const newChat = await locals.pb.collection('chats').create(chatData);
+
+
+        // get Agent
+        const agent = await locals.pb.collection('agents').getOne(data.agentId);
+
+        const systemTrainingData = {
+            "content": agent.training,
+            "role": "system",
+            "usage": "JSON",
+            "chat": newChat.id,
+            "user": locals.user.id
+        };
+
+        const systemMessage = await locals.pb.collection('messages').create(systemTrainingData);
+        // console.log(systemMessage);
+
+        if (agent.public) {
+            throw redirect(303, `/${locals.user.username}/public/${data.agentId}/${newChat.id}`)    
+        }
+
         throw redirect(303, `/agents/${data.agentId}/${newChat.id}`)
         
-    }
+    },
 }

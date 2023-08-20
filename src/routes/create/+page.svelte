@@ -117,7 +117,8 @@
                         </h2>
                     </div>
 
-                    <textarea id="knowledge" name="knowledge" class="bg-black w-3/4 my-4 h-full min-h-[100px] bg-opacity-30 rounded-2xl" oninput="autoResize(this)"></textarea>
+                    <!-- <input type="text" id="knowledge" name="knowledge" placeholder="" class="bg-black bg-opacity-20 rounded-2xl apple-input w-3/4 mt-4"> -->
+                    <textarea id="knowledge" name="knowledge" class="bg-black w-3/4 my-4 h-full min-h-[100px] bg-opacity-30 rounded-2xl" ></textarea>
 
 
 

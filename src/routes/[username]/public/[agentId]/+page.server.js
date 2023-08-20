@@ -31,7 +31,17 @@ export const load = async ({ locals, params }) => {
 
         const newChat = await locals.pb.collection('chats').create(chatData);
 
-        console.log(newChat)
+        // console.log(newChat)
+
+        const systemTrainingData = {
+            "content": agent.training,
+            "role": "system",
+            "usage": "JSON",
+            "chat": newChat.id,
+            "user": agent.user
+        };
+
+        const systemMessage = await locals.pb.collection('messages').create(systemTrainingData);
 
         const url = `/${params.username}/public/${params.agentId}/${newChat.id}`
         console.log(url)

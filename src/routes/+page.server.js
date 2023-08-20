@@ -70,6 +70,26 @@ export const actions = {
         };
 
         const newChat = await locals.pb.collection('chats').create(chatData);
+
+
+        // get Agent
+        const agent = await locals.pb.collection('agents').getOne(data.agentId);
+
+        const systemTrainingData = {
+            "content": agent.training,
+            "role": "system",
+            "usage": "JSON",
+            "chat": newChat.id,
+            "user": locals.user.id
+        };
+
+        const systemMessage = await locals.pb.collection('messages').create(systemTrainingData);
+        // console.log(systemMessage);
+
+        if (agent.public) {
+            throw redirect(303, `/${locals.user.username}/public/${data.agentId}/${newChat.id}`)    
+        }
+
         throw redirect(303, `/agents/${data.agentId}/${newChat.id}`)
         
     },

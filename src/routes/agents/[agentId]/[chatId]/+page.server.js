@@ -16,6 +16,10 @@ export const load = ({ locals, params }) => {
                 sort: '+created',
                 filter: `chat="${chatId}"`
             }));
+
+            
+            console.log(messages)
+
             return messages
         } catch (err) {
             console.log("Error: ", err)
@@ -32,6 +36,8 @@ export const load = ({ locals, params }) => {
             throw error(err.status, err.message)
         }
     };
+
+    // console.log(getMessages(params.chatId))
 
     return {
         chat: getChat(params.chatId),
