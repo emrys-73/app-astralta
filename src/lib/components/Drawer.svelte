@@ -112,7 +112,7 @@
                     </a>
                 </li>                    
             {/each}
-            <li class="hover:bg-true-white hover:bg-opacity-30 hover:cursor-pointer rounded-xl text-true-white p-2 m-2 duration-700 ease-out">
+            <!-- <li class="hover:bg-true-white hover:bg-opacity-30 hover:cursor-pointer rounded-xl text-true-white p-2 m-2 duration-700 ease-out">
                 <form action="/logout" method="POST" class="text-true-white hover:text-true-white">
                     <div class="flex flex-row max-h-[35px]">
                         <div class="py-2 px-1 pl-2">
@@ -125,7 +125,7 @@
                         </button>
                     </div>
                   </form>
-            </li>
+            </li> -->
         </ul>
     </div>
     <div class="absolute bottom-2 lg:bottom-4 ml-[78px]">
