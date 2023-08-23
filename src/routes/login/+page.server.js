@@ -2,6 +2,12 @@
 // @ts-nocheck
 import { error, redirect } from '@sveltejs/kit';
 
+export const load = ({ locals }) => {
+    // if (locals.user) {
+    //     throw redirect(303, '/')
+    // }
+}
+
 
 export const actions = {
     login: async ({ request, locals }) => {

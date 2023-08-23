@@ -98,5 +98,25 @@ export const actions = {
             console.log("Error: ", err)
             throw error(err.status, err.message)
         }
-    }
+    },
+    changeTitle: async ({ request, locals, params }) => {
+        const data = Object.fromEntries(await request.formData());
+
+        const ChatData = {
+            "title": data.newTitle,
+            "user": locals.user.id,
+        }
+
+        const UpdatedChat = await locals.pb.collection('chats').update(data.chatId, ChatData);
+
+        const result = {
+            "ChatID": data.chatId,
+            "UpdatedChat": UpdatedChat
+        }
+    
+        console.log(result)
+
+        throw redirect(303, `/agents/${params.agentId}/${params.chatId}/settings`)
+    },
+
 }

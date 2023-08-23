@@ -1,22 +1,7 @@
-<div class="flex flex-col items-center h-full w-full text-true-white bg-gradient-to-b to-black from-transparent px-6 ">
-    <!-- <a href="/">
-        <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
-            Astralta
-        </h1>
-    </a> -->
-    <div class="flex-none h-10 lg:h-32">
-
-    </div>
-
+<div class="flex flex-col items-center h-full w-full text-true-white px-6 justify-center my-12">
     <h2 class="mt-2 text-center text-xl sm:text-2xl pb-4 lg:text-3xl font-bold tracking-light text-true-white lg:pb-8">
-        Register for an account
+        Apply for the waitlist
     </h2>
-    <!-- <p class="text-center mt-1 opacity-50">
-        Or <a href="/login" class="text-primary font-medium hover:cursor-pointer hover:underline ">Sign In</a>
-        if you already have an account
-
-    </p> -->
-
     <form action="?/register" method="POST" class="flex flex-col items-center space-y-2 w-full pt-4">
         <div class="form-control w-full max-w-md py-2">
             <label for="name" class="label font-medium py-2 hidden">
@@ -52,9 +37,18 @@
             
         </div>
 
+        <div class="form-control w-full max-w-md py-2">
+            <label for="code" class="label font-medium py-2 hidden">
+                <span class="label-text text-transparent">
+                    Referral Code
+                </span>
+            </label>
+                <input type="text" name="code" class="apple-input rounded-full bg-black bg-opacity-40 w-full max-w-md font-semibold force-opaque p-3 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none"  placeholder="Referral Code"/>
+            
+        </div>
 
         <a href="/login">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl p-2 hover:backdrop-blur-md  duration-500 ease-in-out">
+            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
                 Already have an account?
             </div>
         </a>

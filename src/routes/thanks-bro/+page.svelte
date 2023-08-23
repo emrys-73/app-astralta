@@ -123,11 +123,12 @@ the logic, I was just too sleepy to do it -->
                     You're in!
                 </div>
             </span>
-            <span slot="image" class="">
-                <img src="ty.png" alt="nice" class="rounded-xl my-6 max-h-[210px] items-center ml-24">
+            <span slot="image" class="justify-center items-center flex">
+                <img src="ty.png" alt="nice" class="rounded-xl my-6 max-h-[210px] justify-center items-center flex">
             </span>
             <span slot="sub">
-                You will receive an Email once you get full access
+                <!-- You will receive an Email once you get full access -->
+                Check your inbox to verify your EMail.
             </span>
             <span slot="backlink">
                 <!-- <div class="my-4">

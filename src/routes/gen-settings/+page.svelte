@@ -1,6 +1,6 @@
 <script>
 // @ts-nocheck
-    import { darkMode, gpt4, drawerOpen } from "../../stores";
+    import { darkMode, gpt4 } from "../../stores";
     import { enhance, applyAction } from '$app/forms';
     import { AltaCard } from "$lib/components";
 
@@ -39,7 +39,7 @@
 
 </script>
 
-<div class="{$drawerOpen ? 'sm:flex' : 'mt-20'} w-full h-full flex flex-col md:flex-row gap-4 justify-center items-center">
+<div class="w-full h-full flex flex-col gap-4 justify-center items-center">
     
     <AltaCard>
         <div>
@@ -94,5 +94,11 @@
 
         
     </AltaCard>
-
+    <a href="/reset-password">
+        <div class="flex justify-center">
+            <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
+                Change Password
+            </button>
+        </div>
+    </a>
 </div>

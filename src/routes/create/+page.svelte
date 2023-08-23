@@ -93,7 +93,7 @@
                     </div>
                 </AltaCard>
                     
-                <AltaCard>
+                <!-- <AltaCard>
                     <div>
                         <h2 class="font-bold text-xl">
                             Action Button
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                    
-                </AltaCard>
+                </AltaCard> -->
                 
                 <AltaCard>
                     <div>

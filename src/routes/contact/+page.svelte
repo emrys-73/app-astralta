@@ -11,14 +11,14 @@
                     <br>
                     <br>
                     
-                    Whilst Astralta is all about AI, we firmly believe in the value of human interactions. 
+                    Whilst Astralta develops AI Software, we firmly believe in the value of human interactions. 
                     
                     <br>
                     Feel free to get in touch personally anytime by sending me an Email. 
                     
                     <br>
                     <br>
-                    Thank you for building with us,
+                    Thank you for creating with us,
                     <br>
                     Adrian Montoya - founder of Astralta.
                     <br>

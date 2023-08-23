@@ -25,6 +25,7 @@ export const actions = {
             "empathy": data.empathy,
             "optimism": data.optimism,
             "curiosity": data.curiosity,
+            "fine_tune": data.fine_tune ? data.fine_tune : "",
         };
 
         // console.log(personalityData)

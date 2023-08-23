@@ -65,7 +65,7 @@
 </script>
 
 
- <div class="h-full w-full text-center text-true-white flex justify-center items-center relative">
+ <div class="h-full w-full text-center text-true-white flex justify-center items-center relative px-4 xl:px-60 lg:px-40 md:px-20">
   <div class="grid grid-cols-12 gap-4">
     <div class="{debugMode ? 'col-span-4' : 'col-span-12'}">
       <div class="my-24">
@@ -163,7 +163,7 @@
                 {/each}
               </div>
     
-                <form action="?/createChat" method="POST" class="z-50">
+                <form action="?/createChat" method="POST" class="z-50 justify-center items-center flex">
                   <input type="text" id="name" value="Astralta" name="name" class="hidden">
                   <input type="text" id="agentId" value={agent.id} name="agentId" class="hidden"> 
       
@@ -174,8 +174,8 @@
                       </svg>
                       
                     </div>
-                    <div>
-                      <h1 class="text-true-white text-md text-center">
+                    <div class="">
+                      <h1 class="text-true-white text-md text-center justify-center">
                         New Chat
                     </h1>
                     </div>
@@ -187,6 +187,8 @@
          </AltaCard>
     
         {/each}
+
+        {#if !data?.agents}
         <AltaCard>
           <div class="relative">
             <div class="w-full">
@@ -239,6 +241,8 @@
           </div>
     
         </AltaCard>
+        {/if}
+
       
         
         {/if}

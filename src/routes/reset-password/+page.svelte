@@ -2,17 +2,7 @@
     export let form
 </script>
 
-<div class="flex flex-col items-center h-full w-full text-true-white bg-gradient-to-b to-black from-transparent px-6 mt-14">
-    <!-- <a href="/">
-        <h1 class="text-3xl text-true-white pt-8 font-bold uppercase">
-            Astralta
-        </h1>
-    </a>
-     -->
-
-    <div class="flex-none h-16 lg:h-32">
-
-    </div>
+<div class="flex flex-col items-center h-full w-full text-true-white justify-center px-6">
     <h2 class="mt-2 text-center text-3xl font-bold tracking-light text-true-white pb-2">
         Reset your password
     </h2>
@@ -38,15 +28,29 @@
             </button>
         </div>
         <a href="/login">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-xl pt-4 pb-4 hover:backdrop-blur-md px-4 duration-500 ease-in-out">
+            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
                 Nvm, I remembered my password
             </div>
         </a>
         {#if form?.success}
-            <div class="alert bg-system-green w-full max-w-md rounded-full text-white bg-opacity-70 border-none drop-shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6 " fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span>An Email has been sent to reset your password</span>
+            <div class=" py-2 px-4 gap-2 bg-system-green max-w-md rounded-full text-white bg-opacity-70 justify-center items-center flex flex-row">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current  h-4 w-4 bg-white" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> -->
+
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                      </svg>
+                </div>
+                <div>
+                    <span class="text-center justify-center items-center">An Email has been sent to reset your password</span>
+                </div>
+                  
             </div>
+            <a href="/login">
+                <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
+                    Log In
+                </div>
+            </a>
         {/if}
     </form>
 </div>

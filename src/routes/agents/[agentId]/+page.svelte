@@ -24,12 +24,12 @@
 
 </script>
 
-<div class="w-full h-full justify-center items-center flex">
-    <div class="px-4 py-20 md:w-3/4 xl:w-1/2">
+<div class="w-full h-full justify-center items-center flex px-4">
+    <div class=" py-20 md:w-3/4 xl:w-1/2">
         <AltaCard>
             <div class="flex flex-row pb-2 gap-3">
               <div>
-                <h1 class="text-xl font-bold uppercase text-center">
+                <h1 class="text-xl font-bold uppercase text-center mt-6">
                     {data?.agent.name}
                 </h1>
               </div>
@@ -61,6 +61,7 @@
                     {/each}
                     <form action="?/createChat" method="POST" class="justify-center flex ">
                       <input type="text" id="agentId" name="agentId" value={data?.agent.id} class="hidden">
+                      <input type="text" id="name" name="name" value="Astralta" class="hidden">
 
                       <button tyoe="submit" class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-2xl transition duration-500 ease-in-out">
                         <div>
@@ -85,7 +86,7 @@
                                 {data?.agent.summary}
                             </div>
                         </div>
-                        <div class="pt-2">
+                        <div class="pt-4">
                             <button on:click={showConfirmDelete(data.agent.id)} class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-5' } text-md px-4 py-1 rounded-full hover:bg-red-600 hover:bg-opacity-100 transition ease-in-out duration-500">
                               Delete AI
                             </button>

@@ -57,7 +57,7 @@
 <style>
     :global(body) {
       @apply h-full;
-      background-image: url('/bg/ocean.png');
+      background-image: url('/bg/ocean_2.png');
       background-attachment: fixed;
       background-position: center;
       background-repeat: no-repeat;
@@ -86,7 +86,7 @@
 	</svelte:fragment>
 	
     <div class="{!$page.url.pathname.toString().includes(`public`) ? '' : 'hidden'}">
-        <div class="fixed top-0 w-full z-40 backdrop-blur-md justify-center flex items-center h-16">
+        <div class="fixed top-0 w-full z-40 backdrop-blur-md justify-center flex items-center min-h-16">
             <div class="left-4 fixed">
                 {#if !$drawerOpen}
                 <button class="btn {$darkMode ? 'bg-black bg-opacity-30' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>
@@ -98,7 +98,7 @@
             </div>
 
 
-            <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } ">
+            <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } mx-20">
                 <a href="/">
                     <span class="drop-shadow-md text-md">
                         {$header}
@@ -108,12 +108,14 @@
 
             {#if data?.user}
             <div class="fixed right-0">
-                <span class="btn bg-transparent border-none hover:bg-transparent active:border-none avatar w-20 z-50">
-                    <div class=" rounded-full w-[35px] lg:w-[45px]">
-                    <img src={avatarUrl} alt="avatar" id="avatar-preview">
-                    </div>
-                </span>
-                
+                    <a href="/gen-settings">
+                    <span class="btn bg-transparent border-none hover:bg-transparent active:border-none avatar w-20 z-50">
+                        <div class=" rounded-full w-[35px] lg:w-[45px]">
+                        <img src={avatarUrl} alt="avatar" id="avatar-preview">
+                        </div>
+                    </span>
+                    
+                </a>
             </div>
             {/if}
 

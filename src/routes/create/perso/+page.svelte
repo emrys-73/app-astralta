@@ -155,6 +155,14 @@
                         </div>
                     </div>
                 </AltaCard>
+                <AltaCard>
+                    <h3 class="py-4 font-semibold">
+                        Fine Tuning
+                    </h3>
+
+                    <textarea id="fine_tune" name="fine_tune" class="bg-black w-3/4 my-4 h-full min-h-[100px] bg-opacity-30 rounded-2xl" ></textarea>
+
+                </AltaCard>
             </div>
             <div class="flex flex-col justify-center items-center my-2">
                 <button type="submit" class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-60'} altashadow text-true-white p-2 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-full transition duration-300 ease-in-out">
