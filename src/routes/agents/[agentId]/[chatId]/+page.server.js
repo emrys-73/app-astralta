@@ -18,7 +18,7 @@ export const load = ({ locals, params }) => {
             }));
 
             
-            console.log(messages)
+            // console.log(messages)
 
             return messages
         } catch (err) {

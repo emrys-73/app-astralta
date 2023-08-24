@@ -69,18 +69,17 @@ export const actions = {
         const training = `${naming}${personality}${fine_tune} You will base the entire conversation ONLY about thefollowing content. Your goal is to work only with the provided knowledge. [Content]: ${data.knowledge}`;
 
 
-        const summaryCompletion = await openai.createChatCompletion({
-            model: "gpt-4",
-            temperature: 0.73,
-            messages: [{"role": "system", "content": "You will reply only with a summary in one sentence written in first person of whatever I give you. This will contain the personality description of the AI and its knowledge."}
-            , {"role": "user",
-            "content": `${training}`
-            }
-        ]
-        })
+        // const summaryCompletion = await openai.createChatCompletion({
+        //     model: "gpt-4",
+        //     temperature: 0.73,
+        //     messages: [{"role": "system", "content": "You will reply only with a summary in one sentence written in first person of whatever I give you. This will contain the personality description of the AI and its knowledge."}
+        //     , {"role": "user",
+        //     "content": `${training}`
+        //     }
+        // ]
+        // })
         
-
-        let summary = summaryCompletion.data.choices[0].message.content
+        // let summary = summaryCompletion.data.choices[0].message.content
 
         const agentData = {
             "user": locals.user.id,
@@ -92,7 +91,7 @@ export const actions = {
             "public": data.publicAI,
             "CTA_name": data.cta_name === '' ? undefined : data.cta_name,
             "CTA_URL": data.cta_url === '' ? undefined : data.cta_url,
-            "summary": summary,
+            // "summary": summary,
         };
 
         // console.log(agentData)
