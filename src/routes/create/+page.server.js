@@ -6,6 +6,10 @@ import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server'
 import { redirect } from '@sveltejs/kit';
 
+export const config = {
+    runtime: 'edge',
+  };
+
 
 // Follow up creating the SuperForm migration
 

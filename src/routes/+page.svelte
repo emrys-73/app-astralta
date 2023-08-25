@@ -15,7 +15,7 @@
   onMount(() => {
     editing = false;
     displayDeleteConfirmation = false;
-    chatCount.set(data?.chats?.length)
+    chatCount.set(data?.chats?.length);  
   })
 
 
@@ -62,6 +62,20 @@
     pinnedChatUrl = ""
   }
 
+  let existUnassigned;
+  $: existUnassigned = false;
+
+  
+  
+  const checkUnassigned = () => {
+    for (let i = 0; i < data.chats; i++) {
+      console.log(data.chats[i].agent)
+      if (!data.chats[i].agent) {
+        existUnassigned = true;
+      }
+    }
+
+  }
 </script>
 
 
@@ -188,7 +202,7 @@
     
         {/each}
 
-        {#if !data?.agents}
+        {#if false}
         <AltaCard>
           <div class="relative">
             <div class="w-full">
@@ -243,7 +257,6 @@
         </AltaCard>
         {/if}
 
-      
         
         {/if}
     
