@@ -4,9 +4,9 @@ import { Configuration, OpenAIApi } from 'openai';
 import { OPENAI_KEY} from '$env/static/private'
 import { redirect } from '@sveltejs/kit';
 
-export const config = {
-    runtime: 'edge',
-  };
+// export const config = {
+//     runtime: 'edge',
+//   };
 
 
 const configuration = new Configuration({

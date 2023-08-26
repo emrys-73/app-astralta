@@ -18,7 +18,7 @@ const config = {
 	// 	adapter: adapter()
 	// }
 	kit: {
-		adapter: adapter({ runtime: 'edge' }),
+		adapter: adapter(),
 
 		inlineStyleThreshold: 5000
 	}
