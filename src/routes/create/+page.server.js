@@ -2,30 +2,12 @@
 // @ts-nocheck
 import { Configuration, OpenAIApi } from 'openai';
 import { OPENAI_KEY} from '$env/static/private'
-import { z } from 'zod';
-import { superValidate } from 'sveltekit-superforms/server'
 import { redirect } from '@sveltejs/kit';
 
 export const config = {
     runtime: 'edge',
   };
 
-
-// Follow up creating the SuperForm migration
-
-const newAgentSchema = z.object({
-    name: z.string().min(1).max(15),
-    cta_name: z.string().max(10),
-    cta_url: z.string().url().max(100),
-})
-
-export const load = async (event) => {
-
-    const form = await superValidate(event, newAgentSchema)
-    return {
-        form
-    }
-}
 
 const configuration = new Configuration({
     apiKey: OPENAI_KEY,
@@ -34,7 +16,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export const actions = {
-    createAgent: async ({ request, locals, event }) => {
+    createAgent: async ({ request, locals }) => {
         const data = Object.fromEntries(await request.formData());
 
         // const revisited_data = await superValidate(event, newAgentSchema)
@@ -73,17 +55,17 @@ export const actions = {
         const training = `${naming}${personality}${fine_tune} You will base the entire conversation ONLY about thefollowing content. Your goal is to work only with the provided knowledge. [Content]: ${data.knowledge}`;
 
 
-        // const summaryCompletion = await openai.createChatCompletion({
-        //     model: "gpt-4",
-        //     temperature: 0.73,
-        //     messages: [{"role": "system", "content": "You will reply only with a summary in one sentence written in first person of whatever I give you. This will contain the personality description of the AI and its knowledge."}
-        //     , {"role": "user",
-        //     "content": `${training}`
-        //     }
-        // ]
-        // })
+        const summaryCompletion = await openai.createChatCompletion({
+            model: "gpt-4",
+            temperature: 0.73,
+            messages: [{"role": "system", "content": "You will reply only with a summary in one sentence written in first person of whatever I give you. This will contain the personality description of the AI and its knowledge."}
+            , {"role": "user",
+            "content": `${training}`
+            }
+        ]
+        })
         
-        // let summary = summaryCompletion.data.choices[0].message.content
+        let summary = summaryCompletion.data.choices[0].message.content
 
         const agentData = {
             "user": locals.user.id,
@@ -95,7 +77,7 @@ export const actions = {
             "public": data.publicAI,
             "CTA_name": data.cta_name === '' ? undefined : data.cta_name,
             "CTA_URL": data.cta_url === '' ? undefined : data.cta_url,
-            // "summary": summary,
+            "summary": summary,
         };
 
         // console.log(agentData)

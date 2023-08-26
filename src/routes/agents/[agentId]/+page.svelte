@@ -81,11 +81,13 @@
                 </div>
                 <div class="col-span-4 justify-center items-center flex flex-col">
                     <div class="justify-center items-center flex flex-col">
-                        <div>
-                            <div class="bg-black bg-opacity-20 rounded-2xl backdrop-blur-md text-center p-4">
-                                {data?.agent.summary}
-                            </div>
-                        </div>
+                      {#if data?.agent?.summary}
+                      <div>
+                          <div class="bg-black bg-opacity-20 rounded-2xl backdrop-blur-md text-center p-4">
+                              {data?.agent.summary}
+                          </div>
+                      </div>
+                      {/if}
                         <div class="pt-4">
                             <button on:click={showConfirmDelete(data.agent.id)} class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-5' } text-md px-4 py-1 rounded-full hover:bg-red-600 hover:bg-opacity-100 transition ease-in-out duration-500">
                               Delete AI

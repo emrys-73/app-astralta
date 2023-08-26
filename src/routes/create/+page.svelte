@@ -3,12 +3,8 @@
         import { AltaCard } from "$lib/components";
         import { darkMode } from "../../stores";
         import { SlideToggle } from '@skeletonlabs/skeleton';
-        import { superForm } from 'sveltekit-superforms/client'
-        import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte'
 
         export let data
-
-        const { form } = superForm(data.form)
 
         let proMode = false;
         let publicAI = false;
@@ -30,7 +26,7 @@
         <form action="?/createAgent" method="POST">
             <div>
                 <AltaCard>
-                    <input type="text" id="name" name="name" placeholder="Name" bind:value={$form.name} class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input my-2 mt-4">
+                    <input type="text" id="name" name="name" placeholder="Name" class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input my-2 mt-4">
 
                     <div class="flex flex-row justify-center gap-6 items-center my-2">
                         <!-- <div class="my-2 justify-center items-center flex gap-2 flex-row">
