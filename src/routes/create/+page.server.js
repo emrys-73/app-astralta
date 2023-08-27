@@ -15,33 +15,31 @@ export const actions = {
     createAgent: async ({ request, locals }) => {
         const data = Object.fromEntries(await request.formData());
 
-        console.log(data)
+        const rawPersonality = await locals.pb.collection('personalities').getOne(data.persoID)
 
-        // const rawPersonality = await locals.pb.collection('personalities').getOne(data.persoID)
+        const personalityJSON = {
+            "curiosity": rawPersonality.curiosity,
+            "empathy": rawPersonality.empathy,
+            "humor": rawPersonality.humor,
+            "optimism": rawPersonality.optimism,
+            "politeness": rawPersonality.politeness,
+            "tone": rawPersonality.tone,
+        }
 
-        // const personalityJSON = {
-        //     "curiosity": rawPersonality.curiosity,
-        //     "empathy": rawPersonality.empathy,
-        //     "humor": rawPersonality.humor,
-        //     "optimism": rawPersonality.optimism,
-        //     "politeness": rawPersonality.politeness,
-        //     "tone": rawPersonality.tone,
-        // }
+        let fine_tune = ""
 
-        // let fine_tune = ""
+        let naming = data.name === '' ? 'Your name is Astralta. ' : `Your name is ${data.name}. `
 
-        // let naming = data.name === '' ? 'Your name is Astralta. ' : `Your name is ${data.name}. `
-
-        // const completion = await openai.createChatCompletion({
-        //     model: "gpt-4",
-        //     temperature: 0.73,
-        //     messages: [{"role": "system", "content": "Transform the following JSON with personality traits and weights from 0 to 10 into a system prompt for an OpenAI Model that describes the personality of it in imperative second person narrative so that it trains the bot. Optimise it so it makes absolutely sure that the generated system prompt will change how the model to be trained acts. [JSON]: ''' { curiosity: 9, empathy: 7, humor: 6, optimism: 9, politeness: 1, tone: ['casual'] } ''' [Personality]: '''You are strongly curious and will ask a lot of questions. You have decent empathy so will relate to the user and validate their feelings. Your humor is at 6 so you will joke every now and then. You are very optimistic so you'll nearly always support the user. Your politeness is low so you will mock and roast the user on almost every chance like a best friend would do. Your tone is casual ''' "
+        const completion = await openai.createChatCompletion({
+            model: "gpt-4",
+            temperature: 0.73,
+            messages: [{"role": "system", "content": "Transform the following JSON with personality traits and weights from 0 to 10 into a system prompt for an OpenAI Model that describes the personality of it in imperative second person narrative so that it trains the bot. Optimise it so it makes absolutely sure that the generated system prompt will change how the model to be trained acts. [JSON]: ''' { curiosity: 9, empathy: 7, humor: 6, optimism: 9, politeness: 1, tone: ['casual'] } ''' [Personality]: '''You are strongly curious and will ask a lot of questions. You have decent empathy so will relate to the user and validate their feelings. Your humor is at 6 so you will joke every now and then. You are very optimistic so you'll nearly always support the user. Your politeness is low so you will mock and roast the user on almost every chance like a best friend would do. Your tone is casual ''' "
         
-        //     }, {role: "user", content: JSON.stringify(personalityJSON)}],
-        //   });
+            }, {role: "user", content: JSON.stringify(personalityJSON)}],
+          });
 
           
-        //   let personality = completion.data.choices[0].message.content
+        let personality = completion.data.choices[0].message.content
 
 
         // const training = `${naming}${personality}${fine_tune} You will base the entire conversation ONLY about thefollowing content. Your goal is to work only with the provided knowledge. [Content]: ${data.knowledge}`;
