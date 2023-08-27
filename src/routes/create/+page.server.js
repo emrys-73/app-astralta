@@ -41,6 +41,21 @@ export const actions = {
           
         let personality = completion.data.choices[0].message.content
 
+        const agentData = {
+                "user": locals.user.id,
+                "name": data.name === "" ? "Astralta Agent" : data.name,
+                "personality": data.persoID,
+                "training": `${naming}${personality}${fine_tune} The following is the knowledge you have. You will base all your conversations only about this: ${data.knowledge}`,
+                // "model": data.pro ? 'gpt-4' : 'gpt-3.5-turbo',
+                "model": 'gpt-3.5-turbo',
+                "public": data.publicAI,
+                "CTA_name": data.cta_name === '' ? undefined : data.cta_name,
+                "CTA_URL": data.cta_url === '' ? undefined : data.cta_url,
+                // "summary": summary,
+            };
+
+        const newAgent = await locals.pb.collection('agents').create(agentData);
+
 
         // const training = `${naming}${personality}${fine_tune} You will base the entire conversation ONLY about thefollowing content. Your goal is to work only with the provided knowledge. [Content]: ${data.knowledge}`;
 
