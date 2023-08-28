@@ -24,7 +24,7 @@
     
         <!-- Form -->
         <form action="?/createAgent" method="POST">
-            <div>
+            <div class="px-4 lg:px-20 xl:px-40">
                 <AltaCard>
                     <input type="text" id="name" name="name" placeholder="Name" class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input my-2 mt-4">
 
@@ -63,7 +63,7 @@
                         </div>
                     </a>
                     
-                    <div class="flex flex-col md:flex-row justify-center items-center gap-2">
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-2 flex-wrap">
                         {#each data?.personalities as perso}
                         <div class="flex flex-row justify-center items-center gap-2">
                             <div class="flex">

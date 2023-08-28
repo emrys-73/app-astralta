@@ -79,10 +79,10 @@
 </script>
 
 
- <div class="h-full w-full text-center text-true-white flex justify-center items-center relative px-4 xl:px-60 lg:px-40 md:px-20">
-  <div class="grid grid-cols-12 gap-4">
+ <div class="h-full w-full text-center text-true-white flex justify-center items-center relative px-4 xl:px-36 lg:px-24 md:px-20">
+  <div class="grid grid-cols-12 gap-4 ">
     <div class="{debugMode ? 'col-span-4' : 'col-span-12'}">
-      <div class="my-24">
+      <div class="mt-20">
         <a href="/create">
           <div class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-2xl transition duration-500 ease-in-out">
             <div>
@@ -98,6 +98,8 @@
             </div>
           </div>
         </a>
+      </div>
+      <div class="my-4 w-full gap-4 flex flex-wrap flex-row justify-center items-center">
     
         {#if $chatCount >= max_chats}
         <div class="bg-black bg-opacity-60 py-2 px-4 rounded-full breathe">
