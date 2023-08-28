@@ -37,3 +37,6 @@ export const chatCount = writable(0);
 
 
 export const header = writable("Astralta") 
+
+
+export const publicUrl = writable("/");
