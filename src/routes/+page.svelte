@@ -2,8 +2,9 @@
 // @ts-nocheck
 
   import { InfoModal, LiveCard, AltaCard } from '$lib/components';
-  import { darkMode, chatCount, header } from '../stores.js';
+  import { darkMode, chatCount, header, publicUrl } from '../stores.js';
   import { onMount } from 'svelte';
+  import { page } from '$app/stores';
   export let data;
 
   let debugMode = false
@@ -16,6 +17,7 @@
     editing = false;
     displayDeleteConfirmation = false;
     chatCount.set(data?.chats?.length);  
+    countPublic();
   })
 
 
@@ -65,6 +67,27 @@
   let existUnassigned;
   $: existUnassigned = false;
 
+  async function copyToClipboard(content) {
+  try {
+    await navigator.clipboard.writeText(content);
+    // ALERT COPIED TO CLIPBOARD
+    console.log('Content copied successfully!');
+  } catch (error) {
+    console.error('Failed to copy content to clipboard:', error);
+  }
+}
+
+  let publicCount;
+  $: publicCount = 0;
+
+  const countPublic = () => {
+    for (let i = 0; i < data.agents.length; i++) {
+      if (data.agents[i].public) {
+        console.log("hi")
+        publicCount = publicCount + 1;
+      }
+    }
+  }
   
   
   const checkUnassigned = () => {
@@ -76,6 +99,9 @@
     }
 
   }
+
+
+
 </script>
 
 
@@ -108,101 +134,132 @@
           </p>
         </div>
         {:else}
-    
-        {#each data?.agents as agent}
-        <AltaCard>
-          <div class="relative">
-            <div class="w-full">
-              <div>
-                <a href="/agents/{agent.id}">
-                  <div class="flex flex-row gap-2 justify-center items-center">
-                    <div>
-                      <h2 class="text-left ml-2 font-bold text-md">
-                        {agent.name}
-                      </h2>
-                    </div>
-                    <div class="gap-1 flex flex-row ">
-                      {#if agent.public}
-                      <div class="justify-center items-center flex">
-                          <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
-                              PUBLIC
-                          </span>
-                      </div>
-                      {/if}
-                      {#if agent.model === "gpt-4"}
-                      <div class="justify-center items-center flex">
-                          <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
-                              PRO
-                          </span>
-                      </div>
-                      {/if}
-                    </div>
+        <div class="w-full flex flex-col gap-2">
+          {#if publicCount > 0}
+          <div class="">
+            <div class="">
+              <AltaCard>
+                <div class="">
+                  <div class="justify-center items-center flex gap-2">
+                    <h2 class="text-left ml-2 font-bold text-md">
+                      Public
+                    </h2>
                   </div>
-                </a>
+                  <div class="flex flex-row flex-wrap gap-x-4 justify-center gap-y-0 items-center">
+                    {#each data?.agents as agent}
+                    {#if agent.public}
+                    <AltaCard>
+                      <div class="flex flex-row gap-4">
+                        <div class="justify-center items-center flex">
+                          <a href={`/${data?.user?.username}/public/${agent.id}`}>
+                            <h3 class="text-left ml-2 font-bold text-md">
+                              {agent.name}
+                            </h3>
+                            </a>
+                          </div>
+                          <div class="">
+                            <button on:click={copyToClipboard(`${$page.url}${data?.user?.username}/public/${agent.id}`)} class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-10' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z" />
+                              </svg>
+                            </button>
+                          
+                          </div>
+                        </div>
+                      </AltaCard>
+                    {/if}
+                    {/each}
+                  </div>
                 </div>
-              </div>
-              
-      
-              <div>
-                {#each data?.chats as chat}
-                {#if chat.agent === agent.id} 
-                  <a href="/agents/{agent.id}/{chat.id}" class="min-w-[350px] hover:opacity-60 hover:cursor-pointer">
-                    <LiveCard>
-                      <div>
-                        <h1 class="text-true-white text-md text-center">
-                          {chat.title}
-                        </h1>
-                      </div>
-                      <!-- <div class="absolute right-2 bottom-3">
-                        <a href="/">
-                          <button on:click={toggleEditForm(chat.id)} class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-10' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                            </svg>
-                          </button>
-                        </a>
-                      </div> -->
-                      <div class="absolute right-2 bottom-3">
-                        <a href="/agents/{agent.id}/{chat.id}/settings">
-                          <button class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-10' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                            </svg>
-                            
-                          </button>
-                        </a>
-                      </div>
-                    </LiveCard>
-                  </a>
-                  
-                {/if}
-                {/each}
-              </div>
-    
-                <form action="?/createChat" method="POST" class="z-50 justify-center items-center flex">
-                  <input type="text" id="name" value="Astralta" name="name" class="hidden">
-                  <input type="text" id="agentId" value={agent.id} name="agentId" class="hidden"> 
-      
-                  <button type="submit" class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-2xl transition duration-500 ease-in-out">
-                    <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                      </svg>
-                      
-                    </div>
-                    <div class="">
-                      <h1 class="text-true-white text-md text-center justify-center">
-                        New Chat
-                    </h1>
-                    </div>
-                  </button>
-                </form>
-              
+              </AltaCard>
               
             </div>
-         </AltaCard>
-    
+          </div>
+          {/if}
+          <div class="gap-x-6 gap-y-0 flex flex-wrap justify-center items-center">
+            {#each data?.agents as agent}
+              {#if !agent.public}
+              <AltaCard>
+                <div class="relative">
+                  <div class="w-full">
+                    <div>
+                      <a href="/agents/{agent.id}">
+                        <div class="flex flex-row gap-2 justify-center items-center">
+                          <div>
+                            <h2 class="text-left ml-2 font-bold text-md">
+                              {agent.name}
+                            </h2>
+                          </div>
+                          <div class="gap-1 flex flex-row ">
+                            {#if agent.model === "gpt-4"}
+                            <div class="justify-center items-center flex">
+                                <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
+                                    PRO
+                                </span>
+                            </div>
+                            {/if}
+                          </div>
+                        </div>
+                      </a>
+                      </div>
+                    </div>
+                    
+            
+                    <div>
+                      {#each data?.chats as chat}
+                      {#if chat.agent === agent.id} 
+                        <a href="/agents/{agent.id}/{chat.id}" class="min-w-[350px] hover:opacity-60 hover:cursor-pointer">
+                          <LiveCard>
+                            <div>
+                              <h1 class="text-true-white text-md text-center">
+                                {chat.title}
+                              </h1>
+                            </div>
+                            <div class="absolute right-2 bottom-3">
+                              <a href="/agents/{agent.id}/{chat.id}/settings">
+                                <button class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-10' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                  </svg>
+                                  
+                                </button>
+                              </a>
+                            </div>
+                          </LiveCard>
+                        </a>
+                        
+                      {/if}
+                      {/each}
+                    </div>
+          
+                      <form action="?/createChat" method="POST" class="z-50 justify-center items-center flex">
+                        <input type="text" id="name" value="Astralta" name="name" class="hidden">
+                        <input type="text" id="agentId" value={agent.id} name="agentId" class="hidden"> 
+            
+                        <button type="submit" class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-2xl transition duration-500 ease-in-out">
+                          <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            
+                          </div>
+                          <div class="">
+                            <h1 class="text-true-white text-md text-center justify-center">
+                              New Chat
+                          </h1>
+                          </div>
+                        </button>
+                      </form>
+                    
+                    
+                  </div>
+              </AltaCard>
+          
+              {/if}
         {/each}
+
+          </div>
+        </div>
 
         {#if false}
         <AltaCard>

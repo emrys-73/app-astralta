@@ -16,6 +16,10 @@ export const load = async ({ locals, params }) => {
 
         const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(params.agentId))
 
+        if (!agent.public) {
+            throw redirect(303, '/')
+        }
+
         if (!user) {
             console.log("oh no")
         }
@@ -23,7 +27,6 @@ export const load = async ({ locals, params }) => {
         return {
             agent: agent
         }
-
 
     } catch (err) {
         console.log("Error finding User")

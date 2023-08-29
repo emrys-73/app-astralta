@@ -6,9 +6,10 @@
 
     export let data;
 
+
 </script>
 
-<div class="w-full h-full flex justify-center items-center">
+<div class="w-full h-full flex justify-center items-center px-4">
         <AltaCard>
             <div class="flex flex-row pb-2 gap-3">
               <div>
@@ -25,7 +26,7 @@
                 {/if} -->
             </div>
             <div class="md:grid md:grid-cols-6 md:gap-0 flex flex-col justify-center items-center">
-                <div>
+                <!-- <div>
                     <div class="justify-center items-center flex flex-col">
                         {#if data?.agent?.summary}
                         <div>
@@ -35,7 +36,7 @@
                         </div>
                         {/if}
                       </div>
-                </div>
+                </div> -->
                 <div class="col-span-6">
                     <form action="?/createPublicAgent" method="POST" class="justify-center flex ">
 

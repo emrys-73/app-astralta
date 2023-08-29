@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import { error } from "@sveltejs/kit";
+import { bg, back } from "../../stores.js";
 
 export const actions = {
     // System Settings
@@ -70,5 +71,14 @@ export const actions = {
                 throw error(err.status, err.message);
             }
         },
+
+        updateBg: async ({ request, locals }) => {
+            const data = Object.fromEntries(await request.formData());
+
+            console.log(data.bg)
+            back.set(data.bg)
+            
+        
+        }
         
 }

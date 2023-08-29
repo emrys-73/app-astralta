@@ -93,8 +93,38 @@ export const actions = {
         throw redirect(303, `/agents/${data.agentId}/${newChat.id}`)
         
     },
-    pinChat: async ({ request, locals }) => {
 
-        return {}
-    }
+    createPublicChat: async ({ request, locals }) => {
+        const data = Object.fromEntries(await request.formData());
+
+        const chatData = {
+            "title": data.name,
+            "user": locals.user.id,
+            "agent": data.agentId
+        };
+
+        const newChat = await locals.pb.collection('chats').create(chatData);
+
+
+        // get Agent
+        const agent = await locals.pb.collection('agents').getOne(data.agentId);
+
+        const systemTrainingData = {
+            "content": agent.training,
+            "role": "system",
+            "usage": "JSON",
+            "chat": newChat.id,
+            "user": locals.user.id
+        };
+
+        const systemMessage = await locals.pb.collection('messages').create(systemTrainingData);
+        // console.log(systemMessage);
+
+        if (agent.public) {
+            throw redirect(303, `/${locals.user.username}/public/${data.agentId}/${newChat.id}`)    
+        }
+
+        throw redirect(303, `/agents/${data.agentId}/${newChat.id}`)
+        
+    },
 }

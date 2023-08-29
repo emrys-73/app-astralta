@@ -1,12 +1,11 @@
 <script lang='ts'>
 // @ts-nocheck
 	import { AppShell } from '@skeletonlabs/skeleton';
-	import { AppBar } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
 	import { Drawer } from '$lib/components';
-    import { drawerOpen, bg, darkMode, header } from '../stores';
+    import { drawerOpen, bg, darkMode, header, back } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
@@ -29,6 +28,8 @@
 
     let avatarUrl = `https://ui-avatars.com/api/?name=${data?.user?.name}`;
 
+    let backgroundUrl = "/bg/home.png"
+
     onMount(() => {
 
         function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
@@ -46,27 +47,50 @@
             avatarUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar).toString()
         }
 
+        // if (data?.user?.background){
+        //     backgroundUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.background).toString()
+        // }
+
+        // back.set(`bg-[url('${backgroundUrl}'')]`)
+
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
     })
-    
+
+    // let bgImagePath = '/bg/forest.png';
+
+    // $: {
+    // document.body.style.backgroundImage = `url(${bgImagePath})`;
+    // }
 
 </script>
 
-<style>
+<!-- <style>
     :global(body) {
       @apply h-full;
-      background-image: url('/bg/ocean_2.png');
+      background-image: url('/bg/forest.png');
       background-attachment: fixed;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
     }
-  </style>
+  </style> -->
+
+
+  <!-- <style>
+    :global(body) {
+      
+      /* other background properties */
+    }
+  </style> -->
 
 <!-- <AppShell class="bg-[url('/bg/ocean.png')] bg-image"> -->
-<AppShell class="">
+
+
+
+<!-- <AppShell class="bg-[url('{backgroundUrl}')] bg-image"> -->
+<AppShell class="bg-black bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         
@@ -101,7 +125,7 @@
             <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } mx-20">
                 <a href="/">
                     <span class="drop-shadow-md text-md">
-                        {$header}
+                        {$header} {$back}
                     </span>
                 </a>
             </div>
@@ -118,7 +142,6 @@
                 </a>
             </div>
             {/if}
-
 
         </div>
     </div>       

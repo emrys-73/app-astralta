@@ -1,6 +1,6 @@
 <script>
 // @ts-nocheck
-    import { darkMode, gpt4 } from "../../stores";
+    import { darkMode, gpt4, bg, back } from "../../stores";
     import { enhance, applyAction } from '$app/forms';
     import { AltaCard } from "$lib/components";
 
@@ -36,6 +36,27 @@
         loading = false;
       };
     };
+
+
+    const updateBg = (newBg) => {
+        back.update(newBg)
+    }
+
+    const backgrounds = [
+        {
+            "name": "home",
+            "url": "bg-[url('/bg/home.png')]"
+        },
+        {
+            "name": "dubai",
+            "url": "bg-[url('/bg/dubai.png')]"
+        },
+        {
+            "name": "forest",
+            "url": "bg-[url('/bg/forest.png')]"
+        },
+    ]
+
 
 </script>
 
@@ -100,6 +121,83 @@
                 </button>
             </div>
         </a>
+    </AltaCard>
+    <AltaCard>
+        <div>
+            <h3 class="text-true-white text-center font-semibold text-2xl">
+                Background
+            </h3>
+        </div>
+<!-- 
+        <form action="?/changeBg" method="POST">
+            <div class="justify-center items-center flex flex-col">
+                <div class="justify-center items-center flex">
+                    <div class="flex items-center justify-center w-full py-3">
+                        <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-40 text-white rounded-2xl cursor-pointer bg-black bg-opacity-40 px-6">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                </svg>
+                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">JPG or PNG (MAX. 800x400px)</p>
+                            </div>
+                            <input id="dropzone-file" type="file" class="hidden" />
+                        </label>
+                    </div> 
+    
+                </div>
+                <div>
+                    <button type="submit" class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
+                        Change Background
+                    </button>
+                </div>
+            </div>
+        </form> -->
+
+
+        <!-- <div>
+            <button on:click={back.update("bg-[url('/bg/forest.png')]")} class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
+                Forest
+            </button>
+        </div>
+        <div>
+            <button on:click={updateBg("bg-[url('/bg/home.png')]")} class="btn {$darkMode ? 'bg-black bg-opacity-20' : 'bg-gray-300 bg-opacity-10'} ease-in-out duration-700 hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold my-2 btn-sm md:text-md border-none normal-case shadow-xl" disabled={loading}>
+                Home
+            </button>
+        </div>
+
+
+     -->
+     <div class="flex jsutify-center items-center flex-col gap-2 pt-4">
+        <form action="?/updateBg" method="POST">
+            {#each backgrounds as bg}
+            <div class="flex flex-row justify-center items-center gap-2">
+               <div class="">
+                   {#if bg.name === "home"}
+                   <input type="radio" name="bg" value={bg.url} class="bg-black bg-opacity-40" checked>
+                   {:else }
+                       <input type="radio" name="bg" value={bg.url} class="bg-black bg-opacity-40">
+                   {/if}
+               </div>
+               <div class="flex">
+                   <label for="bg">{bg.name}</label>
+               </div>
+           </div>
+            {/each}
+            <div class="pt-2">
+                <button class="btn bg-black my-2 bg-opacity-10 backdrop-blur-xl hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md  border-none normal-case transition ease-in-out duration-300">  
+                    <span>
+                        Set background
+                    </span>
+                </button>
+            </div>
+        </form>
+     </div>
+
+
+
+
+
     </AltaCard>
 
     <form action="/logout" method="POST" class="text-true-white hover:text-true-white">
