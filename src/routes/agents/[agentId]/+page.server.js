@@ -2,16 +2,16 @@
 // @ts-nocheck
 
 import { error, redirect } from '@sveltejs/kit';
-// import { Configuration, OpenAIApi } from 'openai';
-// import { OPENAI_KEY} from '$env/static/private'
+import { Configuration, OpenAIApi } from 'openai';
+import { OPENAI_KEY} from '$env/static/private'
 
 
 
-// const configuration = new Configuration({
-//     apiKey: OPENAI_KEY,
-//   });
+const configuration = new Configuration({
+    apiKey: OPENAI_KEY,
+  });
 
-// const openai = new OpenAIApi(configuration);
+const openai = new OpenAIApi(configuration);
 
 
 
@@ -28,6 +28,39 @@ export const load = async ({ locals, params }) => {
                 expand: 'personality',
             }))
 
+            let summary = ""
+
+            if (!agent.summary) {
+                // console.log("No agent foun")
+                const completion = await openai.createChatCompletion({
+                    model: "gpt-3.5-turbo",
+                    temperature: 0.8,
+                    messages: [{
+                        "role": "system",
+                        "content": agent.training
+                    },
+                    {
+                        "role": "user",
+                        "content": "Summarise your personality and your knowledge in two sentences in a first person view and do not include anything else than the prue description"
+                    }
+                ]
+                })
+
+                summary = completion.data.choices[0].message.content
+
+                const agentData = {
+                    "summary": summary
+                };
+
+                const updatedAgent = await locals.pb.collection('agents').update(agent.id, agentData);
+                console.log(updatedAgent)
+
+
+                // agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(agentId, {
+                //     expand: 'personality',
+                // }))
+
+            }
             // console.log(agent)
 
             // if (agent.training === "") {
@@ -50,6 +83,9 @@ export const load = async ({ locals, params }) => {
             
             // summary = completion.data.choices[0].message.content
             // console.log(summary)
+
+
+
 
             return {
                 agent: agent,
