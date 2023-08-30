@@ -9,6 +9,8 @@
 
   let debugMode = false
 
+  let agentCopied = false;
+
   header.set("Astralta")
 
   let max_chats = 100;
@@ -70,6 +72,7 @@
   async function copyToClipboard(content) {
   try {
     await navigator.clipboard.writeText(content);
+    agentCopied = true
     // ALERT COPIED TO CLIPBOARD
     console.log('Content copied successfully!');
   } catch (error) {
@@ -100,6 +103,14 @@
 
   }
 
+  // setTimeout(() => {
+  //     const toast = document.querySelector('.toast');
+  //     toast.style.display = 'none';
+  //   }, 5000); // 3000 milliseconds = 3 seconds
+
+  setTimeout(() => {
+    agentCopied = false;
+  }, 4000);
 
 
 </script>
@@ -149,7 +160,7 @@
                     {#each data?.agents as agent}
                     {#if agent.public}
                     <AltaCard>
-                      <div class="flex flex-row gap-4">
+                      <div class="flex flex-row gap-2">
                         <div class="justify-center items-center flex">
                           <a href={`/${data?.user?.username}/public/${agent.id}`}>
                             <h3 class="text-left ml-2 font-bold text-md">
@@ -164,6 +175,16 @@
                               </svg>
                             </button>
                           
+                          </div>
+                          <div class="">
+                            <a href="/{data?.user?.username}/public/{agent.id}/settings">
+                              <button class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-10' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                </svg>
+                                
+                              </button>
+                            </a>
                           </div>
                         </div>
                       </AltaCard>
@@ -438,5 +459,13 @@
     {/if}
 
   </div>
+
+  {#if agentCopied}
+    <div class="toast toast-center ">
+      <div class="alert alert-success rounded-2xl bg-green-500">
+        <span>Agent Link copied to Clipboard!</span>
+      </div>
+    </div>
+  {/if}
   
 </div>
