@@ -60,7 +60,7 @@
 
 </script>
 
-<div class="w-full h-full flex flex-col gap-4 justify-center items-center">
+<div class="w-full h-full flex flex-col gap-4 justify-center items-center my-8">
     
     <AltaCard>
         <div>
@@ -122,12 +122,12 @@
             </div>
         </a>
     </AltaCard>
-    <AltaCard>
+    <!-- <AltaCard>
         <div>
             <h3 class="text-true-white text-center font-semibold text-2xl">
                 Background
             </h3>
-        </div>
+        </div> -->
 <!-- 
         <form action="?/changeBg" method="POST">
             <div class="justify-center items-center flex flex-col">
@@ -168,8 +168,8 @@
 
 
      -->
-     <div class="flex jsutify-center items-center flex-col gap-2 pt-4">
-        <form action="?/updateBg" method="POST">
+     <!-- <div class="flex jsutify-center items-center flex-col gap-2 pt-4">
+        <form action="?/updateBg" method="POST" use:enhance>
             {#each backgrounds as bg}
             <div class="flex flex-row justify-center items-center gap-2">
                <div class="">
@@ -192,13 +192,13 @@
                 </button>
             </div>
         </form>
-     </div>
+     </div> -->
 
 
 
 
 
-    </AltaCard>
+    <!-- </AltaCard> -->
 
     <form action="/logout" method="POST" class="text-true-white hover:text-true-white">
         <div class="flex flex-row max-h-[35px]">

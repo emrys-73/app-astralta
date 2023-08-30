@@ -90,7 +90,7 @@
 
 
 <!-- <AppShell class="bg-[url('{backgroundUrl}')] bg-image"> -->
-<AppShell class="bg-black bg-image">
+<AppShell class="{$back} bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         
@@ -125,7 +125,7 @@
             <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } mx-20">
                 <a href="/">
                     <span class="drop-shadow-md text-md">
-                        {$header} {$back}
+                        {$header}
                     </span>
                 </a>
             </div>

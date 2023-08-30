@@ -41,4 +41,4 @@ export const publicUrl = writable("/");
 
 export const bg = writable("forest");
 
-export const back = writable("");
+export const back = writable("bg-[url('/bg/ocean.png')]");
