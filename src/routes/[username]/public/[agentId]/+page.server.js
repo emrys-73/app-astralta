@@ -21,7 +21,7 @@ export const load = async ({ locals, params }) => {
         }
 
         if (!user) {
-            console.log("oh no")
+            throw redirect(303, '/')
         }
 
         return {

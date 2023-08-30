@@ -224,6 +224,25 @@
                       </a>
                       </div>
                     </div>
+
+                    <form action="?/createChat" method="POST" class="z-50 justify-center items-center flex">
+                      <input type="text" id="name" value="Astralta" name="name" class="hidden">
+                      <input type="text" id="agentId" value={agent.id} name="agentId" class="hidden"> 
+          
+                      <button type="submit" class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-2xl transition duration-500 ease-in-out">
+                        <div>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                          </svg>
+                          
+                        </div>
+                        <div class="">
+                          <h1 class="text-true-white text-md text-center justify-center">
+                            New Chat
+                        </h1>
+                        </div>
+                      </button>
+                    </form>
                     
             
                     <div>
@@ -253,24 +272,7 @@
                       {/each}
                     </div>
           
-                      <form action="?/createChat" method="POST" class="z-50 justify-center items-center flex">
-                        <input type="text" id="name" value="Astralta" name="name" class="hidden">
-                        <input type="text" id="agentId" value={agent.id} name="agentId" class="hidden"> 
-            
-                        <button type="submit" class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-60' : 'bg-black bg-opacity-30'} altashadow text-true-white p-4 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-2xl transition duration-500 ease-in-out">
-                          <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            </svg>
-                            
-                          </div>
-                          <div class="">
-                            <h1 class="text-true-white text-md text-center justify-center">
-                              New Chat
-                          </h1>
-                          </div>
-                        </button>
-                      </form>
+                      
                     
                     
                   </div>

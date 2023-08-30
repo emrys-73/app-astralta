@@ -3,6 +3,7 @@
 import { Configuration, OpenAIApi } from 'openai';
 import { OPENAI_KEY} from '$env/static/private'
 import { redirect } from '@sveltejs/kit';
+import { agentData } from '../../stores.js';
 
 
 const configuration = new Configuration({
@@ -12,7 +13,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export const actions = {
-    createAgent: async ({ request, locals }) => {
+    setPersonality: async ({ request, locals }) => {
         const data = Object.fromEntries(await request.formData());
 
         const rawPersonality = await locals.pb.collection('personalities').getOne(data.persoID)
@@ -41,20 +42,26 @@ export const actions = {
           
         let personality = completion.data.choices[0].message.content
 
-        const agentData = {
+
+        const result = {
                 "user": locals.user.id,
                 "name": data.name === "" ? "Astralta Agent" : data.name,
                 "personality": data.persoID,
-                "training": `${naming}${personality}${fine_tune} The following is the knowledge you have. You will base all your conversations only about this: ${data.knowledge}`,
-                // "model": data.pro ? 'gpt-4' : 'gpt-3.5-turbo',
+                "training": `${naming}${personality}${fine_tune} The following is the knowledge you have expertise on. You will base all your conversations only about this:`,
                 "model": 'gpt-3.5-turbo',
                 "public": data.publicAI,
                 "CTA_name": data.cta_name === '' ? undefined : data.cta_name,
                 "CTA_URL": data.cta_url === '' ? undefined : data.cta_url,
-                // "summary": summary,
             };
 
-        const newAgent = await locals.pb.collection('agents').create(agentData);
+        // console.log(result)
+
+        agentData.set(result);
+
+        throw redirect(303, '/create/agent')
+
+        
+        // const newAgent = await locals.pb.collection('agents').create(agentData);
 
 
         // const training = `${naming}${personality}${fine_tune} You will base the entire conversation ONLY about thefollowing content. Your goal is to work only with the provided knowledge. [Content]: ${data.knowledge}`;

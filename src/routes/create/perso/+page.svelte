@@ -1,6 +1,18 @@
 <script>
     import { LiveCard, AltaCard, InfoModal } from "$lib/components";
-    import { darkMode } from "../../../stores";
+	import { onDestroy, onMount } from "svelte";
+    import { darkMode, header } from "../../../stores";
+
+
+    onMount(() => {
+        header.set("New Personality")
+    })
+
+    onDestroy(() => {
+        header.set("Astralta")
+    })
+
+
 
     // export let data
 
@@ -17,13 +29,13 @@
 
 </script>
 
-<div class="w-full h-full text-true-white">
-    <div class="flex justify-center items-center my-20 flex-col">
-        <div>
+<div class="w-full h-full text-true-white mt-20 ">
+    <div class="flex justify-center items-center flex-col">
+        <!-- <div>
             <h1 class="text-xl text-center font-bold">
                 New Personality
             </h1>
-        </div>
+        </div> -->
         <form action="?/createPersonality" method="POST" class="w-full px-4 md:w-3/4 py-2">
             <div class="w-full">
                 <AltaCard>

@@ -42,3 +42,6 @@ export const publicUrl = writable("/");
 export const bg = writable("forest");
 
 export const back = writable("bg-[url('/bg/ocean.png')]");
+
+// This is a temp store while creating the agent to balance the workload
+export const agentData = writable();

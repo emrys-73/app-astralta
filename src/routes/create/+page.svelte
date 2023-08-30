@@ -1,6 +1,7 @@
 <script>
     // @ts-nocheck
         import { AltaCard } from "$lib/components";
+        import { onDestroy, onMount } from "svelte";
         import { darkMode } from "../../stores";
         import { SlideToggle } from '@skeletonlabs/skeleton';
 
@@ -9,6 +10,15 @@
         let proMode = false;
         let publicAI = false;
 
+        onMount(() => {
+            header.set("New AI")
+        })
+
+        onDestroy(() => {
+            header.set("Astralta")
+        })
+
+        
     </script>
 
 
@@ -23,7 +33,7 @@
         </div>
     
         <!-- Form -->
-        <form action="?/createAgent" method="POST">
+        <form action="?/setPersonality" method="POST">
             <div class="px-4 lg:px-20 xl:px-40">
                 <AltaCard>
                     <input type="text" id="name" name="name" placeholder="Name" class="bg-black bg-opacity-20 rounded-full min-w-[350px] apple-input my-2 mt-4">
@@ -106,19 +116,16 @@
                    
                 </AltaCard> -->
                 
-                <AltaCard>
+                <!-- <AltaCard>
                     <div>
                         <h2 class="font-bold text-xl">
                             Knowledge
                         </h2>
                     </div>
 
-                    <!-- <input type="text" id="knowledge" name="knowledge" placeholder="" class="bg-black bg-opacity-20 rounded-2xl apple-input w-3/4 mt-4"> -->
                     <textarea id="knowledge" name="knowledge" class="bg-black w-3/4 my-4 h-full min-h-[100px] bg-opacity-30 rounded-2xl" ></textarea>
 
-
-
-                </AltaCard>
+                </AltaCard> -->
     
                 <div class="flex flex-col justify-center items-center my-2">
                     <button type="submit" class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-60'} altashadow text-true-white p-2 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-full transition duration-300 ease-in-out">
@@ -127,7 +134,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
                               </svg>                          
                           <h1 class="text-true-white text-lg text-center">
-                            Create AI
+                            Set Personality
                         </h1>
                         </div>
                     </button>

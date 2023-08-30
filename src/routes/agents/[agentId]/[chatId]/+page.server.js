@@ -36,8 +36,7 @@ export const load = ({ locals, params }) => {
             throw error(err.status, err.message)
         }
     };
-
-    // console.log(getMessages(params.chatId))
+    
 
     return {
         chat: getChat(params.chatId),
