@@ -58,7 +58,7 @@
 </script>
 
 
-<div class="w-full h-full flex justify-center items-center px-4 my-12 mx-4">
+<div class="w-full h-full flex justify-center items-center px-4 my-12 mx-4 md:mx-20 lg:mx-40 xl:mx-60">
     <AltaCard>
         <div>
             <h3 class="text-true-white text-center font-semibold text-xl">
