@@ -110,7 +110,7 @@
 
   setTimeout(() => {
     agentCopied = false;
-  }, 4000);
+  }, 5000);
 
 
 </script>
@@ -176,7 +176,7 @@
                             </button>
                           
                           </div>
-                          <div class="">
+                          <!-- <div class="">
                             <a href="/{data?.user?.username}/public/{agent.id}/settings">
                               <button class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-10' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -185,7 +185,7 @@
                                 
                               </button>
                             </a>
-                          </div>
+                          </div> -->
                         </div>
                       </AltaCard>
                     {/if}
@@ -465,7 +465,7 @@
   {#if agentCopied}
     <div class="toast toast-center ">
       <div class="alert alert-success rounded-2xl bg-green-500">
-        <span>Agent Link copied to Clipboard!</span>
+        <span>AI Link copied to Clipboard!</span>
       </div>
     </div>
   {/if}

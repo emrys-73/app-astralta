@@ -22,10 +22,12 @@
         displayDeleteConfirmation = false;
     }
 
+    let summaryMessage = data?.agent?.summary ? 'Regenerate Summary' : 'Generate Summary'
+
 </script>
 
 <div class="w-full h-full justify-center items-center flex px-4">
-    <div class=" py-20 md:w-3/4 xl:w-1/2">
+    <div class=" py-20 md:w-3/4 xl:w-3/4">
         <AltaCard>
             <div class="flex flex-row pb-2 gap-3">
               <div>
@@ -48,10 +50,20 @@
                         <a href="/agents/{data.agent.id}/{chat.id}">
                             <div class="">
                                 <LiveCard>
-                                    <div class="justify-center items-center text-center">
-                                        <span class="text-center">
+                                    <div class="justify-center items-center text-center flex">
+                                        <span class="text-center px-16">
                                             {chat.title}
                                         </span>
+                                    </div>
+                                    <div class="absolute right-2 bottom-3">
+                                      <a href="/agents/{data?.agent.id}/{chat.id}/settings">
+                                        <button class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-10' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                          </svg>
+                                          
+                                        </button>
+                                      </a>
                                     </div>
                                 </LiveCard>
                             </div>
@@ -82,19 +94,27 @@
                 <div class="col-span-4 justify-center items-center flex flex-col">
                     <div class="justify-center items-center flex flex-col">
                       {#if data?.agent?.summary}
-                      <div>
-                          <div class="bg-black bg-opacity-20 rounded-2xl backdrop-blur-md text-center p-4">
+                      <div class="py-4 sm:py-0">
+                          <div class="bg-black bg-opacity-20 rounded-2xl backdrop-blur-md text-center p-4 mb-4">
                               {data?.agent.summary}
                           </div>
                       </div>
+                      
                       {/if}
-                        <div class="pt-4">
+                      <div class="justify-center flex items-center flex-row gap-2 w-full">
+                        <a href={`/create/${data.agent.id}`}>
+                          <div class="">
+                            <button class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-5' } text-md px-4 py-1 rounded-full hover:bg-white hover:bg-opacity-10 transition ease-in-out duration-500">
+                              {summaryMessage}
+                            </button>
+                          </div>
+                        </a>
+                        <div class="">
                             <button on:click={showConfirmDelete(data.agent.id)} class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-5' } text-md px-4 py-1 rounded-full hover:bg-red-600 hover:bg-opacity-100 transition ease-in-out duration-500">
                               Delete AI
                             </button>
                         </div>
-    
-    
+                      </div>
                     </div>
                 </div>
                 

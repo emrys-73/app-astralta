@@ -30,11 +30,15 @@ export const actions = {
             "fine_tune": data.fine_tune ? data.fine_tune : "",
         };
 
+        
+
         // console.log(personalityData)
 
         const newPersonality = await locals.pb.collection('personalities').create(personalityData);
         console.log(newPersonality)
 
         throw redirect(303, '/create')
-    }
+    },
+
+    
 }

@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 
-import { redirect } from '@sveltejs/kit'
+import { redirect, error } from '@sveltejs/kit'
 import { publicUrl } from '../../../../stores.js';
 
 const serializeNonPOJOs = (/** @type {any} */ obj) => {
@@ -12,7 +12,7 @@ const serializeNonPOJOs = (/** @type {any} */ obj) => {
 
 export const load = async ({ locals, params }) => {
     try {
-        const user = await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`);
+        const user = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
 
         const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(params.agentId))
 
@@ -24,7 +24,11 @@ export const load = async ({ locals, params }) => {
             throw redirect(303, '/')
         }
 
+        const thereIsAnUser = locals.user ? true : false;
+
         return {
+            user: user,
+            thereIsAnUser: thereIsAnUser,
             agent: agent
         }
 
@@ -89,5 +93,18 @@ export const actions = {
             throw redirect(303, `${pUrl}`)
 
         }
-    }
+    },
+
+    deletePublicAgent: async ({ request, locals, params }) => {
+
+        try {
+            await locals.pb.collection('agents').delete(params.agentId);   
+
+        } catch (err) {
+            console.log("Error: ", err)
+            throw error(err.status, err.message)
+        }
+
+        throw redirect(303, '/')
+    },
 }

@@ -2,25 +2,29 @@
 // @ts-nocheck
 
 import { redirect } from "@sveltejs/kit";
-import { agentData } from "../../../stores"
+import { newAgentData } from "../../../stores"
 
 
 export const load = async () => {
     let localAgentData = {};
 
-    agentData.subscribe((value) => {localAgentData = value})
+    newAgentData.subscribe((value) => {localAgentData = value})
 
     return {
         agentData: localAgentData
     }
 }
 
+const serializeNonPOJOs = (/** @type {any} */ obj) => {
+    return structuredClone(obj)
+};
+
 export const actions = {
     createAgent: async ({ request, locals }) => {
         const data = Object.fromEntries(await request.formData());
 
         let localAgentData;
-        agentData.subscribe((value) => {localAgentData = value})
+        newAgentData.subscribe((value) => {localAgentData = value})
 
         console.log(localAgentData)
 
@@ -28,7 +32,7 @@ export const actions = {
         localAgentData.training = `${localAgentData.training} '''${data.knowledge}'''`
 
 
-        const user = await locals.pb.collection('users').getOne(localAgentData.user);
+        const user = serializeNonPOJOs(await locals.pb.collection('users').getOne(localAgentData.user))
 
 
         console.log(user.username)

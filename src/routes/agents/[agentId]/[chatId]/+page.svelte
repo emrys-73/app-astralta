@@ -1,10 +1,18 @@
 <script>
-    // @ts-nocheck
+  
+  // @ts-nocheck
+	      import { onMount, onDestroy } from 'svelte';
         import { darkMode, header } from '../../../../stores.js';
         import { useChat } from "ai/svelte";
         export let data
 
-        header.set(data?.chat?.title)
+        onMount(() => {
+          header.set(data?.chat?.title)
+        })
+
+        onDestroy(() => {
+          header.set("Astralta")
+        })
     
         let debugMode = false;
     
@@ -24,8 +32,9 @@
 
     
         const copyToClipboard = () => {
-            navigator.clipboard.writeText($messages[$messages.length - 1].content);
-          }
+          navigator.clipboard.writeText($messages[$messages.length - 1].content);
+          messageCopied = true;
+        }
     
     
         const formatMessages = ( msgs ) => {
@@ -130,6 +139,31 @@
     
           $: rows = message.length > 0 ? Math.min(Math.ceil(message.length / 100), MAX_ROWS) : 1;
           $: rounded = rows > 1 ? "rounded-lg" : "rounded-full";
+
+
+          // let titleChatOptions = {
+          //   api: "/x-engine/title",
+          //   initialMessages: formatMessages(data.messages),
+          //   onFinish: () => {
+          //     error = false;
+          //     thisMsgCount = thisMsgCount + 1;
+          //     ideaInput.set($messages[$messages.length - 1].content)
+          //     storeMessage(data.chat.id, $messages[$messages.length - 2].content, $messages[$messages.length - 1].content)
+          //   },
+          //   onError: () => {
+          //     error = true;
+          //   }
+          // }
+
+
+          let messageCopied = false;
+
+
+
+          setTimeout(() => {
+            messageCopied = false;
+          }, 3000);
+
     
     </script>
     
@@ -193,7 +227,7 @@
                 </button> -->
       
                 <!-- Keep writing -->
-                <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={loadMore} disabled={msgcount === 1}>
+                <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={loadMore} disabled={$messages.length < 2 || $isLoading}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062A1.125 1.125 0 013 16.81V8.688zM12.75 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062a1.125 1.125 0 01-1.683-.977V8.688z" />
                   </svg>
@@ -232,7 +266,7 @@
                 </form> -->
       
                 <!-- Copy to Clipboard -->
-                <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={copyToClipboard} disabled={msgcount === 1}>
+                <button class="btn btn-sm bg-black bg-opacity-40 border-none rounded-full hover:bg-white hover:bg-opacity-10 text-white font-normal normal-case content-center" on:click={copyToClipboard} disabled={$messages.length < 2 || $isLoading}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
                   </svg>
@@ -275,5 +309,14 @@
             <!-- Input area end -->
 
         </div>
+
+        {#if messageCopied}
+          <div class="toast toast-center ">
+            <div class="alert alert-success rounded-2xl bg-green-500 mb-32">
+              <span class="text-white">Last response copied to Clipboard!</span>
+            </div>
+          </div>
+        {/if}
+        
     </div>
     

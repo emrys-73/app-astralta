@@ -3,7 +3,7 @@
 
     import { AltaCard, LiveCard } from "$lib/components";
 	import { onDestroy, onMount } from "svelte";
-    import { darkMode, header, agentData } from "../../../stores.js";
+    import { darkMode, header, newAgentData } from "../../../stores.js";
     import { SlideToggle } from '@skeletonlabs/skeleton';
 
     export let data
@@ -12,7 +12,7 @@
     let publicAI = false;
 
     onMount(() => {
-        header.set(`Training ${data?.agentData?.name}`)
+        header.set(`Training`)
     })
 
     onDestroy(() => {

@@ -1,5 +1,17 @@
 <script>
     import { LiveCard } from "$lib/components";
+    import { onMount, onDestroy } from "svelte";
+    import { header } from "../../stores";
+
+
+    onMount(() => {
+        header.set("Astralta")
+    })
+    
+    onDestroy(() => {
+        header.set("Astralta")
+    })
+
 </script>
 
 <div class="h-full text-center text-true-white content-center flex justify-center items-center mx-6">
