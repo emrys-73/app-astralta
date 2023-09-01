@@ -250,7 +250,7 @@
                       {#if chat.agent === agent.id} 
                         <a href="/agents/{agent.id}/{chat.id}" class="min-w-[350px] hover:opacity-60 hover:cursor-pointer">
                           <LiveCard>
-                            <div>
+                            <div class="max-w-[500px] max-h-12 overflow-x-auto mx-12">
                               <h1 class="text-true-white text-md text-center">
                                 {chat.title}
                               </h1>
