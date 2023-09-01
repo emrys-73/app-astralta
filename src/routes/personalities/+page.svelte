@@ -24,7 +24,8 @@
 
 </script>
 
-<div class="w-full h-full flex justify-center items-center lg:gap-4 lg:flex-row flex-col">
+<div class="w-full h-full flex justify-center items-center gap-x-4 flex-row my-12 px-4 lg:px-24">
+  <div class="flex flex-wrap justify-center gap-y-0 gap-x-2">
     {#each data.personalities as perso}
     <AltaCard>
         {#if perso.created_by === data.user.id }
@@ -45,6 +46,7 @@
     </AltaCard>
 
     {/each}
+  </div>
 
     {#if displayDeleteConfirmation}
     <InfoModal>

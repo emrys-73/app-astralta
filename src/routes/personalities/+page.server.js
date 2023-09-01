@@ -9,13 +9,19 @@ export const load =  async ({ locals }) => {
     };
 
     const personalities = serializeNonPOJOs(await locals.pb.collection('personalities').getFullList({
-        sort: '+created',
-    }))
+        sort: '-updated',
+        filter: `created_by="${locals.user.id}"`
+    }));
+
+    const defaultPersonalities = serializeNonPOJOs(await locals.pb.collection('personalities').getFullList({
+        sort: '-updated',
+        filter: `created_by="0d4sgup0fhmau4p"`
+    }));
 
     // console.log(personalities)
 
     return {
-        personalities: personalities
+        personalities: [...defaultPersonalities, ...personalities]
     }
 }
 

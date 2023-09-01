@@ -37,8 +37,8 @@ export const actions = {
         const newPersonality = await locals.pb.collection('personalities').create(personalityData);
         console.log(newPersonality)
 
-        throw redirect(303, '/create')
+        throw redirect(303, `/create/perso/${newPersonality.id}`)
     },
 
-    
+
 }

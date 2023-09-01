@@ -1,8 +1,7 @@
 <script>
 // @ts-nocheck
 
-    import { AltaCard } from "$lib/components";
-	import LiveCard from "$lib/components/LiveCard.svelte";
+    import { AltaCard, LiveCard } from "$lib/components";
     import { darkMode, header } from "../../../stores.js";
     import { useChat } from "ai/svelte";
     import { onDestroy, onMount } from "svelte";
@@ -46,9 +45,6 @@
     $: summary = ""
 
 </script>
-
-
-<!-- http://localhost:5173/create/c8v3ij66atxvrxx -->
 
 <div class="w-full h-full flex justify-center items-center px-4">
     <AltaCard>
