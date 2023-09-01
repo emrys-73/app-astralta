@@ -4,10 +4,15 @@
 	      import { onMount, onDestroy } from 'svelte';
         import { darkMode, header } from '../../../../stores.js';
         import { useChat } from "ai/svelte";
+	    import AltaCard from '$lib/components/AltaCard.svelte';
         export let data
 
+        let firstTraining = `[AI training]: ${data?.agent.training}.`;
+
         onMount(() => {
-          header.set(data?.chat?.title)
+          header.set(data?.chat.title)
+          // titleInput.set(`[AI training]: ${data?.agent.training}.`)
+          // $titleInput.set(`${data?.agent.id}`)
         })
 
         onDestroy(() => {
@@ -71,15 +76,6 @@
     
             const result = await response.json()
         }
-
-        const { messages: titleMsg, handleSubmit: titleSubmit, input: titleInput, reload: reloadTitle, isLoading: titleLoading } = useChat({
-            api: "/x-engine/title",
-            initialMessages: [{"role": "system", "content": "Your task is to reply with just one short title in a short sentence that is best suitable for the following message interaction with an user and an AI."}],
-            onFinish: () => {
-
-              // updateTitle on DB
-            }
-          });
     
     
         // Helper function created to see what the message storage sends
@@ -103,6 +99,10 @@
               thisMsgCount = thisMsgCount + 1;
               ideaInput.set($messages[$messages.length - 1].content)
               storeMessage(data.chat.id, $messages[$messages.length - 2].content, $messages[$messages.length - 1].content)
+              // if ($messages.length === 3) {
+              //   firstTraining = firstTraining + `[firstMessage]: ${$messages[$messages.length - 2].content}`
+              //   $titleInput.set(firstTraining)
+              // }
             },
             onError: () => {
               error = true;
@@ -110,6 +110,23 @@
           }
     
           const { messages, handleSubmit, input, isLoading, reload, stop, setMessages } = useChat(chatOptions);
+
+
+          let titleChatOptions = {
+            api: "/x-engine/title",
+            initialMessages: [
+              {
+                "role": "system",
+                "content": "Your task is to analyse the given description of an AI Model and the first message provided to it in order to generate a coherent title that describes the chat at hand."
+              }
+            ],
+            onFinish: () => {
+              console.log("Finished")
+              header.set($titleMsgs[$titleMsgs.length - 1].content)
+            },
+          }
+
+          const { messages: titleMsgs, handleSubmit: titleHandleSubmit, input: titleInput, isLoading: titleIsLoading, reload: titleReload, stop: titleStop, setMessages: titleSetMessages } = useChat(titleChatOptions);
         
     
           const { messages: ideaMsgs, handleSubmit: ideaSubmit, input: ideaInput, reload: reloadIdea, isLoading: ideaLoading } = useChat({
@@ -254,6 +271,25 @@
                   </button>
                 </form>
                 {/if}
+
+                <!-- <div>
+                  <AltaCard>
+                    This is the thing
+                    {#each $titleMsgs as msg}
+
+                      <span>
+                        {msg.role}: {msg.content}
+                      </span>
+                    {/each}
+
+                    <form on:submit={titleHandleSubmit}>
+                      <input bind:value={$titleInput}/>
+                      <button type="submit">
+                        Submit
+                      </button>
+                    </form>
+                  </AltaCard>
+                </div> -->
 
                 <!-- Title generation -->
                 <!-- <form on:submit={titleSubmit}>

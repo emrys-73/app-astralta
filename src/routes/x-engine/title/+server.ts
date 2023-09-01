@@ -11,7 +11,7 @@ const config = new Configuration({
 const openai = new OpenAIApi(config);
 
 
-export const POST: RequestHandler = async ({ request })  => {
+export const POST: RequestHandler = async ({ request, locals })  => {
 
     const { messages } = await request.json();
     
@@ -26,5 +26,7 @@ export const POST: RequestHandler = async ({ request })  => {
     const stream = OpenAIStream(response)
 
     return new StreamingTextResponse(stream)
+
+    
     }    
 
