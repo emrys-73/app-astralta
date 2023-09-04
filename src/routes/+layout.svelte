@@ -90,7 +90,8 @@
 
 
 <!-- <AppShell class="bg-[url('{backgroundUrl}')] bg-image"> -->
-<AppShell class="{$back} bg-image">
+<!-- <AppShell class="{$back} bg-image"> -->
+<AppShell class="{$darkMode ? 'bg-[#131313]' : 'bg-[#c7c7c7]'} bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         
