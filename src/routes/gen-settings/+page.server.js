@@ -1,7 +1,37 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-import { error } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
 import { bg, back } from "../../stores.js";
+
+
+export const load = ({ locals }) => {
+
+    if (!locals.user) {
+        throw redirect(303, '/')
+    }
+
+    const serializeNonPOJOs = (/** @type {any} */ obj) => {
+        return structuredClone(obj)
+    };
+    
+
+    const getUser = async (userId) => {
+        try {
+            const user = serializeNonPOJOs(await locals.pb.collection('users').getOne(userId));
+
+            return user;
+        } catch (err) {
+            console.log("Whoops")
+        }
+    }
+    
+
+    return {
+        uesr: getUser(locals.user.id)
+    }
+
+
+}
 
 export const actions = {
     // System Settings
@@ -79,6 +109,26 @@ export const actions = {
             back.set(data.bg)
             
         
+        },
+
+        updateBaseData: async ({ request, locals }) => {
+            const data = Object.fromEntries(await request.formData());
+
+            console.log(data)
+
+            // try {
+            //     const { baseData } = await locals.pb
+            //                 .collection('users')
+            //                 .update(locals.user.id, { baseData: data.baseData });
+                        
+            //             return {
+            //                 success: true
+            //             };
+            // } catch (err) {
+            //     console.log('Error: ', err);
+            //     throw error(err.status, err.message);
+            // }
+
         }
         
 }

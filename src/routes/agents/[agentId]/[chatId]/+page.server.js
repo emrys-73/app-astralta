@@ -58,13 +58,20 @@ export const load = ({ locals, params }) => {
 }
 
 
-export const actions = {
-    updateTitle: async ({ request, locals }) => {
+// export const actions = {
+//     updateTitle: async ({ request, locals }) => {
 
-        const data = Object.fromEntries(await request.formData());
+//         const data = Object.fromEntries(await request.formData());
 
 
+//         const titleData = {
+//             "title": "test",
+//             "user": "RELATION_RECORD_ID",
+//             "agent": "RELATION_RECORD_ID"
+//         };
+        
 
-        return {}
-    }
-}
+
+//         return {}
+//     }
+// }

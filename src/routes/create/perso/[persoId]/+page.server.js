@@ -13,6 +13,8 @@ export const load = async ({ locals, params }) => {
 
     const perso = serializeNonPOJOs(await locals.pb.collection('personalities').getOne(params.persoId))
 
+    // console.log(perso)
+
     return {
         perso: perso
     }
