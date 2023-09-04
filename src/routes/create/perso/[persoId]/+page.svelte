@@ -16,11 +16,14 @@
             optimism: data.perso.optimism, 
             politeness: data.perso.politeness, 
             tone: [`'${data.perso.tone}'`] 
-        } )
+        } ) + `The following is a fine tuned description of your personality which you should consider as part of the personality: ''' ${data?.perso?.fine_tune} '''`
     }
+
+    let summaryInput;
 
     onMount(() => {
         header.set(data?.perso.name)
+        summaryInput = getPersoJSON();
         input.set(getPersoJSON())
     })
 
@@ -89,6 +92,7 @@
                             Generate personality instructions
                         </LiveCard>
     
+                        <!-- {summaryInput} -->
                       </button>
                     </form>
                     {/if}
