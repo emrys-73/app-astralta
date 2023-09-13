@@ -27,7 +27,7 @@ export const load = ({ locals }) => {
     
 
     return {
-        uesr: getUser(locals.user.id)
+        user: getUser(locals.user.id)
     }
 
 

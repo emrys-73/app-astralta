@@ -5,5 +5,6 @@ import Input from './Input.svelte';
 import AltaCard from './AltaCard.svelte';
 import Button from './Button.svelte'
 import Modal from "./Modal.svelte";
+import ActionBar from "./ActionBar.svelte";
 
-export { Drawer, InfoModal, LiveCard, Input, AltaCard, Button, Modal }
+export { Drawer, InfoModal, LiveCard, Input, AltaCard, Button, Modal, ActionBar }
