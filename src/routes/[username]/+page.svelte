@@ -16,7 +16,7 @@
     </div>
 
     <!-- user tag and image -->
-    <div class="fixed top-40 left-12 flex flex-row justify-center items-center z-40">
+    <div class="fixed top-40 md:left-12 left-4 flex flex-row justify-center items-center z-40">
         <!-- Avatar -->
         <div class="">
             <button class="btn border-none bg-transparent hover:bg-transparent mx-1 active:border-none avatar w-18 p-2">
