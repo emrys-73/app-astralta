@@ -48,10 +48,42 @@
       agentCopied = false;
     }, 5000);
 
+    let coversLength = data?.covers.length;
 
+
+    function random(max) {
+      return Math.floor(Math.random() * (max + 1));
+    }
+
+    let bgUrl = data.agent.cover ? data.agent.cover_url : data?.covers[random(coversLength)].url
 
 </script>
 
+
+<div class="w-full h-full relative justify-center flex items-center flex-col">
+  <img src={bgUrl} alt="bg" class="w-full h-full cover blur-2xl absolute z-10">
+  
+  <div class="z-30">
+    <div class="relative">
+      <img src={bgUrl} alt="bg" class=" w-96 h-96 z-40 altashadow ">
+
+      <div class="text-white text-3xl font-semibold text-center mt-8">
+        {data?.agent?.name}
+      </div>
+      <div class="text-center text-gray-400 text-md">
+          by <a href={`/${data?.user?.username}`} class=" hover:text-white">
+            @{data?.user.username}
+          </a>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<!-- 
 <div class="w-full h-full flex justify-center items-center px-4">
         <AltaCard>
             <div class="flex flex-row gap-3">
@@ -60,26 +92,8 @@
                     {data?.agent.name}
                 </h1>
               </div>
-              <!-- {#if data?.agent.model === "gpt-4"}
-                <div class="justify-center items-center flex">
-                  <span class="rounded-2xl bg-black bg-opacity-50 px-4 text-xs py-1">
-                      PRO
-                  </span>
-                </div>
-                {/if} -->
             </div>
             <div class="md:grid md:grid-cols-6 md:gap-0 flex flex-col justify-center items-center">
-                <!-- <div>
-                    <div class="justify-center items-center flex flex-col">
-                        {#if data?.agent?.summary}
-                        <div>
-                            <div class="bg-black bg-opacity-20 rounded-2xl backdrop-blur-md text-center p-2">
-                                {data?.agent.summary}
-                            </div>
-                        </div>
-                        {/if}
-                      </div>
-                </div> -->
                 <div class="col-span-6">
                     <form action="?/createPublicAgent" method="POST" class="justify-center flex ">
 
@@ -94,7 +108,6 @@
                           <h1 class="text-true-white text-md text-center">
                             Start Chat
                         </h1>
-                        <!-- {$publicUrl} -->
                         </div>
                       </button>
                     </form>
@@ -128,36 +141,9 @@
                           
                         </button>
                       </div>
-
-                      
-                        <!-- <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 px-4 transition-all duration-500 ease-in-out">
-                          Go back home
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                        </svg>
-                         -->
-                         
                     </div>
                     {/if}
                 </div>
-                
-                <!-- <div class="col-span-4 justify-center items-center flex flex-col">
-                    <div class="justify-center items-center flex flex-col">
-                      {#if data?.agent?.summary}
-                      <div>
-                          <div class="bg-black bg-opacity-20 rounded-2xl backdrop-blur-md text-center p-4">
-                              {data?.agent.summary}
-                          </div>
-                      </div>
-                      {/if}
-    
-    
-                    </div>
-                </div>
-                
-                
-            </div> -->
         </AltaCard>
 
         {#if displayDeleteConfirmation}
@@ -199,4 +185,4 @@
             </div>
           </div>
         {/if}
-</div>
+</div> -->

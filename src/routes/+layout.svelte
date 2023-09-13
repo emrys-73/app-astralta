@@ -26,26 +26,26 @@
     //     drawerOpen.update((state) => !state)
     // }
 
-    let avatarUrl = `https://ui-avatars.com/api/?name=${data?.user?.name}`;
+    // let avatarUrl = `https://ui-avatars.com/api/?name=${data?.user?.name}`;
 
     let backgroundUrl = "/bg/home.png"
 
     onMount(() => {
 
-        function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
-            if (event.metaKey && event.key === 'x') {
-                toggleDrawer()
-            }
-            if (event.ctrlKey && event.key === 'x') {
-                toggleDrawer()
-            }
-        }
+        // function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
+        //     if (event.metaKey && event.key === 'x') {
+        //         toggleDrawer()
+        //     }
+        //     if (event.ctrlKey && event.key === 'x') {
+        //         toggleDrawer()
+        //     }
+        // }
 
         window.addEventListener('keydown', handleKeyDown);
 
-        if (data?.user?.avatar) {
-            avatarUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar).toString()
-        }
+        // if (data?.user?.avatar) {
+        //     avatarUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar).toString()
+        // }
 
         // if (data?.user?.background){
         //     backgroundUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.background).toString()
@@ -64,6 +64,8 @@
     // document.body.style.backgroundImage = `url(${bgImagePath})`;
     // }
 
+    let username = data.user ? data.user.username : '/'
+    
 
     const actionIslandItems = [
         {
@@ -89,7 +91,7 @@
         },
         {
             title: 'Profile',
-            href: `/${data.user.username}`,
+            href: `/${username}`,
             icon: {
                     "d" : "M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z",
                 }
@@ -105,27 +107,6 @@
     ]
 
 </script>
-
-<!-- <style>
-    :global(body) {
-      @apply h-full;
-      background-image: url('/bg/forest.png');
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-  </style> -->
-
-
-  <!-- <style>
-    :global(body) {
-      
-      /* other background properties */
-    }
-  </style> -->
-
-<!-- <AppShell class="bg-[url('/bg/ocean.png')] bg-image"> -->
 
 
 

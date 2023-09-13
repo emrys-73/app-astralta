@@ -4,6 +4,7 @@
 
 import { redirect, error } from '@sveltejs/kit'
 import { publicUrl } from '../../../../stores.js';
+import { getImageURL } from '$lib/utils.js';
 
 const serializeNonPOJOs = (/** @type {any} */ obj) => {
     return structuredClone(obj)
@@ -16,6 +17,13 @@ export const load = async ({ locals, params }) => {
 
         const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(params.agentId))
 
+        const covers = serializeNonPOJOs(await locals.pb.collection('covers').getFullList());
+
+
+        for (let i = 0; i < covers.length; i++) {
+            covers[i].url = getImageURL(covers[i].collectionId, covers[i].id, covers[i].cover)
+        }
+
         if (!agent.public) {
             throw redirect(303, '/')
         }
@@ -24,12 +32,17 @@ export const load = async ({ locals, params }) => {
             throw redirect(303, '/')
         }
 
+        agent.cover_url = getImageURL(agent.collectionId, agent.id, agent.cover)
+
+        // console.log(agent)
+
         const thereIsAnUser = locals.user ? true : false;
 
         return {
             user: user,
             thereIsAnUser: thereIsAnUser,
-            agent: agent
+            agent: agent,
+            covers: covers
         }
 
     } catch (err) {

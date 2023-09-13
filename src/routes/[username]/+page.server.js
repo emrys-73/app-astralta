@@ -16,10 +16,10 @@ export const load = async ({ locals, params }) => {
         loggedIn = true;
     }
 
-    const getPublicAI = async (userId) => {
+    const getPublicAI = async () => {
         try {
             const agents = serializeNonPOJOs(await locals.pb.collection('agents').getFullList({
-                sort: '-created',
+                filter: 'public = true ',
             }));
 
             return agents;
@@ -29,21 +29,32 @@ export const load = async ({ locals, params }) => {
 
     }
 
-    const getUser = async (userId) => {
+    const getData = async () => {
         try {
-            const user = serializeNonPOJOs(await locals.pb.collection('users').getOne(userId));
 
-            return user;
+            const user = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
+            
+
+            const agents = serializeNonPOJOs(await locals.pb.collection('agents').getFullList({
+                filter: `public = true && user = "${user.id}"`,
+            }));
+
+            // console.log(agents)
+
+            return {
+                user: user,
+                loggedIn: loggedIn,
+                agents: agents
+            }
+
         } catch (err) {
             console.log("Whoops")
+            throw redirect(303, '/')
         }
     }
     
 
-    return {
-        user: getUser(locals.user.id),
-        loggedIn: loggedIn
-    }
+    return getData()
 
 }
 
