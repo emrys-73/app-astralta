@@ -189,7 +189,7 @@
         </div>
           {#each data.agents as ai}
                {#if ai.public}
-                  <a href={`/${data.user.username}/public/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 flex-row flex items-center">
+                  <a href={`/${data.user.username}/public/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 flex-row flex items-center relative">
                       <span class="">
                           {ai.name}
                       </span>

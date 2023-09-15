@@ -64,9 +64,11 @@
     </div>
 
     <div class="my-4 max-h-32 overflow-y-auto p-3 px-6 bg-white bg-opacity-10 rounded-2xl md:w-3/4 backdrop-blur-md">
+      {#if data?.agent?.summary}
       <span class="text-white justify-center text-center items-center flex">
         {data?.agent?.summary}
       </span>
+      {/if}
     </div>
 
     <div class="flex flex-row w-3/4 justify-center items-center gap-6 my-4">
