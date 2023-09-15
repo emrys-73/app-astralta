@@ -36,10 +36,10 @@
 </script>
 
 <div class="w-full h-full relative justify-center flex items-center flex-col mb-24">
-  <img src={bgUrl} alt="bg" class="w-full h-full cover blur-2xl fixed z-10">
+  <img src={bgUrl} alt="bg" class="w-full h-full cover blur-2xl fixed top-0 z-10">
 
   
-  <div class="z-30  justify-center items-center flex flex-col mx-6 md:mx-20">
+  <div class="z-30  justify-center items-center flex flex-col mx-6 md:mx-20 my-16">
 
     <div class="">
       <div class="relative text-white text-opacity-80">
@@ -77,13 +77,41 @@
         
         Import
       </button> -->
-      <button class="rounded-full py-0 px-6 flex border-opacity-20 hover:border-opacity-50 justify-center items-center hover:cursor-pointer bg-transparent border-white border-2 hover:bg-white hover:bg-opacity-10 text-center flex-row gap-1 text-white text-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-        
-        Chat
-      </button>
+
+      <form action="?/createChat" method="POST" class="justify-center flex ">
+        <input type="text" id="agentId" name="agentId" value={data?.agent.id} class="hidden">
+        <input type="text" id="name" name="name" value="Astralta" class="hidden">
+
+        <button type="submit" class="rounded-full py-0 px-6 flex border-opacity-20 hover:border-opacity-50 justify-center items-center hover:cursor-pointer bg-transparent border-white border-2 hover:bg-white hover:bg-opacity-10 text-center flex-row gap-1 text-white text-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          
+          Chat
+        </button>
+      </form>
+    </div>
+
+    <div class=" w-full md:w-5/6 h-64 my-4">
+      {#each data?.chats as chat }
+      {#if chat.agent === data?.agent.id}
+      <a href={`/agents/${data?.agent.id}/${chat.id}`}>
+        <div class="w-full px-4 bg-white bg-opacity-10 rounded-2xl py-2 hover:bg-opacity-20 hover:cursor-pointer hover:text-lg transition-all ease-in-out duration-300 my-1 flex flex-row relative">
+          <div class="text-white ">
+            {chat.title}
+          </div>
+          <a href={`/agents/${data?.agent.id}/${chat.id}/settings`}>
+            <div class="text-white absolute right-4 opacity-50 hover:opacity-100 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+              </svg>
+              
+            </div>
+          </a>
+        </div>
+      </a>
+      {/if}
+      {/each}
     </div>
     
 

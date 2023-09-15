@@ -35,6 +35,15 @@ export const load = async ({ locals, params }) => {
                 covers[i].url = getImageURL(covers[i].collectionId, covers[i].id, covers[i].cover)
             }
 
+            if (!agent.cover) {
+                agent.cover_url = getImageURL(covers[0].collectionId, covers[0].id, covers[0].cover)
+                console.log(agent)
+
+                agent.cover = "praiseTheLord"
+
+            }
+
+
 
             let summary = ""
 

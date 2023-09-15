@@ -69,14 +69,14 @@
     <div class="">
       <div class="relative text-white text-opacity-80">
         <img src={bgUrl} alt="bg" class=" w-96 h-96 z-40 altashadow ">
-        <div class="absolute bottom-3 right-3  hover:opacity-0">
-          <!-- #FD1D1D -->
+        <!-- <div class="absolute bottom-3 right-3  hover:opacity-0">
+          
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" class="w-6 h-6" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>
           
         </div>
         <div class="absolute bottom-3 right-3 opacity-0 hover:opacity-100 hover:cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="w-6 h-6 " viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>
-        </div>
+        </div> -->
       </div>
 
       <div class="text-white text-3xl font-semibold text-center mt-8">
