@@ -112,11 +112,111 @@
     agentCopied = false;
   }, 5000);
 
+  let avatarUrl = "https://ui-avatars.com/api/?name=AI"
+    if (data.user) {
+        avatarUrl = `https://ui-avatars.com/api/?name=${data?.user?.name}`;
+    }
+
+
 
 </script>
 
 
- <div class="h-full w-full text-center text-true-white flex justify-center items-center relative px-4 xl:px-36 lg:px-24 md:px-20">
+<div class="w-full h-full flex flex-col justify-center items-center">
+  <!-- Banner image -->
+  <div class="w-full h-[200px] bg-[url('/banner/base.jpg')] bg-image top-0 fixed z-40 blur-3xl">
+
+  </div>
+  <div class="w-full h-[200px] bg-[url('/banner/base.jpg')] bg-image top-0 fixed z-40">
+
+  </div>
+
+  <!-- user tag and image -->
+  <div class="fixed top-40 md:left-20 left-4 flex flex-row justify-center items-center z-40">
+      <!-- Avatar -->
+      <div class="">
+          <button on:click={copyToClipboard(`${$page.url}`)} class="btn border-none bg-transparent hover:bg-transparent mx-1 active:border-none avatar w-18 p-2">
+              <div class="rounded-full">
+                  <img src={avatarUrl} alt="avatar" id="avatar-preview">
+              </div>
+          </button>
+      </div>
+      <!-- Username -->
+      <div class="text-white font-semibold text-3xl tracking-widest flex flex-col justify-center items-center gap-0">
+        <div>
+          <span>
+              {data?.user?.name}
+          </span>
+        </div>
+        <div class="flex flex-row items-center gap-1 opacity-50 text-sm w-full ">
+          <span class="">
+            @{data?.user?.username}
+          </span>
+          {#if data?.user?.verified_creator}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+            </svg>
+            
+          {/if}
+        </div>
+      </div>
+
+      <!-- <button class="text-white fixed  right-8 md:right-24 opacity-50 hover:opacity-100 hover:cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+            </svg>
+            
+      </button> -->
+
+  </div>
+
+  <div class=" mt-60 flex flex-col justify-start py-8 h-full w-full items-center">
+      <!-- Bio -->
+  <div class="w-full px-6 pb-16 md:px-20">
+      <!-- {#if data.user.bio}
+          <div class="rounded-2xl text-white p-4 bg-white backdrop-blur-md bg-opacity-10 w-full max-h-24 overflow-y-auto">
+              {data.user.bio}
+          </div>
+      {/if} -->
+
+      <!-- Favourite AI (3) -->
+  
+  
+      <!-- Resliche AI -->
+      <div class="h-full justify-center items-center flex overflow-x-auto flex-col text-white">
+        <div class="my-2">
+          My AI
+        </div>
+          {#each data.agents as ai}
+               {#if ai.public}
+                  <a href={`/${data.user.username}/public/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 flex-row flex items-center">
+                      <span class="">
+                          {ai.name}
+                      </span>
+                      <div class=" px-4 text-sm rounded-full text-white bg-white bg-opacity-10 absolute right-4">
+                        Public
+                      </div>
+                  </a>
+                {:else }
+                <a href={`/agents/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1">
+                  <span class="">
+                      {ai.name}
+                  </span>
+              </a>
+                {/if}
+
+          {/each}
+      </div>
+  </div>
+
+  </div>
+
+
+
+</div>
+
+
+ <!-- <div class="h-full w-full text-center text-true-white flex justify-center items-center relative px-4 xl:px-36 lg:px-24 md:px-20">
   <div class="grid grid-cols-12 gap-4 ">
     <div class="{debugMode ? 'col-span-4' : 'col-span-12'}">
       <div class="mt-20">
@@ -176,16 +276,7 @@
                             </button>
                           
                           </div>
-                          <!-- <div class="">
-                            <a href="/{data?.user?.username}/public/{agent.id}/settings">
-                              <button class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-10' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                </svg>
-                                
-                              </button>
-                            </a>
-                          </div> -->
+
                         </div>
                       </AltaCard>
                     {/if}
@@ -284,60 +375,6 @@
           </div>
         </div>
 
-        {#if false}
-        <AltaCard>
-          <div class="relative">
-            <div class="w-full">
-              <div>
-                <div class="flex flex-row gap-3 justify-center items-center min-w-[350px]">
-                  <h2 class="text-left ml-2 font-bold text-md ">
-                    Unassigned
-                  </h2>
-                </div>
-              </div>
-            </div>
-    
-            <div>
-              {#each data?.chats as chat}
-              
-              {#if !chat.agent} 
-                <a href="/agents/unassigned/{chat.id}">
-                  <LiveCard>
-                    <div class="absolute left-2 bottom-3">
-                      <a href="/">
-                        <button on:click={showConfirmDelete(chat.id)} class="{$darkMode ? 'bg-black bg-opacity-40' : 'bg-black bg-opacity-5' } px-4 py-2 rounded-2xl hover:bg-red-600 hover:bg-opacity-100">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                          </svg>
-                          
-                        </button>
-                      </a>
-                    </div>
-                    <div>
-                      <h1 class="text-true-white text-md text-center">
-                        {chat.title}
-                      </h1>
-                    </div>
-                    <div class="absolute right-2 bottom-3">
-                      <a href="/">
-                        <button on:click={toggleEditForm(chat.id)} class="{$darkMode ? 'bg-black bg-opacity-0' : 'bg-black bg-opacity-0' } px-4 py-2 rounded-2xl hover:bg-true-white hover:bg-opacity-10">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                          </svg>
-                        </button>
-                      </a>
-                    </div>
-                  </LiveCard>
-                </a>
-                
-              {/if}
-              {/each}
-            </div>
-            
-          </div>
-    
-        </AltaCard>
-        {/if}
 
         
         {/if}
@@ -380,7 +417,6 @@
                 </div>
                </form>
             </AltaCard>
-            <!-- Showcase chat summary so the user can give a proper name for the chat -->
           </span>
         </InfoModal>
         {/if}
@@ -470,4 +506,4 @@
     </div>
   {/if}
   
-</div>
+</div> -->

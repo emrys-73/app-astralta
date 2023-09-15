@@ -24,9 +24,74 @@
 
     let summaryMessage = data?.agent?.summary ? 'Regenerate Summary' : 'Generate Summary'
 
+    let coversLength = data?.covers.length;
+
+
+    function random(max) {
+      return Math.floor(Math.random() * (max + 1));
+    }
+
+    let bgUrl = data.agent.cover ? data.agent.cover_url : data?.covers[random(coversLength)].url
+   
 </script>
 
-<div class="w-full h-full justify-center items-center flex px-4">
+<div class="w-full h-full relative justify-center flex items-center flex-col mb-24">
+  <img src={bgUrl} alt="bg" class="w-full h-full cover blur-2xl fixed z-10">
+
+  
+  <div class="z-30  justify-center items-center flex flex-col mx-6 md:mx-20">
+
+    <div class="">
+      <div class="relative text-white text-opacity-80">
+        <img src={bgUrl} alt="bg" class=" w-96 h-96 z-40 altashadow ">
+        <!-- <div class="absolute bottom-3 right-3  hover:opacity-0">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" class="w-6 h-6" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>
+          
+        </div>
+        <div class="absolute bottom-3 right-3 opacity-0 hover:opacity-100 hover:cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="w-6 h-6 " viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>
+        </div> -->
+      </div>
+
+      <div class="text-white text-3xl font-semibold text-center mt-8">
+        {data?.agent?.name}
+      </div>
+      <div class="text-center text-gray-400 text-md">
+          by <a href={`/${data?.user?.username}`} class=" hover:text-white">
+            @{data?.user.username}
+          </a>
+      </div>
+    </div>
+
+    <div class="my-4 max-h-32 overflow-y-auto p-3 px-6 bg-white bg-opacity-10 rounded-2xl md:w-3/4 backdrop-blur-md">
+      <span class="text-white justify-center text-center items-center flex">
+        {data?.agent?.summary}
+      </span>
+    </div>
+
+    <div class="flex flex-row w-3/4 justify-center items-center gap-6 my-4">
+      <!-- <button class="rounded-full py-0 px-6 flex border-opacity-20 hover:border-opacity-50 justify-center items-center hover:cursor-pointer bg-transparent border-white border-2 hover:bg-white hover:bg-opacity-10 text-center flex-row gap-1 text-white text-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+        </svg>
+        
+        Import
+      </button> -->
+      <button class="rounded-full py-0 px-6 flex border-opacity-20 hover:border-opacity-50 justify-center items-center hover:cursor-pointer bg-transparent border-white border-2 hover:bg-white hover:bg-opacity-10 text-center flex-row gap-1 text-white text-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+        
+        Chat
+      </button>
+    </div>
+    
+
+  </div>
+</div>
+
+
+<!-- <div class="w-full h-full justify-center items-center flex px-4">
     <div class=" py-20 md:w-3/4 xl:w-3/4">
         <AltaCard>
             <div class="flex flex-row pb-2 gap-3">
@@ -154,4 +219,4 @@
       </span>
   </InfoModal>
     {/if}
-</div>
+</div> -->

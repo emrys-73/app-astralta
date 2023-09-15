@@ -5,7 +5,7 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
 	import { Drawer, ActionBar } from '$lib/components';
-    import { drawerOpen, bg, darkMode, header, back } from '../stores';
+    import { drawerOpen, bg, darkMode, header, back, showActionBar } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
@@ -116,8 +116,9 @@
 <AppShell class="{$darkMode ? `bg-[#000]` : 'bg-[#c7c7c7]'} bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
-        <div class="md:h-full bottom-2 md:w-12 w-full fixed md:left-2 z-50 justify-center flex items-center">
-            <div class="bg-white opacity-20 hover:opacity-100 hover:bg-opacity-10 bg-opacity-10 transition-all ease-in-out duration-300 hover:cursor-pointer backdrop-blur-md rounded-2xl md:w-10 w-full mx-4 h-10 md:h-64 px-4 md:px-0 md:mx-0 text-white py-4 justify-center flex items-center flex-row md:flex-col gap-6">
+        <!-- {#if $showActionBar} -->
+        <div class="md:h-full bottom-2 md:w-12 w-full {$showActionBar ? '' : 'hidden'}  md:backdrop-blur-none fixed md:left-2 z-50 justify-center flex items-center bg-opacity-20">
+            <div class="bg-white  md:opacity-50  hover:opacity-100 hover:bg-opacity-10 bg-opacity-5 transition-all ease-in-out duration-300 hover:cursor-pointer backdrop-blur-md rounded-full md:w-10 w-full mx-4 h-10 md:h-64 px-4 md:px-0 md:mx-0 text-white py-4 justify-center flex items-center flex-row md:flex-col gap-6">
                 {#each actionIslandItems as item}
                     <a href={item.href}>
                         <button class="opacity-50 hover:opacity-100 transition-all ease-in-out duration-150 flex flex-row">
@@ -129,6 +130,7 @@
                 {/each}
             </div>
         </div>
+        <!-- {/if} -->
 	</svelte:fragment>
 	
     <!-- <div class="{!$page.url.pathname.toString().includes(`public`) ? '' : 'hidden'}">

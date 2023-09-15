@@ -2,6 +2,7 @@
 // @ts-nocheck
 
 import { error } from '@sveltejs/kit';
+import { getImageURL } from '$lib/utils.js';
 
 
 
@@ -14,6 +15,12 @@ export const load = ({ locals, params }) => {
         try {
             const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(agentId))
 
+            if (agent.cover) {
+                agent.avatarUrl = getImageURL(agent.collectionId, agent.id, agent.cover)
+            } else {
+                agent.avatarUrl = `https://ui-avatars.com/api/?name=${agent.name}`
+            }
+            // console.log(agent)
             return agent;
         } catch (err) {
             console.log("Error: ", err)

@@ -11,7 +11,7 @@
 
     let loading = false;
 
-    let avatarUrl = "/"
+    let avatarUrl = "https://ui-avatars.com/api/?name=AI"
     if (data.user) {
         avatarUrl = `https://ui-avatars.com/api/?name=${data?.user?.name}`;
     }
@@ -68,16 +68,23 @@
             </button>
         </div>
         <!-- Username -->
-        <div class="text-white font-semibold text-3xl tracking-widest flex flex-row justify-center items-center gap-1">
+        <div class="text-white font-semibold text-3xl tracking-widest flex flex-col justify-center items-center gap-0">
+          <div>
             <span>
-                @{data?.user?.username}
+                {data?.user?.name}
+            </span>
+          </div>
+          <div class="flex flex-row items-center gap-1 opacity-50 text-sm w-full ">
+            <span class="">
+              @{data?.user?.username}
             </span>
             {#if data?.user?.verified_creator}
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
               </svg>
               
             {/if}
+          </div>
         </div>
 
         <!-- <button class="text-white fixed  right-8 md:right-24 opacity-50 hover:opacity-100 hover:cursor-pointer">
@@ -105,10 +112,21 @@
         <div class="h-full justify-center items-center flex overflow-x-auto flex-col text-white">
             {#each data.agents as ai}
                 {#if ai.public}    
-                    <a href={`/${data.user.username}/public/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1">
-                        <span class="">
-                            {ai.name}
-                        </span>
+                    <a href={`/${data.user.username}/public/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 flex-row relative justify-start flex items-center">
+                        <div>
+                            <span class="">
+                                {ai.name}
+                            </span>
+                        </div>
+                        <div class="absolute right-4 flex flex-row gap-1 justify-center items-center opacity-50">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                              </svg>
+                              <span class="">
+                                {ai.likes}
+                              </span>
+                              
+                        </div>
                     </a>
                 {/if}
             {/each}

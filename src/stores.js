@@ -45,3 +45,11 @@ export const back = writable("bg-[url('/bg/forest.png')]");
 
 // This is a temp store while creating the agent to balance the workload
 export const newAgentData = writable();
+
+
+
+// New useful stuff
+
+export const lastUrl = writable("/");
+
+export const showActionBar = writable(true);

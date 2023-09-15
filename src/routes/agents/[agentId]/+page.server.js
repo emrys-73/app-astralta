@@ -4,7 +4,7 @@
 import { error, redirect } from '@sveltejs/kit';
 import { Configuration, OpenAIApi } from 'openai';
 import { OPENAI_KEY} from '$env/static/private'
-
+import { getImageURL } from '$lib/utils.js';
 
 
 const configuration = new Configuration({
@@ -27,6 +27,14 @@ export const load = async ({ locals, params }) => {
             const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(agentId, {
                 expand: 'personality',
             }))
+
+            const covers = serializeNonPOJOs(await locals.pb.collection('covers').getFullList());
+
+
+            for (let i = 0; i < covers.length; i++) {
+                covers[i].url = getImageURL(covers[i].collectionId, covers[i].id, covers[i].cover)
+            }
+
 
             let summary = ""
 
@@ -89,6 +97,7 @@ export const load = async ({ locals, params }) => {
 
             return {
                 agent: agent,
+                covers: covers,
                 // summary: summary
             }
         } catch (err) {
