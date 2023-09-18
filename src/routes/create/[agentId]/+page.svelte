@@ -44,6 +44,7 @@
     let summary;
     $: summary = ""
 
+
 </script>
 
 
@@ -73,11 +74,12 @@
                 {#if !summaryCreated}
                 <form on:submit={handleSubmit}>
                   <input bind:value={$input} hidden />
-                  <button type="submit">
+                  <button type="submit" class="bg-black breathe border-opacity-20 my-4 hover:border-opacity-100 border-[1px] border-white rounded-full px-6 py-2 transition-all duration-300 ease-in-out">
 
-                    <LiveCard>
-                        Who are you?
-                    </LiveCard>
+                    <span>
+                        Create AI
+                    </span>
+                    
 
                   </button>
                 </form>
@@ -91,11 +93,34 @@
             <form action="?/updateAgent" method="POST">
                 <input name="summary" type="text" bind:value={summary} hidden>
                 <input name="id" type="text" value={data?.agent?.id} hidden>
-                <button type="submit" class="my-4 flex flex-row text-center items-center justify-center gap-2 backdrop-blur-md {$darkMode ? 'bg-black bg-opacity-80' : 'bg-black bg-opacity-60'} altashadow text-true-white p-2 min-w-[350px] hover:bg-true-black hover:bg-opacity-40 hover:cursor-pointer rounded-full transition duration-300 ease-in-out">
+                <button type="submit" class="bg-black breathe border-opacity-20 my-4 hover:border-opacity-100 border-[1px] border-white rounded-full px-6 py-2 transition-all duration-300 ease-in-out">
                     <div class="flex flex-row gap-3 justify-center items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-                        </svg>                          
+                        <svg class="w-4 h-6 hover:w-6 hover:h-6 transition-all duration-300 ease-in-out" viewBox="0 0 626 626" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g filter="url(#filter0_d_238_174)">
+                            <path d="M102.999 507.919H40.2871C81.1048 477.645 102.423 459.095 136.83 422.387C184.728 369.672 204.758 340.949 233.19 271.689C252.733 220.966 261.063 156.833 265.371 143.798C269.679 130.763 269.117 118.246 292.783 109.583C306.318 108.046 313.906 108.141 327.44 109.583C343.201 112.051 348.069 116.915 353.02 136.465C357.97 156.015 366.783 218.777 381.9 269.244C403.845 324.724 423.337 356.922 473.492 416.685C511.229 459.14 535.696 480.609 585.712 514.436H527.952C450.953 453.155 419.445 415.733 375.299 345.815C340.16 282.181 328.87 247.148 325.781 186.015C324.349 177.481 322.147 174.672 315.88 172.981C310.414 172.516 312.486 172.383 307.632 172.829C300.061 174.147 297.946 177.513 296.08 185.863C286.53 252.717 271.746 289.482 241.624 345.815C197.757 410.432 168.058 446.008 102.999 507.919Z" fill="url(#paint0_linear_238_174)"/>
+                            <path d="M304.129 317.603C269.3 396.107 243.105 440.535 176.643 511.249H227.026C264.21 468.015 280.018 441.773 304.129 400.48C329.168 445.125 339.239 471.132 390.392 514.436H436.959C369.824 451.011 342.135 401.314 304.129 317.603Z" fill="url(#paint1_linear_238_174)"/>
+                            </g>
+                            <defs>
+                            <filter id="filter0_d_238_174" x="30.2871" y="104.466" width="565.426" height="425.971" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                            <feOffset dy="6"/>
+                            <feGaussianBlur stdDeviation="5"/>
+                            <feComposite in2="hardAlpha" operator="out"/>
+                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.52 0"/>
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_238_174"/>
+                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_238_174" result="shape"/>
+                            </filter>
+                            <linearGradient id="paint0_linear_238_174" x1="313" y1="108.466" x2="313" y2="514.436" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="white"/>
+                            <stop offset="1" stop-color="white"/>
+                            </linearGradient>
+                            <linearGradient id="paint1_linear_238_174" x1="306.801" y1="317.603" x2="306.801" y2="514.436" gradientUnits="userSpaceOnUse">
+                            <stop offset="0.411458" stop-color="white"/>
+                            <stop offset="1" stop-color="white" stop-opacity="0"/>
+                            </linearGradient>
+                            </defs>
+                            </svg>                       
                         <h1 class="text-true-white text-lg text-center">
                             Start Chatting
                         </h1>
