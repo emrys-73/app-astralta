@@ -15,8 +15,11 @@ export const load = async ({ locals, params }) => {
     try {
         const user = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
 
-        const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(params.agentId))
+        const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(params.agentId, {
+            expand: 'creator',
+        }))
 
+        // console.log(agent)
         const covers = serializeNonPOJOs(await locals.pb.collection('covers').getFullList());
 
 

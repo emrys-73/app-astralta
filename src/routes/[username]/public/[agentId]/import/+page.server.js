@@ -15,6 +15,8 @@ export const load = async ({ locals, params }) => {
         throw redirect(303, '/')
     }
 
+    // protect chats that are not importable
+
     const user = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
 
     const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(params.agentId))

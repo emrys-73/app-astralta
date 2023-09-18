@@ -36,7 +36,7 @@ export const load = async ({ locals }) => {
 
             const agents = serializeNonPOJOs(await locals.pb.collection('agents').getFullList({
                 sort: '-updated',
-                filter: `user="${userId}"`
+                filter: `users~"${userId}"`
             }));
 
             return agents

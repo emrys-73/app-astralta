@@ -2,7 +2,7 @@
 // @ts-nocheck
 
   import { InfoModal, LiveCard, AltaCard } from '$lib/components';
-  import { darkMode, chatCount, header, publicUrl } from '../stores.js';
+  import { darkMode, chatCount, header, publicUrl, actionIslandData } from '../stores.js';
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   export let data;
@@ -15,12 +15,15 @@
 
   let max_chats = 100;
 
+  let username = data?.user ? data.user.username : ''
+
   onMount(() => {
     editing = false;
     displayDeleteConfirmation = false;
     chatCount.set(data?.chats?.length);  
     countPublic();
   })
+
 
 
   let editing;

@@ -57,18 +57,76 @@
 
     let bgUrl = data.agent.cover ? data.agent.cover_url : data?.covers[random(coversLength)].url
 
+    // let coverClass = `bg-[url('http://139.144.176.23:80/api/files/oo1sg8k1kzp3p2q/u770asbvqwpzxlg/ezgif_com_video_to_gif_y2l1FVZ1Q1.gif?thumb=0x0')]`
+
+    let coverClass = `bg-[url('${bgUrl}')]`
+
 </script>
 
 
 <div class="w-full h-full relative justify-center flex items-center flex-col mb-24">
-  <img src={bgUrl} alt="bg" class="w-full h-full cover blur-2xl fixed z-10">
+  <!-- <img src={bgUrl} alt="bg" class="w-full h-full cover blur-3xl fixed z-10"> -->
+  <div class="{coverClass} lg:blur-lg cover-image h-[550px] w-full relative">
+    <div class="absolute bottom-0 justify-center flex flex-col items-center w-full mb-32 ">
+      <div class="text-white text-3xl font-semibold text-center mt-8 tracking-wider">
+        {data?.agent?.name}
+      </div>
+
+
+      <div class="text-center text-white opacity-60 hover:opacity-100 text-md">
+        <a href={`/${data?.agent.expand.creator.username}`} class=" hover:text-white">
+          @{data?.agent.expand.creator.username}
+        </a>
+      </div>
+
+
+      <div class="flex flex-row gap-4 justify-center items-center mt-3">
+        {#if !data?.agent?.importable}
+          <div class="bg-white bg-opacity-5 text-white px-4 py-2 rounded-lg backdrop-blur-md flex flex-row justify-center items-center gap-1 hover:cursor-pointer hover:bg-opacity-20 transition-all duration-300 ease-in-out w-32">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+            
+            
+            
+            Import
+          </div>
+        {/if}
+        <div class="bg-white bg-opacity-5 text-white px-4 py-2 rounded-lg backdrop-blur-md flex flex-row justify-center items-center gap-1 hover:cursor-pointer hover:bg-opacity-20 transition-all duration-300 ease-in-out w-32">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          
+          
+          Chat
+        </div>
+      </div>
+    </div>
 
   
-  <div class="z-30  justify-center items-center flex flex-col mx-6 md:mx-20">
+
+    <div class=" bg-gradient-to-b from-transparent to-black h-32 w-full absolute bottom-0">
+  
+    </div>
+  </div>
+
+  <div class="justify-center items-center absolute top-32 lg:flex hidden ">
+    <img src={bgUrl} alt="bg" class=" w-96 h-96 z-40 altashadow">
+  </div>
+  <div class="w-full md:w-3/4 h-64 px-6 md:px-8 my-4">
+    <div class="bg-white bg-opacity-0 text-[11pt] rounded-2xl px-6 py-2 overflow-y-auto h-20 text-white text-center">
+      {data?.agent?.bio}
+    </div>
+  </div>
+
+
+  
+  <div class="z-30 flex flex-col mx-6 md:mx-20 bg-red-500">
 
     <div class="">
-      <div class="relative text-white text-opacity-80">
-        <img src={bgUrl} alt="bg" class=" w-96 h-96 z-40 altashadow ">
+      <div class="text-white text-opacity-80 bg-red-500">
+        <!-- {data?.agent?.bio} -->
+        <!-- <img src={bgUrl} alt="bg" class=" w-96 h-96 z-40 altashadow "> -->
         <!-- <div class="absolute bottom-3 right-3  hover:opacity-0">
           
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white" class="w-6 h-6" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>
@@ -79,25 +137,25 @@
         </div> -->
       </div>
 
-      <div class="text-white text-3xl font-semibold text-center mt-8">
+      <!-- <div class="text-white text-3xl font-semibold text-center mt-8">
         {data?.agent?.name}
       </div>
-      <div class="text-center text-gray-400 text-md">
-          by <a href={`/${data?.user?.username}`} class=" hover:text-white">
-            @{data?.user.username}
+      <div class="text-center text-light-gray text-md">
+          by <a href={`/${data?.agent.expand.creator.username}`} class=" hover:text-white">
+            @{data?.agent.expand.creator.username}
           </a>
-      </div>
+      </div> -->
     </div>
-
+<!-- 
     <div class="my-4 max-h-32 overflow-y-auto p-3 px-6 bg-white bg-opacity-10 rounded-2xl md:w-3/4 backdrop-blur-md">
       {#if data?.agent?.summary}
       <span class="text-white justify-center text-center items-center flex">
         {data?.agent?.summary}
       </span>
       {/if}
-    </div>
+    </div> -->
 
-    <div class="flex flex-row w-3/4 justify-center items-center gap-6 my-4">
+    <!-- <div class="flex flex-row w-3/4 justify-center items-center gap-6 my-4">
       <button class="rounded-full py-0 px-6 flex border-opacity-20 hover:border-opacity-50 justify-center items-center hover:cursor-pointer bg-transparent border-white border-2 hover:bg-white hover:bg-opacity-10 text-center flex-row gap-1 text-white text-lg">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -113,7 +171,7 @@
         Chat
       </button>
     </div>
-    
+     -->
 
   </div>
 </div>
