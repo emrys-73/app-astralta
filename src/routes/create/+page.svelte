@@ -90,7 +90,7 @@
                         {#each data?.personalities as perso}
                         <div class="flex flex-row justify-center items-center gap-2">
                             <div class="flex">
-                                {#if perso.name === "Astralta"}
+                                {#if perso.name === "Personal Assistant"}
                                 <input type="radio" name="persoID" value={perso.id} class="bg-black bg-opacity-40" checked>
                                 {:else }
                                     <input type="radio" name="persoID" value={perso.id} class="bg-black bg-opacity-40">

@@ -13,10 +13,15 @@ const serializeNonPOJOs = (/** @type {any} */ obj) => {
 
 export const load = async ({ locals, params }) => {
     try {
-        const user = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
+        const creator = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
 
         const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(params.agentId, {
             expand: 'creator',
+        }))
+
+        const chats = serializeNonPOJOs(await locals.pb.collection('chats').getFullList({
+            sort: '-last_interacted',
+            filter: ` agent = "${agent.id}"`,
         }))
 
         // console.log(agent)
@@ -35,21 +40,20 @@ export const load = async ({ locals, params }) => {
             throw redirect(303, '/')
         }
 
-        if (!user) {
+        if (!creator) {
             throw redirect(303, '/')
         }
 
         agent.cover_url = getImageURL(agent.collectionId, agent.id, agent.cover)
 
-        // console.log(agent)
-
         const thereIsAnUser = locals.user ? true : false;
 
         return {
-            user: user,
+            creator: creator,
             thereIsAnUser: thereIsAnUser,
             agent: agent,
-            covers: covers
+            covers: covers,
+            chats: chats
         }
 
     } catch (err) {
@@ -127,4 +131,37 @@ export const actions = {
 
         throw redirect(303, '/')
     },
+
+    createChat: async ({ request, locals }) => {
+        const data = Object.fromEntries(await request.formData());
+
+        const chatData = {
+            "title": data.name,
+            "user": locals.user ? locals.user.id : undefined,
+            "agent": data.agentId,
+            "last_interacted": new Date(),
+            "msg_count": 0,
+            // "eval": "RELATION_RECORD_ID"
+        };
+
+        const newChat = await locals.pb.collection('chats').create(chatData);
+
+         // get Agent
+         const agent = await locals.pb.collection('agents').getOne(data.agentId);
+
+         const systemTrainingData = {
+             "content": agent.training,
+             "role": "system",
+             "usage": "JSON",
+             "chat": newChat.id,
+             "user": locals.user ? locals.user.id : ''
+         };
+ 
+         const systemMessage = await locals.pb.collection('messages').create(systemTrainingData);
+         // console.log(systemMessage);
+
+
+         // TODO: Change this
+         throw redirect(303, `/agents/${data.agentId}/${newChat.id}`)
+    }
 }

@@ -1,6 +1,6 @@
 <script>
     // @ts-nocheck
-        import { darkMode, header } from '../../../../../stores.js';
+        import { darkMode, header, elevateActionBar } from '../../../../../stores.js';
         import { useChat } from "ai/svelte";
         export let data
 

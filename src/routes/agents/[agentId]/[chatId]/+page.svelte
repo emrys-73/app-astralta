@@ -2,7 +2,7 @@
   
   // @ts-nocheck
 	      import { onMount, onDestroy } from 'svelte';
-        import { darkMode, header, lastUrl, showActionBar } from '../../../../stores.js';
+        import { darkMode, header, lastUrl, showActionBar, elevateActionBar } from '../../../../stores.js';
         import { useChat } from "ai/svelte";
 	      import AltaCard from '$lib/components/AltaCard.svelte';
         import { page } from '$app/stores';
@@ -16,6 +16,7 @@
         let backgroundColor = "bg-[#000000]"
 
         onMount(() => {
+          elevateActionBar.set(true)
           showActionBar.set(false)
           header.set(data?.chat.title)
           // titleInput.set(`[AI training]: ${data?.agent.training}.`)
@@ -90,6 +91,7 @@
 
         onDestroy(() => {
           header.set("Astralta")
+          elevateActionBar.set(false)
         })
     
         let debugMode = false;
