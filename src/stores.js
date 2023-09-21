@@ -65,3 +65,5 @@ export const actionIslandData = writable([[
             }
     },
 ]]);
+
+export const animate = writable("transition-all duration-300 ease-in-out");

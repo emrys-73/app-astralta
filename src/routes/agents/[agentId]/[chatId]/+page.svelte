@@ -60,7 +60,7 @@
               accentColor = "bg-[#D94800]"
               break;
             case "blue":
-              accentColor = "bg-[#3856E9]"
+              accentColor = "bg-[#0066FF]"
               break;
 
             case "astralta":

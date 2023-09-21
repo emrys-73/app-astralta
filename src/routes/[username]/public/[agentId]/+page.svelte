@@ -89,7 +89,7 @@
 
 <div class="w-full h-full relative flex items-center flex-col mb-24">
   <!-- <img src={bgUrl} alt="bg" class="w-full h-full cover blur-3xl fixed z-10"> -->
-  <div class="{coverClass} lg:blur-lg cover-image h-[550px] w-full relative">
+  <div class="{coverClass} blur-max cover-image h-[550px] w-full relative">
     <div class="absolute bottom-0 justify-center flex flex-col items-center w-full mb-32 ">
       <div class="text-white text-3xl font-semibold text-center mt-8 tracking-wider">
         {data?.agent?.name}

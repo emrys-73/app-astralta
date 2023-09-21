@@ -187,9 +187,9 @@
   
       <!-- Resliche AI -->
       <div class="h-full justify-center items-center flex overflow-x-auto flex-col text-white">
-        <div class="my-2">
+        <!-- <div class="my-2">
           My AI
-        </div>
+        </div> -->
           {#each data.agents as ai}
                {#if ai.public}
                   <a href={`/${data.user.username}/public/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 flex-row flex items-center relative">

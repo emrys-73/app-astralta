@@ -9,6 +9,7 @@
         export let data
 
         let proMode = false;
+        let restricted = false;
         let publicAI = false;
 
         onMount(() => {
@@ -39,48 +40,56 @@
                 "realName": "astralta",
                 "hex": "#4930FF",
                 "bg": `hover:bg-[#4930FF]`,
+                "accent": `bg-black bg-opacity-40 checked:bg-[#4930FF}]`
             },
             {
                 "name": "Punch",
                 "realName": "astralta",
                 "hex": "#E02020",
                 "bg": `hover:bg-[#E02020]`,
+                "accent": `bg-black bg-opacity-40 checked:bg-[#E02020}]`
             },
             {
                 "name": "Tangerine",
                 "realName": "orange",
                 "hex": "#D94800",
                 "bg": `hover:bg-[#D94800]`,
+                "accent": `bg-black bg-opacity-40 checked:bg-[#D94800}]`
             },
             {
                 "name": "Oceans",
                 "realName": "blue",
                 "hex": "#0066FF",
                 "bg": `hover:bg-[#0066FF]`,
+                "accent": `bg-black bg-opacity-40 checked:bg-[#0066FF}]`
             },
             {
                 "name": "Vampire",
                 "realName": "purple",
                 "hex": "#9300E2",
                 "bg": `hover:bg-[#9300E2]`,
+                "accent": `bg-black bg-opacity-40 checked:bg-[#9300E2}]`
             },
             {
                 "name": "Candy",
                 "realName": "pink",
                 "hex": "#DB33C5",
                 "bg": `hover:bg-[#DB33C5]`,
+                "accent": `bg-black bg-opacity-40 checked:bg-[#DB33C5}]`
             },
             {
                 "name": "Forest",
                 "realName": "green",
                 "hex": "#00754C",
                 "bg": `hover:bg-[#00754C]`,
+                "accent": `bg-black bg-opacity-40 checked:bg-[#00754C}]`
             },
             {
                 "name": "Mono",
                 "realName": "gray",
                 "hex": "#4D4D4D",
                 "bg": `hover:bg-[#4D4D4D]`,
+                "accent": `bg-black bg-opacity-40 checked:bg-[#4D4D4D}]`
             },
         ]
 
@@ -141,6 +150,16 @@
                     <input type="checkbox" name="publicAI" value={publicAI} class="hidden" checked>
 
                 </div>
+<!-- 
+                <input type="checkbox" name="restricted" value={restricted} class="hidden" checked>
+                <div class="my-2 justify-center items-center flex gap-2 flex-row">
+                    <h4 class="text-md font-semibold">
+                        Restricted
+                    </h4>
+                    <SlideToggle name="publicAI" bind:checked={restricted} active=" bg-green-500" class="bg-white bg-opacity-20 " size="sm" />
+                    <input type="checkbox" name="restricted" value={restricted} class="hidden" checked>
+
+                </div> -->
 
                 
             </div>
@@ -166,9 +185,9 @@
                             <div class="flex flex-wrap justify-center items-center gap-1 font-light">
                                 <div class="flex">
                                     {#if accent.name === "Astralta"}
-                                    <input type="radio" name="accent" value={accent.realName} class="bg-black bg-opacity-40" checked>
+                                    <input type="radio" name="accent" value={accent.realName} class="{accent.accent}" checked>
                                     {:else }
-                                        <input type="radio" name="accent" value={accent.realName} class="bg-black bg-opacity-40">
+                                        <input type="radio" name="accent" value={accent.realName} class="{accent.accent}">
                                     {/if}
                                 </div>
                                 <div class="flex {accent.bg} rounded-full px-2">
