@@ -2,14 +2,11 @@
 // @ts-nocheck
 
 import { error, redirect } from '@sveltejs/kit';
+import { serializeNonPOJOs } from '$lib/utils.js';
 
 export const load = async ({ locals }) => {
 
     locals.pb.autoCancellation(false);
-
-    const serializeNonPOJOs = (/** @type {any} */ obj) => {
-        return structuredClone(obj)
-    };
 
     const getChats = async () => {
         try {
@@ -81,7 +78,7 @@ export const load = async ({ locals }) => {
                 chats: getChats(),
                 agents: getAgents(),
                 personalities: getPersonalities(),
-                waitlist: false,
+                // waitlist: false,
             }
         }
         return {
@@ -89,7 +86,6 @@ export const load = async ({ locals }) => {
             chats: undefined,
             agents: undefined,
             personalities: undefined,
-            waitlist,
         }
 
     } catch (err) {

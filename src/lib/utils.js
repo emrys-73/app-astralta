@@ -5,7 +5,6 @@ export const serializeNonPOJOs = (/** @type {any} */ obj) => {
     return structuredClone(obj)
 };
 
-
 export const generateUsername = (/** @type {string | any[]} */ name) => {
     const id = randomBytes(2).toString('hex')
     if (name.length > 3 ) {
