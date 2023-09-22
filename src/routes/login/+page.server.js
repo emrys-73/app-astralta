@@ -13,7 +13,6 @@ export const actions = {
     login: async ({ request, locals }) => {
         const body = await Object.fromEntries(await request.formData())
 
-
         try {
             await locals.pb.collection('users').authWithPassword(body.email, body.password)
             if (!locals.pb?.authStore?.model?.verified) {
@@ -27,8 +26,7 @@ export const actions = {
         } catch (err) {
             console.log('Error', err);
             throw redirect(303, '/whoops')    
-            // throw error(500, 'Something went wrong loggin in')
         } 
-        throw redirect(303, '/');
+        throw redirect(303, `/idk`);
     }
 };

@@ -13,16 +13,39 @@ const serializeNonPOJOs = (/** @type {any} */ obj) => {
 
 export const load = async ({ locals, params }) => {
     try {
-        const creator = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
+        // const creator = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
 
         const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(params.agentId, {
             expand: 'creator',
         }))
 
-        const chats = serializeNonPOJOs(await locals.pb.collection('chats').getFullList({
-            sort: '-last_interacted',
-            filter: ` agent = "${agent.id}"`,
-        }))
+        let allChats = undefined;
+
+        if (agent.expand.creator.id === locals.user.id) {
+            allChats = serializeNonPOJOs(await locals.pb.collection('chats').getFullList({
+                sort: '-last_interacted',
+                filter: ` agent = "${agent.id}"`,
+                expand: 'user',
+            }))
+
+            // Could actually keep it away to speed thigns up
+            for (let i = 0; i < allChats.length; i++) {
+                allChats[i].username = allChats[i].expand.user.username
+            }
+        }
+
+        let chats;
+
+        if (locals.user) {
+            chats = serializeNonPOJOs(await locals.pb.collection('chats').getFullList({
+                sort: '-last_interacted',
+                filter: ` agent = "${agent.id}" && user ~ "${locals.user.id}"`,
+            }))
+        } else {
+            chats = []
+        }
+
+        // console.log(chats)
 
         // console.log(agent)
         const covers = serializeNonPOJOs(await locals.pb.collection('covers').getFullList());
@@ -40,20 +63,15 @@ export const load = async ({ locals, params }) => {
             throw redirect(303, '/')
         }
 
-        if (!creator) {
-            throw redirect(303, '/')
-        }
-
         agent.cover_url = getImageURL(agent.collectionId, agent.id, agent.cover)
 
-        const thereIsAnUser = locals.user ? true : false;
-
         return {
-            creator: creator,
-            thereIsAnUser: thereIsAnUser,
+            thereIsAnUser: locals.user ? true : false,
             agent: agent,
             covers: covers,
-            chats: chats
+            chats: chats,
+            allChats: allChats,
+            username: params.username
         }
 
     } catch (err) {

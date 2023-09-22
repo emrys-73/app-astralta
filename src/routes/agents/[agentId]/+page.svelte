@@ -2,8 +2,14 @@
 // @ts-nocheck
 
     import { InfoModal, AltaCard, LiveCard } from "$lib/components";
+	  import { onMount } from "svelte";
     import { darkMode } from "../../../stores.js";
+    import { setModeCurrent } from '@skeletonlabs/skeleton';
     export let data
+
+    onMount(() => {
+      setModeCurrent(false)
+    })
 
     let curAgentId;
     $: curAgentId = "hi"

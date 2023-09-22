@@ -5,6 +5,8 @@
     import { darkMode } from '../../../../stores.js';
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
+    import { modeCurrent } from '@skeletonlabs/skeleton';
+    import { setModeCurrent } from '@skeletonlabs/skeleton';
 
 
     export let data;
@@ -17,6 +19,7 @@
 
     onMount(() => {
         // editing = false;
+        setModeCurrent(false)
         displayDeleteConfirmation = false;
         adminRightEval()
         setImportable()
@@ -84,6 +87,13 @@
       importable = false
     }
 
+    let showAllChats;
+    $: showAllChats = false;
+
+    const showPublic = () => { showAllChats = true }
+
+    const showLocal = () => { showAllChats = false }
+
 </script>
 
 
@@ -145,8 +155,8 @@
       </div>
   
       <div class="text-center text-white opacity-60 hover:opacity-100 text-md">
-        <a href={`/${data?.agent.expand.creator.username}`} class=" hover:text-white">
-          @{data?.agent.expand.creator.username}
+        <a href={`/${data?.username}`} class=" hover:text-white">
+          @{data?.username}
         </a>
       </div>
   
@@ -188,34 +198,53 @@
   {#if adminRights}    
   <div class="w-full md:w-3/4">
     <div class="mx-6 h-full">
-
-      <!-- <div class="h-12 w-full flex flex-row gap-4 justify-center items-center text-white text-sm">
-        <div class=" border-b-2 border-system-cyan hover:border-system-blue px-4 hover:cursor-pointer">
-          Local
-        </div>
-        <div class=" border-b-2 border-system-cyan hover:border-system-blue px-4 hover:cursor-pointer">
-          Public
-        </div>
-      </div> -->
-
-      {#each data?.chats as chat }
-      {#if chat.agent === data?.agent.id}
-      <a href={`/agents/${data?.agent.id}/${chat.id}`}>
+      <div class="justify-center flex items-center h-12 flex-row gap-4 text-black dark:text-white">
+        <button on:click={showLocal} class="{showAllChats ? '' : 'dark:border-white border-black border-b-2 opacity-80'} px-4 opacity-50">
+          My chats
+        </button>
+        <button on:click={showPublic} class="{!showAllChats ? '' : 'dark:border-white border-black border-b-2 opacity-80'} px-4 opacity-50">
+          All chats
+        </button>
+      </div>
+      {#if showAllChats}
+      {#each data?.allChats as chat }
+      <a href={`/${data?.username}/public/${data?.agent.id}/${chat.id}`}>
         <div class="w-full px-4 bg-white bg-opacity-10 rounded-2xl py-2 hover:bg-opacity-20 hover:cursor-pointer hover:text-lg transition-all ease-in-out duration-300 my-1 flex flex-row relative">
           <div class="text-white ">
             {chat.title}
           </div>
-          <a href={`/agents/${data?.agent.id}/${chat.id}/settings`}>
-            <div class="text-white absolute right-4 opacity-50 hover:opacity-100 ">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-              
+          <a href={`/${chat.username}`}>
+            <div class=" px-4 text-sm rounded-full text-white bg-black bg-opacity-90 absolute right-4 hover:bg-opacity-40">
+              {chat.username}
             </div>
           </a>
         </div>
       </a>
+      {/each}
+      {:else}
+      {#each data?.chats as chat }
+      <a href={`/${data?.username}/public/${data?.agent.id}/${chat.id}`}>
+        <div class="w-full px-4 bg-white bg-opacity-10 rounded-2xl py-2 hover:bg-opacity-20 hover:cursor-pointer hover:text-lg transition-all ease-in-out duration-300 my-1 flex flex-row relative">
+          <div class="text-white ">
+            {chat.title}
+          </div>
+        </div>
+      </a>
+      {/each}
       {/if}
+    </div>
+  </div>
+  {:else }
+  <div class="w-full md:w-3/4">
+    <div class="mx-6 h-full">
+      {#each data?.chats as chat }
+      <a href={`/${data?.username}/public/${data?.agent.id}/${chat.id}`}>
+        <div class="w-full px-4 bg-white bg-opacity-10 rounded-2xl py-2 hover:bg-opacity-20 hover:cursor-pointer hover:text-lg transition-all ease-in-out duration-300 my-1 flex flex-row relative">
+          <div class="text-white ">
+            {chat.title}
+          </div>
+        </div>
+      </a>
       {/each}
     </div>
   </div>

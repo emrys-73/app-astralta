@@ -1,29 +1,32 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { getImageURL, serializeNonPOJOs } from '$lib/utils.js';
 
 
-
 export const load = ({ locals, params }) => {
+
+    if (!locals.user) {
+        throw redirect(303, '/')
+    }
     
     const getAgent = async (agentId) => {
-        try {
-            const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(agentId))
+        const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(agentId))
 
-            if (agent.cover) {
-                agent.avatarUrl = getImageURL(agent.collectionId, agent.id, agent.cover)
-            } else {
-                agent.avatarUrl = `https://ui-avatars.com/api/?name=${agent.name}`
-            }
-            
-            // console.log(agent)
-            return agent;
-        } catch (err) {
-            console.log("Error: ", err)
-            throw error(err.status, err.message)
+        if (agent.public) {
+            throw redirect(303, '/')
         }
+
+        if (agent.cover) {
+            agent.avatarUrl = getImageURL(agent.collectionId, agent.id, agent.cover)
+        } else {
+            agent.avatarUrl = `https://ui-avatars.com/api/?name=${agent.name}`
+        }
+        
+        // console.log(agent)
+        return agent;
+
     }
 
     const getMessages = async (chatId) => {

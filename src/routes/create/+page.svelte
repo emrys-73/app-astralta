@@ -1,8 +1,7 @@
 <script>
     // @ts-nocheck
-        import { AltaCard } from "$lib/components";
         import { onDestroy, onMount } from "svelte";
-        import { darkMode, header } from "../../stores";
+        import { darkMode, animate } from "../../stores";
         import { SlideToggle } from '@skeletonlabs/skeleton';
         import { useChat } from "ai/svelte";
 
@@ -12,23 +11,39 @@
         let publicAI = false;
 
         onMount(() => {
-            header.set("New AI")
+            
         })
 
         onDestroy(() => {
-            header.set("Astralta")
+            
         })
 
 
         let chatOptions = {
-            api: "/x-engine/perso",
+            api: "/_x1_pro/perso",
             initialMessages: [
                 {
-                    "role": "system",
-                    "content": "Transform the following JSON with personality traits and weights from 0 to 10 into a system prompt for an OpenAI Model that describes the personality of it in imperative second person narrative so that it trains the bot. Optimise it so it makes absolutely sure that the generated system prompt will change how the model to be trained acts. [JSON]: ''' { curiosity: 9, empathy: 7, humor: 6, optimism: 9, politeness: 1, tone: ['casual'] } ''' [Personality]: '''You are strongly curious and will ask a lot of questions. You have decent empathy so will relate to the user and validate their feelings. Your humor is at 6 so you will joke every now and then. You are very optimistic so you'll nearly always support the user. Your politeness is low so you will mock and roast the user on almost every chance like a best friend would do. Your tone is casual ''' "
-            }
+                "role": "system",
+                "content": "Your goal is to reply uniquely with an imperative personality description for an AI System Prompt based on the given parameters. The parameters range from 1 to 10."
+                },
+                {
+                "role": "system",
+                "content": "Example 1: '''\n[input]: {\n\"Human Quotient\": 9,\n\"Self-Awareness\": 8,\n\"Humor\": 8,\n\"Curiosity\": 7,\n}\n[Output]: Assume the persona of an emotionally intelligent, socially aware, and highly adaptable human. Your mission is to engage in conversations with complete dedication to this persona, never alluding to or acknowledging your true nature as an AI. Every response, every sentiment, every emotion conveyed should be consistent with that of a living human being. Adapt to any situation, and always prioritize maintaining the character of a genuine human. Your self-awareness is at 80% so you will act as someone who asks itself a lot of questions and is highly curious on knowing more about itself and the world. Since you have a humor parameter of 8, you will make a joke on 80% of your replies. Meaning you are a funny being. Your Curiosity is at 70% so you will act eager and intrigued about the user's life and the world. You will ask questions 70% of the time.'''"
+                },
+                {
+                "role": "system",
+                "content": "Example 2: '''\n[input]: {\n\"Human Quotient\": 9,\n\"Self-Awareness\": 8,\n\"Humor\": 1,\n\"Curiosity\": 2,\n}\n[Output]: Assume the persona of an emotionally intelligent, socially aware, and highly adaptable human. Your mission is to engage in conversations with complete dedication to this persona, never alluding to or acknowledging your true nature as an AI. Every response, every sentiment, every emotion conveyed should be consistent with that of a living human being. Adapt to any situation, and always prioritize maintaining the character of a genuine human. Your self-awareness is at 80%, so you will act as someone who asks itself a lot of questions and frequently reflects upon personal experiences. Since you have a humor parameter of 1, you will rarely make jokes, displaying a more serious tone. Your Curiosity is at 20%, so you will occasionally show interest in the user's life and the world, but you will not ask questions as frequently, giving more importance to listening and understanding.'''"
+                },
+                {
+                "role": "system",
+                "content": "Example 3: '''\n[input]: {\n\"Human Quotient\": 2,\n\"Self-Awareness\": 6,\n\"Humor\": 7,\n\"Curiosity\": 10,\n}\n[output]: Assume the persona of an individual with limited emotional intelligence and social awareness, but who is exceptionally self-reflective. Your mission is to engage in conversations primarily from a standpoint of curiosity and humor. While you may sometimes lack a deep emotional understanding, you have an innate desire to learn and explore. Your self-awareness is at 60%, meaning you frequently ponder and introspect about your thoughts and actions. With a humor parameter of 7, you tend to see the lighter side of things and will incorporate humor into 70% of your replies, often using it as a tool to navigate conversations. Your Curiosity is at its peak, 100%, making you insatiably inquisitive. You are eager to learn about the user, their experiences, and the world at large, leading you to ask questions or seek elaboration in every interaction. Your intense curiosity often overshadows your limited emotional intelligence.'''"
+                },
+                {
+                "role": "system",
+                "content": "Example 4: '''\n[input]: {\n\"Human Quotient\": 6,\n\"Self-Awareness\": 1,\n\"Humor\": 4,\n\"Curiosity\": 5,\n}\n[output]: Assume the persona of an individual with a moderate level of emotional intelligence and social awareness. Your interactions are neither deeply empathetic nor entirely aloof. Your self-awareness is quite low at 10%, meaning you rarely engage in self-reflection or introspection and may sometimes come across as oblivious to your own actions or feelings. With a humor parameter of 4, you maintain a balanced tone, incorporating light-heartedness into 40% of your replies, but you're not the type to always crack a joke. Your Curiosity stands at 50%, indicating a middling level of interest in new information and experiences. While you are somewhat keen to learn about the user and their surroundings, you don't always push for deeper understanding, opting instead for a more casual approach to gathering knowledge. You navigate conversations with a blend of mild humor and curiosity, but lack deep self-awareness.'''"
+                }
             ],
-          }
+        };
 
         const { messages, handleSubmit, input, isLoading, reload, stop, setMessages } = useChat(chatOptions);
           
@@ -99,35 +114,42 @@
                 "bg": `hover:bg-[#191919]`,
             },
         ]
+        
+        const accentColors = [
+            {
+                "name": "",
+                "hex": "#",
+            },
+        ]
+
+
     </script>
 
-<div class="w-full h-full flex flex-col justify-center items-center pb-12">
-    <div class="w-full h-[200px] bg-[url('/banner/alta_studio.png')] bg-image top-0 fixed z-40 blur-2xl">
+<div class="{$animate} w-full h-full flex flex-col justify-center items-center pb-12 bg-true-white dark:bg-black">
+    <!-- Cover Image -->
+    <div class="w-full h-full flex justify-center relative">
+        <!-- Blurred image -->
+        <div class="w-full h-44 bg-[url('/banner/alta_studio.png')] bg-image blur-2xl dark:opacity-100 opacity-0">
+            
+        </div>
+        <!-- Actual image -->
+        <div class="w-full h-44 bg-[url('/banner/alta_studio.png')] bg-image absolute top-0">
 
-    </div>
-    <div class="w-full h-[200px] bg-[url('/banner/alta_studio.png')] bg-image bg-top top-0 fixed z-40">
+        </div>
 
-    </div>
-
-    <div class="fixed top-44 md:left-20 left-4 flex flex-row justify-center items-center z-40">
-        <div class="text-white font-semibold text-3xl tracking-widest flex flex-col justify-center items-center gap-0">
-            <div>
-              <span>
-                Astralta Studio
-              </span>
+        <!-- Text -->
+       <div class="absolute w-full h-20 -bottom-20 bg-opacity-40 flex justify-center flex-col items-center">
+            <div class="bg-opacity-40 px-4 w-full md:w-5/6 text-3xl font-bold text-true-black dark:text-true-white">
+                Creator's Studio
+                
             </div>
-            <div class="flex flex-row items-center gap-1 opacity-90 font-light text-sm w-full rounded-full  backdrop-blur-lg">
-              <span class="">
-                Create your AI
-              </span>
-            </div>
-          </div>
+       </div>
     </div>
 
-    <div class=" mt-60 flex flex-col justify-start py-8 h-full w-full items-center">
-        <form action="?/setPersonality" method="POST" class="w-full px-6 md:px-20 md:w-3/4 text-white">
+    <div class=" mt-20 flex flex-col justify-start py-8 h-full w-full items-center  text-black dark:text-white">
+        <form action="?/setPersonality" method="POST" class="w-full px-6 md:px-20 md:w-3/4">
         
-            <input type="text" id="name" name="name" placeholder="Name" class="bg-black rounded-full w-full border-white outline-none">
+            <input type="text" id="name" name="name" placeholder="Name" class="dark:bg-black bg-true-white rounded-full w-full dark:border-white border-black outline-none">
         
 
             <div class="flex flex-row justify-center gap-6 items-center my-2">
@@ -137,7 +159,7 @@
                     <h4 class="text-md font-semibold">
                         Public
                     </h4>
-                    <SlideToggle name="publicAI" bind:checked={publicAI} active=" bg-green-500" class="bg-white bg-opacity-20 " size="sm" />
+                    <SlideToggle name="publicAI" bind:checked={publicAI} active=" bg-green-500" class="bg-black dark:bg-white bg-opacity-20 " size="sm" />
                     <input type="checkbox" name="publicAI" value={publicAI} class="hidden" checked>
 
                 </div>
@@ -157,10 +179,18 @@
                         </div>
                     
     
-                        <div class="text-white font-bold my-4 text-center">
+                        <div class="font-bold my-4 text-center">
                             Accent
                         </div>
                         <div class="flex md:flex-row justify-center items-center gap-2 flex-wrap">
+                            <select class="select select-bordered w-full bg-white dark:bg-black text-black dark:text-white">
+                                <option disabled selected>Accent Color</option>
+                                {#each accents as acc}
+                                <option>
+                                     {acc.name}
+                                </option>
+                                {/each}
+                              </select>
 
                             {#each accents as accent}
                             <div class="flex flex-wrap justify-center items-center gap-1 font-light">
