@@ -1,15 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
+import { serializeNonPOJOs } from '$lib/utils.js';
 
 export const load = async ({ locals }) => {
 
     locals.pb.autoCancellation(false);
-
-    const serializeNonPOJOs = (/** @type {any} */ obj) => {
-        return structuredClone(obj)
-    };
 
     const getChats = async () => {
         try {
@@ -29,14 +26,14 @@ export const load = async ({ locals }) => {
         }
     };
 
-    const getAgents = async () => {
+    const getLocalAgents = async () => {
         try {
 
             const userId = locals.pb.authStore.model.id
 
             const agents = serializeNonPOJOs(await locals.pb.collection('agents').getFullList({
                 sort: '-updated',
-                filter: `users~"${userId}"`
+                filter: `public = false && users~"${userId}"`
             }));
 
             return agents
@@ -46,6 +43,25 @@ export const load = async ({ locals }) => {
             throw error(err.status, err.message)
         }
     };
+
+    const getPublicAgents = async () => {
+        try {
+
+            const userId = locals.pb.authStore.model.id
+
+            const agents = serializeNonPOJOs(await locals.pb.collection('agents').getFullList({
+                sort: '-updated',
+                filter: ` public = true && users~"${userId}"`
+            }));
+
+            return agents
+
+        } catch (err) {
+            console.log("Agent Error: ", err)
+            throw error(err.status, err.message)
+        }
+    };
+
 
     const getPersonalities = async () => {
         try {
@@ -71,25 +87,23 @@ export const load = async ({ locals }) => {
     };
 
 
-    let waitlist = true;
-
-
     try {
         if (locals.user) {
             return {
                 user: locals.user,
                 chats: getChats(),
-                agents: getAgents(),
+                localAgents: getLocalAgents(),
+                publicAgents: getPublicAgents(),
                 personalities: getPersonalities(),
-                waitlist: false,
+                // waitlist: false,
             }
         }
         return {
             user: undefined,
             chats: undefined,
-            agents: undefined,
+            localAgents: undefined,
+            publicAgents: undefined,
             personalities: undefined,
-            waitlist,
         }
 
     } catch (err) {
