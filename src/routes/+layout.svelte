@@ -17,16 +17,10 @@
     import { setModeUserPrefers, setModeCurrent } from '@skeletonlabs/skeleton';
 	export let data;
 
-    let bgUrl;
-    $: bgUrl = `bg-[url('/bg/${$bg}.png')]`
-
-    let curPage;
-    $: curPage = ""
-
-    let username = data.user ? data.user.username : '/login'
+    let username = data?.user ? data?.user?.username : '/login'
 
     onMount(() => {
-        setModeCurrent(false)
+        
     })
 
     let AIData = [

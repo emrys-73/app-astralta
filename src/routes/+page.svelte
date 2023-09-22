@@ -12,10 +12,10 @@
   header.set("Astralta")
 
   onMount(() => {
-    editing = false;
-    displayDeleteConfirmation = false;
-    chatCount.set(data?.chats?.length);  
-    countPublic();
+    // editing = false;
+    // displayDeleteConfirmation = false;
+    // chatCount.set(data?.chats?.length);  
+    // countPublic();
   })
 
 
@@ -54,15 +54,7 @@
 
   let pinnedChatUrl;
   $: pinnedChatUrl = ""
-
-  const pinChat = (url) => {
-    pinnedChatUrl = url
-  }
-
-  const unpinChat = () => {
-    pinnedChatUrl = ""
-  }
-
+  
   let existUnassigned;
   $: existUnassigned = false;
 

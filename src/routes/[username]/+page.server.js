@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { error, redirect } from "@sveltejs/kit";
+
+import { redirect } from "@sveltejs/kit";
+
 
 const serializeNonPOJOs = (/** @type {any} */ obj) => {
     return structuredClone(obj)
@@ -10,28 +11,8 @@ const serializeNonPOJOs = (/** @type {any} */ obj) => {
 
 export const load = async ({ locals, params }) => {
 
-    let loggedIn = false;
-
-    if (!locals.user) {
-        loggedIn = true;
-    }
-
-    const getPublicAI = async () => {
-        try {
-            const agents = serializeNonPOJOs(await locals.pb.collection('agents').getFullList({
-                filter: 'public = true ',
-            }));
-
-            return agents;
-        } catch (err) {
-            console.log("Error retrieving publicAI")
-        }
-
-    }
-
     const getData = async () => {
         try {
-
             const user = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
 
             const agents = serializeNonPOJOs(await locals.pb.collection('agents').getFullList({
@@ -41,12 +22,11 @@ export const load = async ({ locals, params }) => {
 
             return {
                 user: user,
-                loggedIn: loggedIn,
                 agents: agents
             }
 
         } catch (err) {
-            console.log("Error retrieving Data")
+            console.log("Error retrieving Data for username page")
             throw redirect(303, '/')
         }
     }
