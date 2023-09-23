@@ -4,12 +4,10 @@
 	import { onMount } from 'svelte';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
-	import { Drawer, ActionBar } from '$lib/components';
-    import { drawerOpen, bg, darkMode, header, back, showActionBar, actionIslandData, elevateActionBar } from '../stores';
+    import { bg, darkMode, showActionBar, actionIslandData, elevateActionBar } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
-    import { page } from '$app/stores';
 	export let data;
 
     let bgUrl;
@@ -21,12 +19,6 @@
     const getImageURL = (collectionId, recordId, fileName, size = '0x0') => {
 		return `http://139.144.176.23:80/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
 	};
-
-    // const toggleDrawer = () => {
-    //     drawerOpen.update((state) => !state)
-    // }
-
-    // let avatarUrl = `https://ui-avatars.com/api/?name=${data?.user?.name}`;
 
     let backgroundUrl = "/bg/home.png"
 
