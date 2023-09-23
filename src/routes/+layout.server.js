@@ -44,6 +44,24 @@ export const load = async ({ locals }) => {
         }
     };
 
+    const getAllAgents = async () => {
+        try {
+
+            const userId = locals.pb.authStore.model.id
+
+            const agents = serializeNonPOJOs(await locals.pb.collection('agents').getFullList({
+                sort: '-updated',
+                filter: `users~"${userId}"`
+            }));
+
+            return agents
+
+        } catch (err) {
+            console.log("Agent Error: ", err)
+            throw error(err.status, err.message)
+        }
+    };
+
     const getPublicAgents = async () => {
         try {
 
@@ -92,7 +110,8 @@ export const load = async ({ locals }) => {
             return {
                 user: locals.user,
                 chats: getChats(),
-                agents: getLocalAgents(),
+                agents: getAllAgents(),
+                localAgents: getLocalAgents(),
                 publicAgents: getPublicAgents(),
                 personalities: getPersonalities(),
             }
@@ -101,6 +120,7 @@ export const load = async ({ locals }) => {
             user: undefined,
             chats: undefined,
             agents: undefined,
+            localAgents: undefined,
             publicAgents: undefined,
             personalities: undefined,
         }
