@@ -4,10 +4,16 @@
 	import { onMount } from 'svelte';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
-    import { bg, darkMode, showActionBar, actionIslandData, elevateActionBar } from '../stores';
+    import { bg, showActionBar, elevateActionBar } from '../stores';
     import { dev } from '$app/environment';
     import { inject } from '@vercel/analytics';
     inject({ mode: dev ? 'development' : 'production' });
+    import { autoModeWatcher } from '@skeletonlabs/skeleton';
+    import { LightSwitch } from '@skeletonlabs/skeleton';
+    import { getImageURL } from '$lib/utils';
+    import { setInitialClassState } from '@skeletonlabs/skeleton';
+    import { modeOsPrefers, modeUserPrefers, modeCurrent } from '@skeletonlabs/skeleton';
+    import { setModeUserPrefers, setModeCurrent } from '@skeletonlabs/skeleton';
 	export let data;
 
     let bgUrl;
@@ -16,42 +22,12 @@
     let curPage;
     $: curPage = ""
 
-    const getImageURL = (collectionId, recordId, fileName, size = '0x0') => {
-		return `http://139.144.176.23:80/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
-	};
-
     let backgroundUrl = "/bg/home.png"
 
     let username = data.user ? data.user.username : '/login'
 
     onMount(() => {
-        setActionIslandData();
-
-        // function handleKeyDown(event: { metaKey: any; key: string; ctrlKey: any; }) {
-        //     if (event.metaKey && event.key === 'x') {
-        //         toggleDrawer()
-        //     }
-        //     if (event.ctrlKey && event.key === 'x') {
-        //         toggleDrawer()
-        //     }
-        // }
-
-        window.addEventListener('keydown', handleKeyDown);
-
-        // if (data?.user?.avatar) {
-        //     avatarUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.avatar).toString()
-        // }
-
-        // if (data?.user?.background){
-        //     backgroundUrl = getImageURL(data.user?.collectionId, data.user?.id, data.user?.background).toString()
-        // }
-
-        // back.set(`bg-[url('${backgroundUrl}'')]`)
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-
+        setModeCurrent(false)
     })
 
 
@@ -139,28 +115,12 @@
                 },
     ]
 
-
-
-    // let bgImagePath = '/bg/forest.png';
-
-    // $: {
-    // document.body.style.backgroundImage = `url(${bgImagePath})`;
-    // }
-    
-
-    // let actionIslandItems;
-    // $: actionIslandItems = []
-
-    // actionBarData.subscribe
-
 </script>
 
 
+<svelte:head>{@html `<script>(${setInitialClassState.toString()})();</script>`}</svelte:head>
 
-<!-- <AppShell class="bg-[url('{backgroundUrl}')] bg-image"> -->
-<!-- <AppShell class="{$back} bg-image"> -->
-<!-- <AppShell class="{$darkMode ? `bg-[url('/bg/ocean.png')]` : 'bg-[#c7c7c7]'} bg-image"> -->
-<AppShell class="{$darkMode ? `bg-[#000]` : 'bg-[#c7c7c7]'} bg-image">
+<AppShell class="bg-true-white dark:bg-black bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         <!-- {#if $showActionBar} -->
@@ -179,33 +139,6 @@
         </div>
         <!-- {/if} -->
 	</svelte:fragment>
-	
-    <!-- <div class="{!$page.url.pathname.toString().includes(`public`) ? '' : 'hidden'}">
-        <div class="fixed top-0 w-full z-40 backdrop-blur-md justify-center flex items-center min-h-16 bg-white bg-opacity-5 hover:bg-opacity-10 transition-all ease-in-out duration-300"> -->
-
-            <!-- <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } mx-20">
-                <a href="/">
-                    <span class="drop-shadow-md text-md">
-                        {$header}
-                    </span>
-                </a>
-            </div> -->
-
-            <!-- {#if data?.user}
-            <div class="fixed right-0">
-                    <a href="/gen-settings">
-                    <span class="btn bg-transparent border-none hover:bg-transparent active:border-none avatar w-20 z-50">
-                        <div class=" rounded-full w-[35px] lg:w-[45px]">
-                        <img src={avatarUrl} alt="avatar" id="avatar-preview">
-                        </div>
-                    </span>
-                    
-                </a>
-            </div>
-            {/if} -->
-<!-- 
-        </div>
-    </div>        -->
 
     <slot/>
 </AppShell>
