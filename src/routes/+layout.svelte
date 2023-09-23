@@ -75,7 +75,7 @@
 <svelte:head>{@html `<script>(${setInitialClassState.toString()})();</script>`}</svelte:head>
 
 
-<AppShell class="{$backgroundConfig} bg-image">
+<AppShell class="bg-true-white dark:bg-black bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         <div class="md:h-full {$elevateActionBar ? 'bottom-32' : 'bottom-2'} md:w-12 w-full {$showActionBar ? '' : 'hidden'}  md:backdrop-blur-none fixed md:left-2 z-50 justify-center flex items-center bg-opacity-20">
