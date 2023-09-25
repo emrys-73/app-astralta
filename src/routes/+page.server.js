@@ -25,8 +25,6 @@ export const actions = {
             "ChatID": data.chatId,
             "UpdatedChat": UpdatedChat
         }
-    
-        console.log(result)
 
         throw redirect(303, '/')
     },
@@ -116,7 +114,6 @@ export const actions = {
         };
 
         const systemMessage = await locals.pb.collection('messages').create(systemTrainingData);
-        // console.log(systemMessage);
 
         if (agent.public) {
             throw redirect(303, `/${locals.user.username}/public/${data.agentId}/${newChat.id}`)    

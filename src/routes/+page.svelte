@@ -2,7 +2,7 @@
 // @ts-nocheck
 
   import { InfoModal, LiveCard, AltaCard } from '$lib/components';
-  import { darkMode, chatCount, header, publicUrl, actionIslandData } from '../stores.js';
+  import { darkMode, chatCount, header, publicUrl, actionIslandData, animate } from '../stores.js';
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   export let data;
@@ -23,6 +23,11 @@
     chatCount.set(data?.chats?.length);  
     countPublic();
   })
+
+  let showPublicAI;
+  $: showPublicAI = false;
+  const showPublic = () => { showPublicAI = true }
+  const hidePublic = () => { showPublicAI = false }
 
 
 
@@ -125,9 +130,9 @@
 </script>
 
 
-<div class="w-full h-full flex flex-col justify-center items-center">
+<div class="{$animate} w-full h-full flex flex-col justify-center items-center pb-12 text-black dark:text-white bg-true-white dark:bg-black">
   <!-- Banner image -->
-  <div class="w-full h-[200px] bg-[url('/banner/base.jpg')] bg-image top-0 fixed z-40 blur-3xl">
+  <div class="w-full h-[200px] bg-[url('/banner/base.jpg')] bg-image top-0 fixed z-40 blur-3xl opacity-0 dark:opacity-100">
 
   </div>
   <div class="w-full h-[200px] bg-[url('/banner/base.jpg')] bg-image top-0 fixed z-40">
@@ -135,7 +140,7 @@
   </div>
 
   <!-- user tag and image -->
-  <div class="fixed top-40 md:left-20 left-4 flex flex-row justify-center items-center z-40">
+  <div class="fixed top-[151px] md:left-20 left-4 flex flex-row justify-center items-center z-40">
       <!-- Avatar -->
       <div class="">
           <button on:click={copyToClipboard(`${$page.url}`)} class="btn border-none bg-transparent hover:bg-transparent mx-1 active:border-none avatar w-18 p-2">
@@ -145,7 +150,7 @@
           </button>
       </div>
       <!-- Username -->
-      <div class="text-white font-semibold text-3xl tracking-widest flex flex-col justify-center items-center gap-0">
+      <div class="text-white font-semibold text-3xl tracking-widest flex flex-col justify-center items-center gap-1">
         <div>
           <span>
               {data?.user?.name}
@@ -187,28 +192,39 @@
   
       <!-- Resliche AI -->
       <div class="h-full justify-center items-center flex overflow-x-auto flex-col text-white">
-        <div class="my-2">
-          My AI
+        <div class="justify-center flex items-center h-12 flex-row gap-4 text-black dark:text-white">
+          <button on:click={hidePublic} class="{showPublicAI ? '' : 'dark:border-white border-black border-b-2 opacity-80'} px-4 opacity-50">
+            Local
+          </button>
+          <button on:click={showPublic} class="{!showPublicAI ? '' : 'dark:border-white border-black border-b-2 opacity-80'} px-4 opacity-50">
+            Public
+          </button>
         </div>
-          {#each data.agents as ai}
-               {#if ai.public}
-                  <a href={`/${data.user.username}/public/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 flex-row flex items-center relative">
-                      <span class="">
-                          {ai.name}
-                      </span>
-                      <div class=" px-4 text-sm rounded-full text-white bg-white bg-opacity-10 absolute right-4">
-                        Public
-                      </div>
-                  </a>
-                {:else }
-                <a href={`/agents/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1">
-                  <span class="">
-                      {ai.name}
-                  </span>
-              </a>
-                {/if}
 
+        <div class="flex-col flex w-full h-full text-black dark:text-white">
+          {#if showPublicAI}
+          {#each data.publicAgents as ai}
+            <a href={`/${data.user.username}/public/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 flex-row flex items-center relative">
+              <span class="">
+                  {ai.name}
+              </span>
+              <div class=" px-4 text-sm rounded-full text-white bg-white bg-opacity-10 absolute right-4">
+                Public
+              </div>
+          </a>
           {/each}
+          {:else }
+          {#each data.localAgents as ai}
+            <a href={`/${data.user.username}/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 ">
+              <span class="">
+                  {ai.name}
+              </span>
+            </a>
+          {/each}
+          {/if}
+        </div>
+        
+          
       </div>
   </div>
 
