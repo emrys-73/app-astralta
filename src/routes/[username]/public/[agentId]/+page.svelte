@@ -15,9 +15,15 @@
     let currentAgentId;
     $: currentAgentId = "hi"
 
+
+    let bgUrl;
+    let coverClass;
+
     onMount(() => {
+        bgUrl = data.agent.cover ? data.agent.cover_url : data?.covers[random(coversLength)].url
         // editing = false;
         displayDeleteConfirmation = false;
+        coverClass = `bg-[url('${bgUrl}')]`
         adminRightEval()
         setImportable()
     })
@@ -57,12 +63,11 @@
       return Math.floor(Math.random() * (max + 1));
     }
 
-    let bgUrl = data.agent.cover ? data.agent.cover_url : data?.covers[random(coversLength)].url
+  
 
+    
+    
     // let coverClass = `bg-[url('http://139.144.176.23:80/api/files/oo1sg8k1kzp3p2q/u770asbvqwpzxlg/ezgif_com_video_to_gif_y2l1FVZ1Q1.gif?thumb=0x0')]`
-
-    let coverClass = `bg-[url('${bgUrl}')]`
-
     let adminRights = false;
 
     const adminRightEval = () => {
