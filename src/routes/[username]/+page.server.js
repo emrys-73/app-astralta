@@ -33,14 +33,11 @@ export const load = async ({ locals, params }) => {
         try {
 
             const user = serializeNonPOJOs(await locals.pb.collection('users').getFirstListItem(`username="${params.username}"`))
-            
 
             const agents = serializeNonPOJOs(await locals.pb.collection('agents').getFullList({
                 filter: `public = true && users ~ "${user.id}"`,
-                sort: '-likes',
+                sort: '-like_count',
             }));
-
-            // console.log(agents)
 
             return {
                 user: user,
