@@ -23,7 +23,7 @@
         bgUrl = data.agent.cover ? data.agent.cover_url : data?.covers[random(coversLength)].url
         // editing = false;
         displayDeleteConfirmation = false;
-        coverClass = `bg-[url('http://139.144.176.23:80/api/files/oo1sg8k1kzp3p2q/u770asbvqwpzxlg/ezgif_com_video_to_gif_y2l1FVZ1Q1.gif?thumb=0x0')]`
+        coverClass = `bg-[url('http://139.144.176.23:80/api/files/oo1sg8k1kzp3p2q/u770asbvqwpzxlg/ezgif_com_video_to_gif_y2l1FVZ1Q1.gif')]`
         adminRightEval()
         setImportable()
     })
