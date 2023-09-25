@@ -23,7 +23,7 @@
         bgUrl = data.agent.cover ? data.agent.cover_url : data?.covers[random(coversLength)].url
         // editing = false;
         displayDeleteConfirmation = false;
-        coverClass = `bg-[url('${bgUrl}')]`
+        coverClass = `bg-[url('https://www.finedininglovers.com/sites/g/files/xknfdk626/files/styles/im_square_33_fallback/public/Gordon-Ramsay.jpg?itok=6SIpVcBe')]`
         adminRightEval()
         setImportable()
     })
