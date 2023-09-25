@@ -89,6 +89,12 @@
       importable = false
     }
 
+    let imgUrl = "http://139.144.176.23:80/api/files/oo1sg8k1kzp3p2q/u770asbvqwpzxlg/ezgif_com_video_to_gif_y2l1FVZ1Q1.gif"
+
+
+    let urlll = "http://139.144.176.23:80/api/files/oo1sg8k1kzp3p2q/u770asbvqwpzxlg/ezgif_com_video_to_gif_y2l1FVZ1Q1.gif"
+    let secondHandUrl = `${urlll}`
+
 </script>
 
 
@@ -106,6 +112,8 @@
           @{data?.agent.expand.creator.username}
         </a>
       </div>
+
+      
 
 
       <div class="flex flex-row gap-4 justify-center items-center mt-3">
@@ -148,6 +156,14 @@
       <div class="text-white text-3xl font-semibold text-center mt-8 tracking-wider">
         {data?.agent?.name}
       </div>
+
+      <div class="w-64 h-64 bg-[url('http://139.144.176.23:80/api/files/oo1sg8k1kzp3p2q/u770asbvqwpzxlg/ezgif_com_video_to_gif_y2l1FVZ1Q1.gif')]">
+
+      </div>
+
+      <img src="http://139.144.176.23:80/api/files/oo1sg8k1kzp3p2q/u770asbvqwpzxlg/ezgif_com_video_to_gif_y2l1FVZ1Q1.gif" alt="whoops"/>
+
+      <img src={`${secondHandUrl}`} alt="whoops"/>
   
       <div class="text-center text-white opacity-60 hover:opacity-100 text-md">
         <a href={`/${data?.agent.expand.creator.username}`} class=" hover:text-white">

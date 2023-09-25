@@ -18,6 +18,7 @@
 
             <span class="text-white absolute bottom-4 left-4 font-semibold text-2xl">
                 {cat.name}
+                {cat.image_url}
             </span>
         </a>
 
