@@ -24,7 +24,7 @@
     onMount(() => {
         showActionBar.set(true)
         elevateActionBar.set(false)
-        setModeCurrent(true)
+        setModeCurrent(false)
     })
 
     let AIData = [

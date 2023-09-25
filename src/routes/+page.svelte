@@ -204,18 +204,18 @@
         <div class="flex-col flex w-full h-full text-black dark:text-white">
           {#if showPublicAI}
           {#each data.publicAgents as ai}
-            <a href={`/${data.user.username}/public/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 flex-row flex items-center relative">
+            <a href={`/${data.user.username}/public/${ai.id}`} class="bg-black dark:bg-white dark:bg-opacity-5 rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 flex-row flex items-center relative">
               <span class="">
                   {ai.name}
               </span>
-              <div class=" px-4 text-sm rounded-full text-white bg-white bg-opacity-10 absolute right-4">
+              <div class=" px-4 text-sm rounded-full text-white bg-black dark:bg-white bg-opacity-80 dark:bg-opacity-10 absolute right-4">
                 Public
               </div>
           </a>
           {/each}
           {:else }
           {#each data.localAgents as ai}
-            <a href={`/${data.user.username}/${ai.id}`} class="bg-white rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 ">
+            <a href={`/${data.user.username}/${ai.id}`} class="bg-black dark:bg-white dark:bg-opacity-5 rounded-2xl bg-opacity-5 hover:bg-opacity-10 hover:text-lg transition-all ease-in-out duration-300 backdrop-blur-md px-6 w-full py-2 my-1 ">
               <span class="">
                   {ai.name}
               </span>
