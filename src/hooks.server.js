@@ -8,7 +8,7 @@ const serializeNonPOJOs = (/** @type {any} */ obj) => {
 };
 
 export const handle = async ({ event, resolve }) => {
-    event.locals.pb = new Pocketbase('http://139.144.176.23')
+    event.locals.pb = new Pocketbase('https://astralta.com')
     event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '')
 
     // The following try/catch block is a later addition because 
