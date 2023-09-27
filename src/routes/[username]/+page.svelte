@@ -2,9 +2,8 @@
 <script>
 // @ts-nocheck
 
-    import { LiveCard } from "$lib/components";
     import { page } from '$app/stores';
-    import { InfoModal, AltaCard } from "$lib/components";
+    import { InfoModal } from "$lib/components";
     import { darkMode } from "../../stores.js";
 
     export let data;

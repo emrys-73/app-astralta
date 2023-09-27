@@ -28,6 +28,11 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
 
+.altashadow-max {
+  box-shadow: 10px 20px 55px rgba(0, 0, 0, 0.8);
+}
+
+
 .altashadow-light {
   box-shadow: 0 20px 15px rgba(0, 0, 0, 0.3);
 }
@@ -35,14 +40,17 @@ body {
 
 .bg-image {
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
   background-position: center;
 }
+
+
 
 .cover-image {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
+  /* filter: blur(50px); Adjust the blur value as needed */
 }
 
 .force-opaque::placeholder {

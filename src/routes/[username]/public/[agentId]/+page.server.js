@@ -27,7 +27,6 @@ export const load = async ({ locals, params }) => {
         // console.log(agent)
         const covers = serializeNonPOJOs(await locals.pb.collection('covers').getFullList());
 
-
         for (let i = 0; i < covers.length; i++) {
             covers[i].url = getImageURL(covers[i].collectionId, covers[i].id, covers[i].cover)
         }
@@ -44,9 +43,11 @@ export const load = async ({ locals, params }) => {
             throw redirect(303, '/')
         }
 
-        agent.cover_url = getImageURL(agent.collectionId, agent.id, agent.cover)
+        agent.cover_url = getImageURL(agent.collectionId, agent.id, agent.cover, "20x20f")
 
         const thereIsAnUser = locals.user ? true : false;
+
+        console.log(agent)
 
         return {
             creator: creator,
