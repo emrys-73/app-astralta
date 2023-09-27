@@ -27,6 +27,6 @@ export const actions = {
             console.log('Error', err);
             throw redirect(303, '/whoops')    
         } 
-        throw redirect(303, `/idk`);
+        throw redirect(303, `/`);
     }
 };
