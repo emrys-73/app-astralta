@@ -78,7 +78,7 @@
 
 <!-- Content -->
 <div class="w-full h-full z-20  absolute top-0 text-white">
-  <div class="flex flex-col w-full h-full">
+  <div class="flex flex-col w-full h-full ">
     <!-- Header -->
     <div class="w-full h-[650px] md:h-[750px] lg:h-[850px] flex items-center flex-col gap-2 relative justify-center">
       <!-- Cover -->
@@ -118,5 +118,6 @@
 
 
     <!-- Body -->
+  
   </div>
 </div>
