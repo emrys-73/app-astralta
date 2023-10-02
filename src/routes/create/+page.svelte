@@ -196,13 +196,13 @@
         const backgrounds = [
             {
                 "name": "Classic",
-                "realName": "dark",
+                "realName": "Classic",
                 "hex": "#000000",
                 "bg": `hover:bg-[#000000]`,
             },
             {
                 "name": "Notion",
-                "realName": "notionDark",
+                "realName": "Notion",
                 "hex": "#000000",
                 "bg": `hover:bg-[#191919]`,
             },
@@ -218,7 +218,7 @@
 
         // Color selection
         let selectedColor = null;
-        let accent = '';  // This variable is bound to the input field and will hold the base_name
+        let accent = undefined;  // This variable is bound to the input field and will hold the base_name
         // This function finds the selected color object based on the color name
         const findColorByName = (name) => colors.find(color => color.name === name);
 
@@ -236,7 +236,7 @@
 
         let storeMessages = true;
 
-        let actionPrompt = ""
+        let actionPrompt = undefined
 
         let AIMax = false
 
@@ -271,7 +271,7 @@
             <div class="flex flex-row justify-center items-center my-2">
 
                 <!-- <input type="checkbox" name="pro" value={proMode} class="" checked> -->
-                <div class="my-4 justify-center items-center flex gap-28 flex-row mx-6">
+                <div class="my-4 justify-center items-center flex flex-wrap gap-x-20 flex-row px-6">
                     <!-- <div class="flex flex-row">
 
                         <h4 class="text-md font-semibold">
@@ -309,7 +309,7 @@
 
                     </div>
 
-                    <div>
+                    <!-- <div>
 
                         <input type="checkbox" name="max" value={AIMax} class="hidden" checked>
                         <div class="my-4 justify-center items-center flex gap-2 flex-row">
@@ -321,7 +321,7 @@
     
                         </div>
 
-                    </div>
+                    </div> -->
 
 
                 </div>
@@ -369,25 +369,29 @@
                         <div class="font-bold text-center mt-12 mb-4">
                             Accent Color
                         </div>
-                        <div class="flex md:flex-col justify-center items-center gap-2">
-                            <input type="text" name="accent" bind:value={accent} class="bg-black" hidden />
-                            <select bind:value={selectedColor} class="select select-bordered w-full bg-white dark:bg-black text-black dark:text-white">
-                                <option disabled selected>Accent Color</option>
-                                {#each colors as color}
-                                    <option value={color.name}>
-                                        {color.name}
-                                    </option>
-                                {/each}
-                            </select>
-
-                            <div class="justify-center flex items-center my-4  p-6 {`${selectedBackgroundColorObj ? selectedBackgroundColor : ''}`}">
-                                <!-- This button's class changes based on the selected color -->
-                                <div class="{`${selectedColorObj ? selectedColorObj['bg-hex'] : 'bg-true-black'} ${selectedColorObj ? selectedColorObj.text : 'text-white'}`} altashadow px-6 py-2 hover:cursor-auto font-normal lowercase tracking-wider rounded-full border-none {$animate}">
-                                    <span class="text-sm">
-                                        This is how your messages will look like
-                                    </span>
+                        <div class="flex flex-col justify-center items-center gap-2">
+                            <div class="w-full">
+                                <input type="text" name="accent" bind:value={accent} class="bg-black" hidden />
+                                <select bind:value={selectedColor} class="select select-bordered w-full bg-white dark:bg-black text-black dark:text-white">
+                                    <option disabled selected>Accent Color</option>
+                                    {#each colors as color}
+                                        <option value={color.name}>
+                                            {color.name}
+                                        </option>
+                                    {/each}
+                                </select>
+                            </div>
+                            <div>
+                                <div class="justify-center flex items-center my-4  p-6 {`${selectedBackgroundColorObj ? selectedBackgroundColor : ''}`}">
+                                    <!-- This button's class changes based on the selected color -->
+                                    <div class="{`${selectedColorObj ? selectedColorObj['bg-hex'] : 'bg-true-black'} ${selectedColorObj ? selectedColorObj.text : 'text-white'}`} altashadow px-6 py-2 hover:cursor-auto font-normal lowercase tracking-wider rounded-full border-none {$animate}">
+                                        <span class="text-sm">
+                                            This is how your messages will look like
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
+
                             
                         </div>
 
