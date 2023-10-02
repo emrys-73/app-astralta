@@ -47,7 +47,7 @@ export const load = async ({ locals, params }) => {
 
         const thereIsAnUser = locals.user ? true : false;
 
-        console.log(agent)
+        // console.log(agent)
 
         return {
             creator: creator,
