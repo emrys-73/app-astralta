@@ -23,11 +23,33 @@
         if (data.agent.cover_url) {
           coverUrl = `bg-[url('${data.agent.cover_url}')]`
         } else {
-          coverUrl = `bg-[url('/base.gif')]`
+          let pedrito = getRandomNumber(2)
+          switch (pedrito) {
+            case 0:
+              coverUrl = `bg-[url('/base.gif')]`
+              break;
+
+            case 1:
+              coverUrl = `bg-[url('/ghost_one.gif')]`
+              break;
+
+            case 2:
+              coverUrl = `bg-[url('/ghost_two.gif')]`
+              break;
+          
+            default:
+              break;
+          }
         }
         displayDeleteConfirmation = false;
         adminRightEval()
     })
+
+    const getRandomNumber = (n) => {
+      const randomDecimal = Math.random();
+      const randomNumber = randomDecimal * n;
+      return Math.floor(randomNumber);
+    };
 
     const showConfirmDelete = (agentId) => {
         currentAgentId = agentId
