@@ -17,9 +17,14 @@
     let bgUrl;
     let coverClass;
 
+    let coverUrl = 'bg-white'
+
     onMount(() => {
-        bgUrl = data.agent.cover ? data.agent.cover_url : data?.covers[random(coversLength)].url
-        // editing = false;
+        if (data.agent.cover_url) {
+          coverUrl = `bg-[url('${data.agent.cover_url}')]`
+        } else {
+          coverUrl = `bg-[url('/base.gif')]`
+        }
         displayDeleteConfirmation = false;
         adminRightEval()
     })
@@ -50,10 +55,7 @@
     setTimeout(() => {
       agentCopied = false;
     }, 5000);
-
-    let coversLength = data?.covers.length;
     
-    let coverUrl = `bg-[url('${data.agent.cover_url}')]`
     // let coverClass = `bg-[url('http://139.144.176.23:80/api/files/oo1sg8k1kzp3p2q/u770asbvqwpzxlg/ezgif_com_video_to_gif_y2l1FVZ1Q1.gif?thumb=0x0')]`
     let adminRights = false;
 
@@ -73,11 +75,11 @@
 <!-- we do not allow light Mode here -->
 
 <!-- Background -->
-<div class="w-full h-full z-10 flex items-center {coverUrl} blur-3xl cover-image"></div>
+<div class="w-full h-full z-10 flex items-center {coverUrl} blur-3xl cover-image {$animate}"></div>
 
 
 <!-- Content -->
-<div class="w-full h-full z-20  absolute top-0 text-white">
+<div class="w-full h-full z-20  absolute top-0 text-white {$animate}">
   <div class="flex flex-col w-full h-full ">
     <!-- Header -->
     <div class="w-full h-[650px] md:h-[750px] lg:h-[850px] flex items-center flex-col gap-2 relative justify-center">
@@ -104,7 +106,7 @@
       <form action="?/createChat" method="POST" class="justify-center flex w-[400px]">
         <input type="text" id="agentId" name="agentId" value={data?.agent.id} class="hidden">
         <input type="text" id="name" name="name" value={data?.agent.name} class="hidden">
-        <button type="submit" class="bg-white bg-opacity-5 text-white px-4 py-2 rounded-lg backdrop-blur-md flex flex-row justify-center items-center gap-1 hover:cursor-pointer hover:bg-opacity-20 {$animateShort} w-full">
+        <button type="submit" class="bg-black altashadow bg-opacity-20 px-4 py-2 rounded-lg backdrop-blur-md flex flex-row justify-center items-center gap-1 hover:cursor-pointer hover:bg-opacity-40 {$animateShort} w-full">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
@@ -116,6 +118,7 @@
 
     </div>    
 
+    <!-- {coverUrl} -->
 
     <!-- Body -->
   

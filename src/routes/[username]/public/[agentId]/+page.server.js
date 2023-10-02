@@ -25,15 +25,15 @@ export const load = async ({ locals, params }) => {
         }))
 
         // console.log(agent)
-        const covers = serializeNonPOJOs(await locals.pb.collection('covers').getFullList());
+        // const covers = serializeNonPOJOs(await locals.pb.collection('covers').getFullList());
 
-        for (let i = 0; i < covers.length; i++) {
-            covers[i].url = getImageURL(covers[i].collectionId, covers[i].id, covers[i].cover)
-        }
+        // for (let i = 0; i < covers.length; i++) {
+        //     covers[i].url = getImageURL(covers[i].collectionId, covers[i].id, covers[i].cover)
+        // }
 
-        if (!agent.cover) {
-            agent.cover_url = getImageURL(covers[0].collectionId, covers[0].id, covers[0].cover)
-        }
+        // if (!agent.cover) {
+        //     agent.cover_url = getImageURL(covers[0].collectionId, covers[0].id, covers[0].cover)
+        // }
 
         if (!agent.public) {
             throw redirect(303, '/')
@@ -43,7 +43,8 @@ export const load = async ({ locals, params }) => {
             throw redirect(303, '/')
         }
 
-        agent.cover_url = getImageURL(agent.collectionId, agent.id, agent.cover, "20x20f")
+        agent.cover_url = agent.cover ? getImageURL(agent.collectionId, agent.id, agent.cover) : undefined
+        
 
         const thereIsAnUser = locals.user ? true : false;
 
@@ -53,7 +54,7 @@ export const load = async ({ locals, params }) => {
             creator: creator,
             thereIsAnUser: thereIsAnUser,
             agent: agent,
-            covers: covers,
+            // covers: covers,
             chats: chats
         }
 
