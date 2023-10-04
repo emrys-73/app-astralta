@@ -134,7 +134,7 @@ export const actions = {
         throw redirect(303, '/')
     },
 
-    createChat: async ({ request, locals }) => {
+    createChat: async ({ request, locals, params }) => {
         const data = Object.fromEntries(await request.formData());
 
         const chatData = {
@@ -162,8 +162,6 @@ export const actions = {
          const systemMessage = await locals.pb.collection('messages').create(systemTrainingData);
          // console.log(systemMessage);
 
-
-         // TODO: Change this
-         throw redirect(303, `/agents/${data.agentId}/${newChat.id}`)
+         throw redirect(303, `/${params.username}/public/${data.agentId}/${newChat.id}`)
     }
 }

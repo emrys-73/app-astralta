@@ -10,47 +10,33 @@ export const load = ({ locals, params }) => {
         return structuredClone(obj)
     };
 
-    const getAgent = async (agentId) => {
+    const getData = async (chatId) => {
         try {
-            const agent = serializeNonPOJOs(await locals.pb.collection('agents').getOne(agentId));
+            const chat = serializeNonPOJOs(await locals.pb.collection('chats').getOne(chatId, {
+                expand: 'agent'
+            }));
 
-            return agent
+            const agent = chat.expand.agent
 
-        } catch (err) {
-            console.log("Error: ", err)
-            throw error(err.status, err.message)
-        }
-    }
-
-    const getMessages = async (chatId) => {
-        try {
             const messages = serializeNonPOJOs(await locals.pb.collection('messages').getFullList({
                 sort: '+created',
                 filter: `chat="${chatId}"`
             }));
-            return messages
-        } catch (err) {
-            console.log("Error: ", err)
-            throw error(err.status, err.message)
-        }
-    }
-    
-    const getChat = async (chatId) => {
-        try {
-            const chat = serializeNonPOJOs(await locals.pb.collection('chats').getOne(chatId));
 
-            return chat
+
+            return {
+                agent: agent,
+                chat: chat,
+                messages: messages,
+                username: params.username
+            }
             
         } catch (err) {
             console.log("Error: ", err)
             throw error(err.status, err.message)
         }
-    };
-
-    return {
-        agent: getAgent(params.agentId),
-        chat: getChat(params.chatId),
-        messages: getMessages(params.chatId),
     }
+
+    return getData(params.chatId)
 
 }

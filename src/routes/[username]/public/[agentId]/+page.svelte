@@ -23,18 +23,14 @@
         if (data.agent.cover_url) {
           coverUrl = `bg-[url('${data.agent.cover_url}')]`
         } else {
-          let pedrito = getRandomNumber(2)
+          let pedrito = getRandomNumber(1)
           switch (pedrito) {
             case 0:
-              coverUrl = `bg-[url('/base.gif')]`
+              coverUrl = `bg-[url('/ghost_two.gif')]`
               break;
 
             case 1:
               coverUrl = `bg-[url('/ghost_one.gif')]`
-              break;
-
-            case 2:
-              coverUrl = `bg-[url('/ghost_two.gif')]`
               break;
           
             default:
@@ -104,7 +100,7 @@
 <div class="w-full h-full z-20  absolute top-0 text-white {$animate}">
   <div class="flex flex-col w-full h-full ">
     <!-- Header -->
-    <div class="w-full h-[650px] md:h-[750px] lg:h-[850px] flex items-center flex-col gap-2 relative justify-center">
+    <div class="w-full h-[750px] md:h-[750px] lg:h-[850px] flex items-center flex-col gap-2 relative justify-center py-20">
       <!-- Cover -->
       <div class="{coverUrl} h-96 lg:h-[500px] w-96 lg:w-[500px] bg-image altashadow-max rounded-lg"></div>
 
@@ -125,7 +121,7 @@
       </div>
 
       <!-- Create Chat -->
-      <form action="?/createChat" method="POST" class="justify-center flex w-[400px]">
+      <form action="?/createChat" method="POST" class="justify-center flex w-[400px] hover:w-[500px] transition-all duration-300 ease-in-out">
         <input type="text" id="agentId" name="agentId" value={data?.agent.id} class="hidden">
         <input type="text" id="name" name="name" value={data?.agent.name} class="hidden">
         <button type="submit" class="bg-black altashadow bg-opacity-20 px-4 py-2 rounded-lg backdrop-blur-md flex flex-row justify-center items-center gap-1 hover:cursor-pointer hover:bg-opacity-40 {$animateShort} w-full">
@@ -138,11 +134,36 @@
         </button>
       </form>
 
+      
+
     </div>    
 
     <!-- {coverUrl} -->
 
+    <!-- <div class="w-full h-full">
+      {data.agent.training}
+    </div> -->
+
     <!-- Body -->
+    <div class="w-full h-[650px] md:h-[750px] lg:h-[1050px] flex items-center flex-col gap-2 relative justify-center bg-black  bg-opacity-5 backdrop-blur-3xl ">
+      <div class=" w-full flex h-full">
+        <div class="w-full h-full">
+          {#each data?.chats as chat}
+            <div class="flex w-full h-12 items-center hover:bg-white hover:bg-opacity-5 transition-all duration-300 ease-in-out hover:cursor-pointer relative">
+              <span class="font-regular mx-4 md:mx-40 lg:mx-80">
+                {chat.title}
+              </span>
+              <div class="{$animateShort} mx-4 md:mx-40 lg:mx-80 absolute right-0 bg-white bg-opacity-5 rounded-full top-3 hover:bg-opacity-20 w-6 h-6 items-center flex justify-center hover:cursor-pointer ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                </svg>
+                
+              </div>
+            </div>
+          {/each}
+        </div>
+      </div>
+    </div>
   
   </div>
 </div>
