@@ -19,16 +19,16 @@
             <input type="email" name="email" class="apple-input rounded-full bg-black bg-opacity-40 w-full max-w-md font-semibold force-opaque p-3 text-lg focus:bg-black focus:bg-opacity-40 focus:apple-input focus:force-opaque focus:border-none"  placeholder="Email"/>
         </div>
         
-        <div class="w-full max-w-md pt-2">
+        <div class="w-full max-w-md pt-2 justify-center items-center flex">
             <!-- <button type="submit" class="btn btn-primary w-full">Register</button> -->
-            <button class="btn bg-true-black w-full bg-opacity-10 backdrop-blur-md text-xl hover:bg-opacity-20 hover:bg-gray-500 rounded-full text-true-white font-semibold btn-md border-none normal-case drop-shadow-2xl  duration-500 ease-in-out" type="submit">
+            <button type="submit" class=" bg-system-blue rounded-full px-4 py-1 hover:bg-[#0a8dff] hover:px-6 transition-all duration-300 ease-in-out">
                 <div class="px-1.5 font-regular">
                     Request password reset
                 </div>
             </button>
         </div>
         <a href="/login">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
+            <div class="text-[#0a8dff] hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
                 Nvm, I remembered my password
             </div>
         </a>
@@ -47,7 +47,7 @@
                   
             </div>
             <a href="/login">
-                <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
+                <div class="text-[#0a8dff] hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
                     Log In
                 </div>
             </a>

@@ -32,21 +32,21 @@
             <a href="/reset-password" class="font-medium text-primary hover:cursor-pointer hover:underline">Forgot Password?</a>
         </div> -->
         <a href="/reset-password">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
+            <div class="text-[#0a8dff] hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
                 Forgot password?
             </div>
         </a>
 
-        <div class="w-full max-w-md">
+        <div class="w-full max-w-md flex justify-center items-center">
             <!-- <button type="submit" class="btn btn-primary w-full">Register</button> -->
-            <button class="btn bg-true-black w-full bg-opacity-10 backdrop-blur-md text-xl hover:bg-opacity-20 hover:bg-gray-500 rounded-full text-true-white font-semibold btn-md border-none normal-case duration-500 ease-in-out" type="submit">
+            <button type="submit" class=" bg-system-blue rounded-full px-4 py-1 hover:bg-[#0a8dff] hover:px-6 transition-all duration-300 ease-in-out">
                 <div class="font-regular">
                     Log In
                 </div>
             </button>
         </div>
-        <a href="/register">
-            <div class="text-system-cyan hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
+        <a href="/waitlist">
+            <div class="text-[#0a8dff] hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
                 I don't have an account yet
             </div>
         </a>

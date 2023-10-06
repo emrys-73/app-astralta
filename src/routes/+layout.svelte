@@ -90,7 +90,7 @@
 
 
 <!-- <AppShell class="bg-[url('{backgroundUrl}')] bg-image"> -->
-<AppShell class="{$back} bg-image">
+<AppShell class="bg-[url('/waves.gif')] bg-image">
 	
 	<svelte:fragment slot="sidebarLeft">
         
@@ -111,7 +111,7 @@
 	
     <div class="{!$page.url.pathname.toString().includes(`public`) ? '' : 'hidden'}">
         <div class="fixed top-0 w-full z-40 backdrop-blur-md justify-center flex items-center min-h-16">
-            <div class="left-4 fixed">
+            <!-- <div class="left-4 fixed">
                 {#if !$drawerOpen}
                 <button class="btn {$darkMode ? 'bg-black bg-opacity-30' : 'bg-gray-300 bg-opacity-10'} hover:bg-opacity-20 hover:bg-gray-300 rounded-full text-true-white font-semibold btn-sm md:text-md border-none normal-case shadow-xl" on:click={toggleDrawer}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -119,8 +119,7 @@
                       </svg>                  
                 </button>
                 {/if}
-            </div>
-
+            </div> -->
 
             <div class="text-center text-2xl xl:text-3xl text-true-white font-bold uppercase {$drawerOpen ? 'hidden sm:block' : '' } mx-20">
                 <a href="/">
