@@ -2,7 +2,7 @@
     <h2 class="mt-2 text-center text-xl sm:text-2xl pb-4 lg:text-3xl font-bold tracking-light text-true-white lg:pb-8">
         Apply for the waitlist
     </h2>
-    <span>
+    <span class="text-center mb-12">
         We are giving early-access to new users every week.
     </span>
     <form action="?/register" method="POST" class="flex flex-col items-center space-y-2 w-full pt-4">
@@ -62,7 +62,7 @@
         </div>
 
         <a href="/login">
-            <div class="text-[#0a8dff] hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out">
+            <div class="text-[#0a8dff] hover:bg-true-white hover:bg-opacity-5 hover:cursor-pointer rounded-full p-2 hover:backdrop-blur-sm px-4 transition-all duration-500 ease-in-out opacity-100">
                 Already have an account?
             </div>
         </a>
