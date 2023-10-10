@@ -147,7 +147,7 @@
     </script>
     
     
-    <div class="h-full flex justify-center relative">
+    <div class="h-full flex justify-center relative ">
       <div class="w-full fixed top-0 z-50 backdrop-blur-md py-2">
         <h1 class="text-center text-true-white font-bold text-2xl">
           {data?.agent?.name}
